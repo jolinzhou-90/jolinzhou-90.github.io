@@ -224,33 +224,68 @@ body {
 
 /* ===== 宠物板块 ===== */
 .pets-section { margin-top:60px; }
-.pet-row {
-    display:flex; align-items:center; gap:40px; padding:48px 60px;
+.pet-block { margin-bottom:40px; }
+
+/* 宠物卡片 */
+.pet-card {
+    width:220px; margin:0 auto 32px; padding:32px 24px;
+    border-radius:16px; text-align:center;
     transition:var(--transition);
 }
-.pet-cat { background:#ffffff; }
-.pet-dog { background:#0a0a0a; }
-.pet-content { flex:0 0 200px; }
-.pet-name { font-size:2rem; font-weight:700; margin-bottom:4px; }
-.pet-cat .pet-name { color:var(--text); }
-.pet-dog .pet-name { color:#fff; }
-.pet-label {
-    font-family:'Playfair Display',serif; font-size:.85rem; letter-spacing:3px;
-    text-transform:uppercase; margin-bottom:12px;
+.pet-card-cat {
+    background:rgba(255,255,255,.95); border:1px solid var(--border);
+    box-shadow:0 8px 30px rgba(0,0,0,.08);
 }
-.pet-cat .pet-label { color:var(--text-lighter); }
-.pet-dog .pet-label { color:rgba(255,255,255,.3); }
-.pet-desc { font-size:.9rem; }
-.pet-cat .pet-desc { color:var(--text-light); }
-.pet-dog .pet-desc { color:rgba(255,255,255,.5); }
-.pet-gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; flex:1; }
-.pet-img {
-    height:200px; border-radius:var(--radius); background-size:cover; background-position:center;
-    transition:var(--transition); cursor:pointer;
+.pet-card-dog {
+    background:#111; border:1px solid #222;
+    box-shadow:0 8px 30px rgba(0,0,0,.4);
 }
-.pet-img:hover { transform:scale(1.03); box-shadow:var(--shadow-lg); }
-.pet-img-bw { filter:grayscale(100%) brightness(.8); }
-.pet-img-bw:hover { filter:grayscale(100%) brightness(1); }
+.pet-card:hover { transform:translateY(-4px); }
+.pet-avatar {
+    width:64px; height:64px; border-radius:50%; margin:0 auto 16px;
+    background:linear-gradient(135deg,#f8f0ff,#fff0f5);
+    display:flex; align-items:center; justify-content:center;
+}
+.pet-avatar i { font-size:1.5rem; color:var(--primary); }
+.pet-avatar-dog {
+    background:linear-gradient(135deg,#1a1a1a,#222);
+}
+.pet-avatar-dog i { color:#666; }
+.pet-card-name { font-size:1.5rem; font-weight:700; margin-bottom:4px; }
+.pet-card-cat .pet-card-name { color:var(--text); }
+.pet-card-dog .pet-card-name { color:#fff; }
+.pet-card-tag {
+    font-family:'Playfair Display',serif; font-size:.78rem;
+    letter-spacing:3px; text-transform:uppercase;
+}
+.pet-card-cat .pet-card-tag { color:var(--text-lighter); }
+.pet-card-dog .pet-card-tag { color:rgba(255,255,255,.3); }
+
+/* 无限循环滚动 */
+.pet-scroll-track {
+    overflow:hidden; position:relative; padding:0;
+    mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent);
+    -webkit-mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent);
+}
+.pet-scroll-inner {
+    display:flex; gap:16px; width:max-content;
+    animation:petScroll 30s linear infinite;
+}
+.pet-scroll-inner:hover { animation-play-state:paused; }
+.pet-scroll-reverse { animation-direction:reverse; }
+.pet-scroll-img {
+    flex:0 0 260px; height:180px; border-radius:12px;
+    background-size:cover; background-position:center;
+    transition:var(--transition);
+}
+.pet-scroll-img:hover { transform:scale(1.05); }
+.pet-scroll-track-bw .pet-scroll-img { filter:grayscale(100%) brightness(.7); }
+.pet-scroll-track-bw .pet-scroll-img:hover { filter:grayscale(100%) brightness(1); }
+
+@keyframes petScroll {
+    0% { transform:translateX(0); }
+    100% { transform:translateX(-50%); }
+}
 
 /* ===== 工作 ===== */
 .work-entry {
@@ -316,9 +351,8 @@ body {
     .contact-grid { grid-template-columns:1fr; max-width:400px; }
     .film-item { flex:0 0 250px; height:180px; }
     .work-gallery { grid-template-columns:1fr 1fr; }
-    .pet-row { flex-direction:column; padding:32px 24px; gap:24px; }
-    .pet-content { flex:none; text-align:center; }
-    .pet-gallery { grid-template-columns:repeat(2,1fr); }
+    .pet-card { width:180px; padding:24px 16px; }
+    .pet-scroll-img { flex:0 0 200px; height:140px; }
 }
 @media (max-width:640px) {
     .nav-toggle { display:flex; }
@@ -340,8 +374,7 @@ body {
     .film-text-panel { padding:0 24px; }
     .work-header { flex-direction:column; gap:16px; }
     .work-gallery { grid-template-columns:1fr; }
-    .pet-gallery { grid-template-columns:1fr 1fr; }
-    .pet-img { height:150px; }
+    .pet-scroll-img { flex:0 0 180px; height:130px; }
     .timeline { padding-left:30px; }
     .timeline-content { padding:20px; }
 }
