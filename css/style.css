@@ -275,8 +275,8 @@ body {
 .pet-scroll-reverse { animation-direction:reverse; }
 .pet-scroll-img {
     flex:0 0 260px; height:180px; border-radius:12px;
-    background-size:cover; background-position:center;
-    transition:var(--transition);
+    object-fit:cover; transition:var(--transition); cursor:pointer;
+    user-select:none; -webkit-user-drag:none;
 }
 .pet-scroll-img:hover { transform:scale(1.05); }
 .pet-scroll-track-bw .pet-scroll-img { filter:grayscale(100%) brightness(.7); }
