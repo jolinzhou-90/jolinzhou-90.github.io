@@ -1,113 +1,92 @@
-// ===== 导航栏滚动效果 & 移动端菜单 =====
+// ===== 导航栏 =====
 const navbar = document.getElementById('navbar');
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
 
-// 滚动时添加导航栏样式
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
     updateActiveLink();
 });
 
-// 移动端菜单切换
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-});
+navToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+navLinks.forEach(link => link.addEventListener('click', () => navMenu.classList.remove('active')));
 
-// 点击菜单项后关闭菜单
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-    });
-});
-
-// 更新当前激活的导航链接
 function updateActiveLink() {
     const sections = document.querySelectorAll('section[id]');
     const scrollPos = window.scrollY + 100;
-
     sections.forEach(section => {
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
-        const id = section.getAttribute('id');
-
+        const top = section.offsetTop, height = section.offsetHeight, id = section.getAttribute('id');
         if (scrollPos >= top && scrollPos < top + height) {
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === `#${id}`) {
-                    link.classList.add('active');
-                }
+                if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
             });
         }
     });
 }
 
-// ===== 滚动动画 =====
-const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -50px 0px'
-};
+// ===== 胶片拉片交互 =====
+const filmTrack = document.getElementById('filmstripTrack');
+const filmItems = document.querySelectorAll('.film-item');
+const filmTextTitle = document.getElementById('filmTextTitle');
+const filmTextDesc = document.getElementById('filmTextDesc');
 
+// 悬停显示文字
+filmItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        const text = item.getAttribute('data-text');
+        const desc = item.getAttribute('data-desc');
+        filmTextTitle.style.opacity = '0';
+        filmTextDesc.style.opacity = '0';
+        setTimeout(() => {
+            filmTextTitle.textContent = text;
+            filmTextDesc.textContent = desc;
+            filmTextTitle.style.opacity = '1';
+            filmTextDesc.style.opacity = '1';
+        }, 150);
+    });
+});
+
+// 拖拽滚动
+let isDown = false, startX, scrollLeft;
+filmTrack.addEventListener('mousedown', e => {
+    isDown = true;
+    filmTrack.style.cursor = 'grabbing';
+    startX = e.pageX - filmTrack.offsetLeft;
+    scrollLeft = filmTrack.scrollLeft;
+});
+filmTrack.addEventListener('mouseleave', () => { isDown = false; filmTrack.style.cursor = 'grab'; });
+filmTrack.addEventListener('mouseup', () => { isDown = false; filmTrack.style.cursor = 'grab'; });
+filmTrack.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - filmTrack.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    filmTrack.scrollLeft = scrollLeft - walk;
+});
+
+// 触摸支持
+let touchStartX;
+filmTrack.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; scrollLeft = filmTrack.scrollLeft; });
+filmTrack.addEventListener('touchmove', e => {
+    const walk = (touchStartX - e.touches[0].clientX) * 1.2;
+    filmTrack.scrollLeft = scrollLeft + walk;
+});
+
+// ===== 滚动动画 =====
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-
-            // 技能条动画
-            if (entry.target.classList.contains('skill-item')) {
-                const progress = entry.target.querySelector('.skill-progress');
-                if (progress) {
-                    const width = progress.getAttribute('data-width');
-                    progress.style.width = width + '%';
-                }
-            }
-
-            // 数字动画
-            const statNumbers = entry.target.querySelectorAll('.stat-number');
-            statNumbers.forEach(num => {
-                animateNumber(num);
-            });
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-}, observerOptions);
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
-// 观察需要动画的元素
-document.querySelectorAll('.hobby-card, .timeline-item, .contact-item, .about-skills, .about-text').forEach(el => {
+document.querySelectorAll('.hobby-card, .timeline-item, .contact-item, .about-intro, .personal-info, .work-entry').forEach(el => {
     el.classList.add('fade-in');
     observer.observe(el);
 });
 
-// 观察技能条
-document.querySelectorAll('.skill-item').forEach(el => {
-    observer.observe(el);
-});
-
-// ===== 数字递增动画 =====
-function animateNumber(el) {
-    const target = parseInt(el.getAttribute('data-target'));
-    if (!target) return;
-
-    const duration = 1500;
-    const step = target / (duration / 16);
-    let current = 0;
-
-    const timer = setInterval(() => {
-        current += step;
-        if (current >= target) {
-            el.textContent = target;
-            clearInterval(timer);
-        } else {
-            el.textContent = Math.floor(current);
-        }
-    }, 16);
-}
-
-// ===== 页面加载动画 =====
+// ===== 页面加载 =====
 window.addEventListener('load', () => {
     document.querySelector('.hero-content').classList.add('fade-in', 'visible');
 });

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>你好90</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -14,21 +14,19 @@
         <div class="nav-container">
             <a href="#hero" class="nav-logo">你好90</a>
             <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#about" class="nav-link">关于我</a></li>
-                <li><a href="#hobbies" class="nav-link">兴趣爱好</a></li>
-                <li><a href="#education" class="nav-link">学校经历</a></li>
-                <li><a href="#work" class="nav-link">工作经历</a></li>
+                <li><a href="#about" class="nav-link">我</a></li>
+                <li><a href="#life" class="nav-link">我的生活</a></li>
+                <li><a href="#education" class="nav-link">我的教育</a></li>
+                <li><a href="#work" class="nav-link">我的工作</a></li>
                 <li><a href="#contact" class="nav-link">联系我</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero 区域 -->
+    <!-- Hero -->
     <section class="hero" id="hero">
         <div class="hero-content">
             <div class="hero-avatar">
@@ -37,216 +35,204 @@
                 </div>
             </div>
             <h1 class="hero-title">你好，我是 <span class="highlight">Jolin</span></h1>
-            <p class="hero-subtitle">全栈开发工程师 / 技术爱好者 / 终身学习者</p>
-            <p class="hero-description">热爱技术，专注于创造优秀的数字体验</p>
+            <p class="hero-subtitle">自洽｜真诚｜勇敢</p>
+            <p class="hero-quote">"The World is Wide Enough, for both you and me"</p>
             <div class="hero-buttons">
                 <a href="#about" class="btn btn-primary">了解更多</a>
-                <a href="#contact" class="btn btn-outline">联系我</a>
+                <a href="#contact" class="btn btn-outline">联系90</a>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <span></span>
-        </div>
+        <div class="scroll-indicator"><span></span></div>
     </section>
 
-    <!-- 关于我 -->
+    <!-- 我 -->
     <section class="section" id="about">
         <div class="container">
-            <h2 class="section-title">关于我</h2>
+            <h2 class="section-title">我</h2>
             <div class="section-divider"></div>
-            <div class="about-grid">
-                <div class="about-text">
-                    <p class="about-intro">一名充满热情的软件工程师，拥有多年开发经验。</p>
-                    <p>我热衷于将创意转化为现实，擅长使用现代技术栈构建高性能、用户友好的应用程序。在工作中注重团队协作，持续学习新技术，追求代码的优雅与效率。</p>
-                    <p>我相信技术可以改变世界，每一行代码都是通往未来的桥梁。</p>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <span class="stat-number" data-target="5">0</span><span class="stat-suffix">+</span>
-                            <span class="stat-label">年工作经验</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" data-target="20">0</span><span class="stat-suffix">+</span>
-                            <span class="stat-label">完成项目</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span>
-                            <span class="stat-label">技术栈</span>
-                        </div>
+
+            <div class="about-intro">
+                <p>一个正在独立学习中成长的职场新人，热爱生活的每一个切面。</p>
+                <p>相信真诚与自洽是面对世界最好的姿态，勇敢地去探索、去体验、去创造属于自己的故事。</p>
+            </div>
+
+            <div class="personal-info">
+                <div class="info-card">
+                    <div class="info-item">
+                        <span class="info-label">出生</span>
+                        <span class="info-value">2005.08</span>
                     </div>
-                </div>
-                <div class="about-skills">
-                    <h3>技能特长</h3>
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span>JavaScript / TypeScript</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
+                    <div class="info-item">
+                        <span class="info-label">星座</span>
+                        <span class="info-value">处女座</span>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span>React / Vue</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
+                    <div class="info-item">
+                        <span class="info-label">MBTI</span>
+                        <span class="info-value mbti">INTJ</span>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span>Node.js / Python</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="80"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span>数据库设计</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+                    <div class="info-item">
+                        <span class="info-label">坐标</span>
+                        <span class="info-value">爱丁堡</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- 兴趣爱好 -->
-    <section class="section section-alt" id="hobbies">
-        <div class="container">
-            <h2 class="section-title">兴趣爱好</h2>
-            <div class="section-divider"></div>
-            <p class="section-desc">工作之余，我热衷于探索生活中的美好</p>
+            <h3 class="sub-title">兴趣爱好</h3>
             <div class="hobbies-grid">
                 <div class="hobby-card">
-                    <div class="hobby-icon">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                    <h3>摄影</h3>
-                    <p>用镜头记录生活中的美好瞬间，喜欢街头摄影和风景摄影。</p>
+                    <div class="hobby-icon"><i class="fas fa-plane"></i></div>
+                    <h3>旅游</h3>
+                    <p>至今旅行过40+国家<br>如果地球Online有结算页面，希望自己的地图加载达到30%...</p>
                 </div>
                 <div class="hobby-card">
-                    <div class="hobby-icon">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <h3>阅读</h3>
-                    <p>广泛阅读技术、历史、哲学类书籍，保持终身学习的习惯。</p>
-                </div>
-                <div class="hobby-card">
-                    <div class="hobby-icon">
-                        <i class="fas fa-hiking"></i>
-                    </div>
-                    <h3>户外运动</h3>
-                    <p>热爱徒步、骑行和跑步，享受大自然带来的宁静与力量。</p>
-                </div>
-                <div class="hobby-card">
-                    <div class="hobby-icon">
-                        <i class="fas fa-music"></i>
-                    </div>
+                    <div class="hobby-icon"><i class="fas fa-music"></i></div>
                     <h3>音乐</h3>
-                    <p>学习吉他多年，喜欢民谣和爵士，音乐是灵魂的良药。</p>
+                    <p>音乐是生命的旋律<br>钢琴学习8年，喜欢R&B</p>
                 </div>
                 <div class="hobby-card">
-                    <div class="hobby-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
-                    <h3>美食烹饪</h3>
-                    <p>喜欢研究各国料理，在厨房中创造美味，分享快乐。</p>
+                    <div class="hobby-icon"><i class="fas fa-theater-masks"></i></div>
+                    <h3>音乐剧</h3>
+                    <p>最伟大的作品：Hamilton<br>永远为用音乐讲述故事的方式而痴迷</p>
                 </div>
                 <div class="hobby-card">
-                    <div class="hobby-icon">
-                        <i class="fas fa-plane"></i>
-                    </div>
-                    <h3>旅行</h3>
-                    <p>走过多个国家城市，感受不同文化的魅力与碰撞。</p>
+                    <div class="hobby-icon"><i class="fas fa-dumbbell"></i></div>
+                    <h3>健身</h3>
+                    <p>运动是最强的心情治愈剂<br>健身3年+，偏好自主力量训练+Lagree+游泳</p>
+                </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon"><i class="fas fa-ice-cream"></i></div>
+                    <h3>美食品鉴</h3>
+                    <p>在控糖减脂的同时，接纳自己对甜品的原生渴望，保持自制力</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 学校经历 -->
+    <!-- 我的生活 - 胶片拉片式横向滚动 -->
+    <section class="section section-dark" id="life">
+        <div class="container">
+            <h2 class="section-title">我的生活</h2>
+            <div class="section-divider"></div>
+            <p class="section-desc light">鼠标悬停图片，查看背后的故事</p>
+        </div>
+        <div class="filmstrip-wrapper">
+            <div class="filmstrip-track" id="filmstripTrack">
+                <div class="film-item" data-text="旅行中的风景" data-desc="在这里写下你的旅行故事...">
+                    <div class="film-img" style="background-image: url('https://picsum.photos/seed/travel1/500/350')"></div>
+                    <div class="film-number">01</div>
+                </div>
+                <div class="film-item" data-text="城市漫步" data-desc="在这里写下你的城市故事...">
+                    <div class="film-img" style="background-image: url('https://picsum.photos/seed/city2/500/350')"></div>
+                    <div class="film-number">02</div>
+                </div>
+                <div class="film-item" data-text="自然风光" data-desc="在这里写下你的自然故事...">
+                    <div class="film-img" style="background-image: url('https://picsum.photos/seed/nature3/500/350')"></div>
+                    <div class="film-number">03</div>
+                </div>
+                <div class="film-item" data-text="美食时刻" data-desc="在这里写下你的美食故事...">
+                    <div class="film-img" style="background-image: url('https://picsum.photos/seed/food4/500/350')"></div>
+                    <div class="film-number">04</div>
+                </div>
+                <div class="film-item" data-text="健身日常" data-desc="在这里写下你的运动故事...">
+                    <div class="film-img" style="background-image: url('https://picsum.photos/seed/fitness5/500/350')"></div>
+                    <div class="film-number">05</div>
+                </div>
+                <div class="film-item" data-text="音乐时光" data-desc="在这里写下你的音乐故事...">
+                    <div class="film-img" style="background-image: url('https://picsum.photos/seed/music6/500/350')"></div>
+                    <div class="film-number">06</div>
+                </div>
+                <div class="film-item" data-text="精彩瞬间" data-desc="在这里写下你的故事...">
+                    <div class="film-img" style="background-image: url('https://picsum.photos/seed/moment7/500/350')"></div>
+                    <div class="film-number">07</div>
+                </div>
+                <div class="film-item" data-text="更多回忆" data-desc="在这里写下你的故事...">
+                    <div class="film-img" style="background-image: url('https://picsum.photos/seed/memory8/500/350')"></div>
+                    <div class="film-number">08</div>
+                </div>
+            </div>
+            <div class="film-text-panel" id="filmTextPanel">
+                <div class="film-text-title" id="filmTextTitle">将鼠标移至图片</div>
+                <div class="film-text-desc" id="filmTextDesc">每一张照片都承载着一段独特的故事</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 我的教育 -->
     <section class="section" id="education">
         <div class="container">
-            <h2 class="section-title">学校经历</h2>
+            <h2 class="section-title">我的教育</h2>
             <div class="section-divider"></div>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="timeline-date">2016 - 2019</div>
-                        <h3>XX大学</h3>
-                        <h4>计算机科学与技术 · 硕士</h4>
-                        <p>研究方向：人工智能与机器学习。参与多项国家级科研项目，发表 SCI 论文 2 篇。获得优秀毕业生称号。</p>
+                        <div class="timeline-date">2023 - 2027</div>
+                        <h3>爱丁堡大学</h3>
+                        <h4>University of Edinburgh</h4>
+                        <h4 class="timeline-major">Social Policy and Economics（MA Hons）</h4>
                         <div class="timeline-tags">
-                            <span class="tag">优秀毕业生</span>
-                            <span class="tag">国家奖学金</span>
-                            <span class="tag">科研创新</span>
+                            <span class="tag">宏观经济</span>
+                            <span class="tag">微观经济</span>
+                            <span class="tag">计量经济</span>
                         </div>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="timeline-date">2012 - 2016</div>
-                        <h3>XX大学</h3>
-                        <h4>软件工程 · 学士</h4>
-                        <p>系统学习了计算机科学基础理论和软件开发技术。担任学生会技术部部长，组织多次校园技术活动。</p>
+                        <div class="timeline-date">2020 - 2023</div>
+                        <h3>杭州外国语学校</h3>
+                        <h4>高中</h4>
                         <div class="timeline-tags">
-                            <span class="tag">学生会部长</span>
-                            <span class="tag">ACM竞赛获奖</span>
-                            <span class="tag">GPA 3.8</span>
+                            <span class="tag">IGCSE</span>
+                            <span class="tag">Alevel</span>
                         </div>
+                        <p class="timeline-courses">课程：数学｜高等数学｜物理｜化学｜生物｜经济</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2017 - 2020</div>
+                        <h3>杭州市公益中学</h3>
+                        <h4>初中</h4>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 工作经历 -->
+    <!-- 我的工作 -->
     <section class="section section-alt" id="work">
         <div class="container">
-            <h2 class="section-title">工作经历</h2>
+            <h2 class="section-title">我的工作</h2>
             <div class="section-divider"></div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">2021 - 至今</div>
-                        <h3>高级前端工程师</h3>
-                        <h4>XX科技有限公司</h4>
-                        <p>负责公司核心产品的前端架构设计与开发。带领5人团队完成多个重要项目，推动前端技术栈升级，将页面加载速度提升 40%。</p>
-                        <div class="timeline-tags">
-                            <span class="tag">团队管理</span>
-                            <span class="tag">架构设计</span>
-                            <span class="tag">性能优化</span>
+            <div class="work-entry">
+                <div class="work-header">
+                    <div class="work-logo">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>阿里巴巴 · 钉钉</h3>
+                        <div class="work-meta">
+                            <span class="work-position">钉钉合作伙伴-客发行业团队</span>
+                            <span class="work-date">2026.06 - 2026.09</span>
+                        </div>
+                        <div class="work-tags">
+                            <span class="tag">金融</span>
+                            <span class="tag">健康</span>
+                            <span class="tag">产投</span>
+                            <span class="tag">出海</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">2019 - 2021</div>
-                        <h3>前端开发工程师</h3>
-                        <h4>XX互联网公司</h4>
-                        <p>参与电商平台的前端开发，使用 React 技术栈构建高交互性的用户界面。独立完成多个核心模块的开发工作。</p>
-                        <div class="timeline-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">电商系统</span>
-                            <span class="tag">组件开发</span>
-                        </div>
-                    </div>
+                <div class="work-desc">
+                    <p>工作内容待补充...</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">2018 - 2019</div>
-                        <h3>软件开发实习生</h3>
-                        <h4>XX科技公司</h4>
-                        <p>参与内部管理系统的前端开发工作，学习并实践了敏捷开发流程，快速成长为团队核心成员。</p>
-                        <div class="timeline-tags">
-                            <span class="tag">敏捷开发</span>
-                            <span class="tag">Vue.js</span>
-                            <span class="tag">团队协作</span>
-                        </div>
-                    </div>
+                <div class="work-gallery">
+                    <div class="work-gallery-item" style="background-image: url('https://picsum.photos/seed/work1/400/250')"></div>
+                    <div class="work-gallery-item" style="background-image: url('https://picsum.photos/seed/work2/400/250')"></div>
+                    <div class="work-gallery-item" style="background-image: url('https://picsum.photos/seed/work3/400/250')"></div>
                 </div>
             </div>
         </div>
@@ -255,37 +241,26 @@
     <!-- 联系我 -->
     <section class="section" id="contact">
         <div class="container">
-            <h2 class="section-title">联系我</h2>
+            <h2 class="section-title">联系90</h2>
             <div class="section-divider"></div>
-            <p class="section-desc">期待与你的交流，欢迎通过以下方式联系我</p>
+            <p class="section-desc">期待与你的交流</p>
             <div class="contact-grid">
                 <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                     <h3>邮箱</h3>
-                    <p>your.email@example.com</p>
+                    <p>Jolin_ZhouZX@outlook.com</p>
+                    <p>ZhouZX_Jolin@163.com</p>
                 </div>
                 <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-phone"></i>
-                    </div>
+                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
                     <h3>电话</h3>
-                    <p>+86 138-0000-0000</p>
+                    <p>+86 19143593508</p>
+                    <p>+44 7949365290</p>
                 </div>
                 <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fab fa-github"></i>
-                    </div>
-                    <h3>GitHub</h3>
-                    <p>github.com/yourname</p>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fab fa-linkedin"></i>
-                    </div>
+                    <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
                     <h3>LinkedIn</h3>
-                    <p>linkedin.com/in/yourname</p>
+                    <a href="https://uk.linkedin.com/in/zixuan-zhou-21a9902b7" target="_blank" class="contact-link">查看我的 LinkedIn</a>
                 </div>
             </div>
         </div>
@@ -294,7 +269,7 @@
     <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 你好90. All Rights Reserved.</p>
+            <p>&copy; 2025 你好90 · Jolin Zhou. All Rights Reserved.</p>
         </div>
     </footer>
 
