@@ -115,6 +115,7 @@ body {
 .section-desc { text-align:center; color:var(--text-light); margin-bottom:40px; font-size:1.05rem; }
 .section-desc.light { color:var(--text-lighter); }
 .sub-title { font-size:1.4rem; font-weight:600; margin:48px 0 24px; color:var(--text); }
+.sub-title.light { color:#fff; }
 
 /* ===== 我 - 关于 ===== */
 .about-intro { max-width:700px; margin:0 auto 40px; text-align:center; }
@@ -221,6 +222,36 @@ body {
     background:var(--bg-alt); color:var(--text-light); border:1px solid var(--border);
 }
 
+/* ===== 宠物板块 ===== */
+.pets-section { margin-top:60px; }
+.pet-row {
+    display:flex; align-items:center; gap:40px; padding:48px 60px;
+    transition:var(--transition);
+}
+.pet-cat { background:#ffffff; }
+.pet-dog { background:#0a0a0a; }
+.pet-content { flex:0 0 200px; }
+.pet-name { font-size:2rem; font-weight:700; margin-bottom:4px; }
+.pet-cat .pet-name { color:var(--text); }
+.pet-dog .pet-name { color:#fff; }
+.pet-label {
+    font-family:'Playfair Display',serif; font-size:.85rem; letter-spacing:3px;
+    text-transform:uppercase; margin-bottom:12px;
+}
+.pet-cat .pet-label { color:var(--text-lighter); }
+.pet-dog .pet-label { color:rgba(255,255,255,.3); }
+.pet-desc { font-size:.9rem; }
+.pet-cat .pet-desc { color:var(--text-light); }
+.pet-dog .pet-desc { color:rgba(255,255,255,.5); }
+.pet-gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; flex:1; }
+.pet-img {
+    height:200px; border-radius:var(--radius); background-size:cover; background-position:center;
+    transition:var(--transition); cursor:pointer;
+}
+.pet-img:hover { transform:scale(1.03); box-shadow:var(--shadow-lg); }
+.pet-img-bw { filter:grayscale(100%) brightness(.8); }
+.pet-img-bw:hover { filter:grayscale(100%) brightness(1); }
+
 /* ===== 工作 ===== */
 .work-entry {
     max-width:800px; margin:0 auto;
@@ -285,6 +316,9 @@ body {
     .contact-grid { grid-template-columns:1fr; max-width:400px; }
     .film-item { flex:0 0 250px; height:180px; }
     .work-gallery { grid-template-columns:1fr 1fr; }
+    .pet-row { flex-direction:column; padding:32px 24px; gap:24px; }
+    .pet-content { flex:none; text-align:center; }
+    .pet-gallery { grid-template-columns:repeat(2,1fr); }
 }
 @media (max-width:640px) {
     .nav-toggle { display:flex; }
@@ -306,6 +340,8 @@ body {
     .film-text-panel { padding:0 24px; }
     .work-header { flex-direction:column; gap:16px; }
     .work-gallery { grid-template-columns:1fr; }
+    .pet-gallery { grid-template-columns:1fr 1fr; }
+    .pet-img { height:150px; }
     .timeline { padding-left:30px; }
     .timeline-content { padding:20px; }
 }
