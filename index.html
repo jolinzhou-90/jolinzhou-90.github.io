@@ -214,6 +214,76 @@
                 </div>
             </div>
         </div>
+
+        <!-- 90的世界地图 -->
+        <div class="worldmap-section">
+            <div class="container">
+                <h3 class="sub-title light">90的世界地图</h3>
+                <p class="worldmap-subtitle">人的本质是流浪...</p>
+            </div>
+            <div class="worldmap-container">
+                <svg class="worldmap-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="cityGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#fbbf24" stop-opacity="1"/>
+                            <stop offset="40%" stop-color="#f59e0b" stop-opacity="0.6"/>
+                            <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+                        </radialGradient>
+                        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="3" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <!-- 背景 -->
+                    <rect width="1000" height="500" fill="#0a0e27" rx="16"/>
+
+                    <!-- 网格线 -->
+                    <g class="map-grid" stroke="rgba(255,255,255,0.04)" stroke-width="0.5">
+                        <line x1="0" y1="125" x2="1000" y2="125"/>
+                        <line x1="0" y1="250" x2="1000" y2="250"/>
+                        <line x1="0" y1="375" x2="1000" y2="375"/>
+                        <line x1="250" y1="0" x2="250" y2="500"/>
+                        <line x1="500" y1="0" x2="500" y2="500"/>
+                        <line x1="750" y1="0" x2="750" y2="500"/>
+                    </g>
+
+                    <!-- 大陆轮廓 -->
+                    <g class="continents" fill="#131a3e" stroke="#1e2a5a" stroke-width="0.8">
+                        <path d="M80,80 L120,60 L180,55 L230,65 L260,80 L270,100 L260,130 L240,150 L220,170 L200,180 L180,175 L160,185 L140,195 L120,190 L100,170 L85,150 L75,120 Z"/>
+                        <path d="M290,50 L320,40 L340,50 L335,70 L310,75 L295,65 Z"/>
+                        <path d="M230,230 L260,220 L280,230 L290,260 L295,300 L290,340 L280,370 L260,390 L240,380 L225,350 L215,310 L210,270 Z"/>
+                        <path d="M430,70 L460,60 L490,65 L510,75 L520,90 L510,110 L490,120 L470,125 L450,120 L435,110 L425,95 Z"/>
+                        <path d="M415,78 L425,72 L430,80 L428,92 L420,95 L413,88 Z"/>
+                        <path d="M440,155 L470,145 L510,150 L540,170 L555,210 L560,260 L555,310 L540,350 L520,380 L490,390 L460,370 L440,330 L430,280 L425,230 L430,190 Z"/>
+                        <path d="M520,60 L580,50 L650,45 L720,50 L790,60 L840,80 L870,100 L880,130 L870,160 L850,180 L820,190 L790,185 L760,190 L730,200 L700,195 L670,185 L640,175 L610,160 L580,140 L550,120 L530,100 L520,80 Z"/>
+                        <path d="M640,175 L660,180 L670,210 L665,240 L650,250 L635,230 L630,200 Z"/>
+                        <path d="M760,190 L790,195 L810,210 L820,230 L810,240 L790,230 L770,215 Z"/>
+                        <path d="M855,110 L865,105 L870,120 L865,140 L858,135 Z"/>
+                        <path d="M770,310 L820,300 L860,310 L880,330 L875,360 L850,380 L810,385 L780,370 L765,340 Z"/>
+                        <path d="M890,370 L900,365 L905,380 L898,390 L890,382 Z"/>
+                    </g>
+
+                    <!-- 城市标记 -->
+                    <g class="city-markers" id="cityMarkers"></g>
+                </svg>
+
+                <!-- 城市详情面板 -->
+                <div class="city-detail-panel" id="cityDetailPanel">
+                    <button class="city-detail-close" id="cityDetailClose"><i class="fas fa-times"></i></button>
+                    <div class="city-detail-header">
+                        <h3 class="city-detail-name" id="cityDetailName"></h3>
+                        <span class="city-detail-country" id="cityDetailCountry"></span>
+                    </div>
+                    <div class="city-detail-dates" id="cityDetailDates"></div>
+                    <div class="city-detail-photos" id="cityDetailPhotos"></div>
+                </div>
+            </div>
+            <p class="worldmap-hint">点击点亮的城市，查看旅行记忆</p>
+        </div>
     </section>
 
     <!-- 我的教育 -->

@@ -90,3 +90,185 @@ document.querySelectorAll('.hobby-card, .timeline-item, .contact-item, .about-in
 window.addEventListener('load', () => {
     document.querySelector('.hero-content').classList.add('fade-in', 'visible');
 });
+
+// ===== 90的世界地图 =====
+const cityData = {
+    edinburgh: {
+        name: '爱丁堡', country: 'Edinburgh, UK',
+        x: 422, y: 88,
+        dates: ['2023.09 - 至今'],
+        photos: []
+    },
+    london: {
+        name: '伦敦', country: 'London, UK',
+        x: 435, y: 100,
+        dates: [],
+        photos: []
+    },
+    copenhagen: {
+        name: '哥本哈根', country: 'Copenhagen, Denmark',
+        x: 490, y: 82,
+        dates: [],
+        photos: []
+    },
+    brussels: {
+        name: '布鲁塞尔', country: 'Brussels, Belgium',
+        x: 455, y: 98,
+        dates: [],
+        photos: []
+    },
+    vienna: {
+        name: '维也纳', country: 'Vienna, Austria',
+        x: 505, y: 105,
+        dates: [],
+        photos: []
+    },
+    barcelona: {
+        name: '巴塞罗那', country: 'Barcelona, Spain',
+        x: 438, y: 130,
+        dates: [],
+        photos: []
+    },
+    tenerife: {
+        name: '特内里费', country: 'Tenerife, Spain',
+        x: 395, y: 175,
+        dates: [],
+        photos: []
+    },
+    paris: {
+        name: '巴黎', country: 'Paris, France',
+        x: 448, y: 102,
+        dates: [],
+        photos: []
+    },
+    hongkong: {
+        name: '香港', country: 'Hong Kong, China',
+        x: 812, y: 195,
+        dates: [],
+        photos: []
+    },
+    shenzhen: {
+        name: '深圳', country: 'Shenzhen, China',
+        x: 800, y: 200,
+        dates: [],
+        photos: []
+    },
+    xiamen: {
+        name: '厦门', country: 'Xiamen, China',
+        x: 815, y: 210,
+        dates: [],
+        photos: []
+    },
+    hangzhou: {
+        name: '杭州', country: 'Hangzhou, China',
+        x: 822, y: 188,
+        dates: [],
+        photos: []
+    },
+    shanghai: {
+        name: '上海', country: 'Shanghai, China',
+        x: 830, y: 180,
+        dates: [],
+        photos: []
+    },
+    beijing: {
+        name: '北京', country: 'Beijing, China',
+        x: 810, y: 148,
+        dates: [],
+        photos: []
+    },
+    shaoxing: {
+        name: '绍兴', country: 'Shaoxing, China',
+        x: 820, y: 190,
+        dates: [],
+        photos: []
+    },
+    jiaxing: {
+        name: '嘉兴', country: 'Jiaxing, China',
+        x: 825, y: 185,
+        dates: [],
+        photos: []
+    }
+};
+
+// 渲染城市标记
+const markersGroup = document.getElementById('cityMarkers');
+Object.entries(cityData).forEach(([key, city]) => {
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.classList.add('city-marker');
+    g.setAttribute('data-city', key);
+    g.setAttribute('transform', `translate(${city.x}, ${city.y})`);
+
+    // 发光圈
+    const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    glow.classList.add('city-marker-glow');
+    glow.setAttribute('r', '10');
+    glow.setAttribute('cx', '0');
+    glow.setAttribute('cy', '0');
+    glow.style.transformOrigin = '0 0';
+
+    // 实心点
+    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    dot.classList.add('city-marker-dot');
+    dot.setAttribute('r', '3.5');
+    dot.setAttribute('cx', '0');
+    dot.setAttribute('cy', '0');
+
+    g.appendChild(glow);
+    g.appendChild(dot);
+    markersGroup.appendChild(g);
+
+    // 点击事件
+    g.addEventListener('click', () => openCityDetail(key));
+});
+
+// 打开城市详情面板
+function openCityDetail(cityKey) {
+    const city = cityData[cityKey];
+    if (!city) return;
+
+    document.getElementById('cityDetailName').textContent = city.name;
+    document.getElementById('cityDetailCountry').textContent = city.country;
+
+    // 日期
+    const datesContainer = document.getElementById('cityDetailDates');
+    datesContainer.innerHTML = '';
+    if (city.dates.length > 0) {
+        city.dates.forEach(date => {
+            const div = document.createElement('div');
+            div.className = 'city-detail-date-item';
+            div.innerHTML = `<i class="fas fa-calendar-alt"></i><span>${date}</span>`;
+            datesContainer.appendChild(div);
+        });
+    } else {
+        datesContainer.innerHTML = '<div class="city-detail-date-item"><i class="fas fa-clock"></i><span style="color:rgba(255,255,255,0.3)">待补充旅行时间</span></div>';
+    }
+
+    // 照片
+    const photosContainer = document.getElementById('cityDetailPhotos');
+    photosContainer.innerHTML = '';
+    if (city.photos.length > 0) {
+        city.photos.forEach(src => {
+            const img = document.createElement('img');
+            img.className = 'city-detail-photo';
+            img.src = src;
+            photosContainer.appendChild(img);
+        });
+    } else {
+        photosContainer.innerHTML = '<p style="color:rgba(255,255,255,0.25);font-size:0.85rem;grid-column:1/-1;text-align:center;padding:20px 0;">待添加旅行照片</p>';
+    }
+
+    document.getElementById('cityDetailPanel').classList.add('active');
+}
+
+// 关闭城市详情面板
+document.getElementById('cityDetailClose').addEventListener('click', () => {
+    document.getElementById('cityDetailPanel').classList.remove('active');
+});
+
+// 点击地图空白处关闭面板
+document.querySelector('.worldmap-svg').addEventListener('click', (e) => {
+    if (!e.target.closest('.city-marker')) {
+        document.getElementById('cityDetailPanel').classList.remove('active');
+    }
+});
