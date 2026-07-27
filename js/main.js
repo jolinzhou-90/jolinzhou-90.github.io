@@ -95,97 +95,97 @@ window.addEventListener('load', () => {
 const cityData = {
     edinburgh: {
         name: '爱丁堡', country: 'Edinburgh, UK',
-        x: 422, y: 88,
+        x: 492, y: 95,
         dates: ['2023.09 - 至今'],
         photos: []
     },
     london: {
         name: '伦敦', country: 'London, UK',
-        x: 435, y: 100,
+        x: 500, y: 107,
         dates: [],
         photos: []
     },
     copenhagen: {
         name: '哥本哈根', country: 'Copenhagen, Denmark',
-        x: 490, y: 82,
+        x: 535, y: 95,
         dates: [],
         photos: []
     },
     brussels: {
         name: '布鲁塞尔', country: 'Brussels, Belgium',
-        x: 455, y: 98,
+        x: 512, y: 109,
         dates: [],
         photos: []
     },
     vienna: {
         name: '维也纳', country: 'Vienna, Austria',
-        x: 505, y: 105,
+        x: 545, y: 116,
         dates: [],
         photos: []
     },
     barcelona: {
         name: '巴塞罗那', country: 'Barcelona, Spain',
-        x: 438, y: 130,
+        x: 506, y: 135,
         dates: [],
         photos: []
     },
     tenerife: {
         name: '特内里费', country: 'Tenerife, Spain',
-        x: 395, y: 175,
+        x: 455, y: 171,
         dates: [],
         photos: []
     },
     paris: {
         name: '巴黎', country: 'Paris, France',
-        x: 448, y: 102,
+        x: 507, y: 114,
         dates: [],
         photos: []
     },
     hongkong: {
         name: '香港', country: 'Hong Kong, China',
-        x: 812, y: 195,
+        x: 817, y: 188,
         dates: [],
         photos: []
     },
     shenzhen: {
         name: '深圳', country: 'Shenzhen, China',
-        x: 800, y: 200,
+        x: 817, y: 187,
         dates: [],
         photos: []
     },
     xiamen: {
         name: '厦门', country: 'Xiamen, China',
-        x: 815, y: 210,
+        x: 828, y: 182,
         dates: [],
         photos: []
     },
     hangzhou: {
         name: '杭州', country: 'Hangzhou, China',
-        x: 822, y: 188,
+        x: 834, y: 166,
         dates: [],
         photos: []
     },
     shanghai: {
         name: '上海', country: 'Shanghai, China',
-        x: 830, y: 180,
+        x: 837, y: 163,
         dates: [],
         photos: []
     },
     beijing: {
         name: '北京', country: 'Beijing, China',
-        x: 810, y: 148,
+        x: 823, y: 139,
         dates: [],
         photos: []
     },
     shaoxing: {
         name: '绍兴', country: 'Shaoxing, China',
-        x: 820, y: 190,
+        x: 835, y: 167,
         dates: [],
         photos: []
     },
     jiaxing: {
         name: '嘉兴', country: 'Jiaxing, China',
-        x: 825, y: 185,
+        x: 835, y: 165,
         dates: [],
         photos: []
     }
