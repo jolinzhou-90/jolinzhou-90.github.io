@@ -222,15 +222,22 @@
                 <p class="worldmap-subtitle">人的本质是流浪...</p>
             </div>
             <div class="worldmap-container">
-                <svg class="worldmap-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+                <svg class="worldmap-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" id="worldMapSvg">
                     <defs>
                         <radialGradient id="cityGlow" cx="50%" cy="50%" r="50%">
-                            <stop offset="0%" stop-color="#fbbf24" stop-opacity="1"/>
-                            <stop offset="40%" stop-color="#f59e0b" stop-opacity="0.6"/>
+                            <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.9"/>
+                            <stop offset="30%" stop-color="#f59e0b" stop-opacity="0.5"/>
                             <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
                         </radialGradient>
-                        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                            <feGaussianBlur stdDeviation="3" result="blur"/>
+                        <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+                            <feGaussianBlur stdDeviation="8" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        <filter id="cityAreaGlow" x="-200%" y="-200%" width="500%" height="500%">
+                            <feGaussianBlur stdDeviation="15" result="blur"/>
                             <feMerge>
                                 <feMergeNode in="blur"/>
                                 <feMergeNode in="SourceGraphic"/>
@@ -251,57 +258,11 @@
                         <line x1="750" y1="0" x2="750" y2="500"/>
                     </g>
 
-                    <!-- 大陆轮廓 - 真实地理数据 -->
-                    <g class="continents" fill="#131a3e" stroke="#1e2a5a" stroke-width="0.6">
-                        <!-- 北美洲 -->
-                        <path d="M78,95 L95,78 L125,62 L165,52 L205,48 L245,55 L275,68 L295,85 L305,105 L300,130 L285,155 L265,175 L240,190 L215,195 L195,188 L175,195 L155,200 L135,195 L115,180 L95,155 L82,125 Z"/>
-                        <!-- 格陵兰 -->
-                        <path d="M310,42 L335,32 L358,42 L355,62 L335,70 L318,62 Z"/>
-                        <!-- 中美洲 -->
-                        <path d="M155,200 L175,195 L195,200 L205,215 L195,225 L175,220 L160,215 Z"/>
-                        <!-- 南美洲 -->
-                        <path d="M210,235 L235,225 L258,235 L272,260 L278,295 L275,335 L265,370 L248,395 L228,400 L210,385 L198,355 L190,315 L188,275 L195,250 Z"/>
-                        <!-- 欧洲西部 -->
-                        <path d="M445,68 L468,58 L492,62 L508,72 L518,88 L512,108 L498,118 L478,122 L458,118 L442,108 L435,92 Z"/>
-                        <!-- 英国爱尔兰 -->
-                        <path d="M428,72 L438,65 L445,75 L442,90 L432,95 L425,85 Z"/>
-                        <!-- 斯堪的纳维亚 -->
-                        <path d="M478,42 L498,35 L515,42 L522,58 L518,75 L505,82 L488,78 L475,65 Z"/>
-                        <!-- 伊比利亚半岛 -->
-                        <path d="M432,108 L448,105 L458,118 L452,135 L438,140 L428,128 Z"/>
-                        <!-- 意大利 -->
-                        <path d="M478,108 L488,105 L495,118 L492,135 L485,142 L478,132 Z"/>
-                        <!-- 巴尔干 -->
-                        <path d="M498,105 L515,100 L525,112 L522,128 L512,135 L498,128 Z"/>
-                        <!-- 非洲北部 -->
-                        <path d="M438,155 L468,145 L505,148 L542,162 L562,185 L568,215 L565,255 L558,295 L545,332 L525,365 L502,382 L478,378 L455,358 L438,325 L428,285 L422,245 L425,205 L430,175 Z"/>
-                        <!-- 马达加斯加 -->
-                        <path d="M568,305 L578,298 L582,315 L578,335 L568,330 Z"/>
-                        <!-- 亚洲西部(土耳其等) -->
-                        <path d="M525,105 L548,98 L568,105 L575,118 L568,132 L548,135 L532,125 Z"/>
-                        <!-- 亚洲中部 -->
-                        <path d="M568,72 L615,58 L668,50 L725,52 L782,62 L828,78 L862,98 L878,125 L875,155 L858,178 L832,192 L805,195 L778,190 L752,195 L725,200 L698,195 L672,185 L645,172 L618,155 L592,135 L572,115 L562,95 Z"/>
-                        <!-- 印度半岛 -->
-                        <path d="M645,172 L668,178 L678,205 L675,238 L662,255 L645,248 L635,225 L632,198 Z"/>
-                        <!-- 东南亚大陆 -->
-                        <path d="M752,195 L778,198 L798,212 L808,232 L802,248 L785,242 L768,228 L755,215 Z"/>
-                        <!-- 马来群岛 -->
-                        <path d="M785,248 L808,242 L828,252 L835,268 L822,278 L802,272 L788,262 Z"/>
-                        <!-- 日本 -->
-                        <path d="M858,105 L872,98 L878,115 L875,138 L865,142 L858,128 Z"/>
-                        <!-- 朝鲜半岛 -->
-                        <path d="M832,115 L848,108 L855,122 L852,138 L842,142 L835,130 Z"/>
-                        <!-- 澳大利亚 -->
-                        <path d="M772,305 L818,295 L862,305 L888,325 L892,355 L878,382 L848,395 L812,392 L782,375 L768,348 Z"/>
-                        <!-- 新西兰 -->
-                        <path d="M898,372 L910,365 L915,382 L908,395 L898,388 Z"/>
-                        <!-- 婆罗洲 -->
-                        <path d="M808,242 L828,238 L838,252 L832,268 L818,265 Z"/>
-                        <!-- 苏门答腊 -->
-                        <path d="M778,252 L792,248 L798,265 L792,282 L780,278 Z"/>
-                        <!-- 爪哇 -->
-                        <path d="M802,275 L828,272 L835,282 L825,290 L805,288 Z"/>
-                    </g>
+                    <!-- 大陆轮廓 - 由JS从GeoJSON渲染 -->
+                    <g class="continents" id="continentsGroup"></g>
+
+                    <!-- 城市区域发光层 -->
+                    <g class="city-glow-layer" id="cityGlowLayer"></g>
 
                     <!-- 城市标记 -->
                     <g class="city-markers" id="cityMarkers"></g>

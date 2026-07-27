@@ -233,7 +233,7 @@ body {
     transition: transform 0.2s ease;
 }
 .city-marker:hover {
-    transform: scale(1.3);
+    transform: scale(1.5);
 }
 .city-marker-dot {
     fill: #fbbf24;
@@ -245,7 +245,17 @@ body {
 }
 @keyframes cityPulse {
     0%, 100% { opacity: 0.6; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.5); }
+    50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* 城市区域发光层 */
+.city-glow-layer circle {
+    pointer-events: none;
+}
+
+/* 城市区域发光层 */
+.city-glow-layer circle {
+    pointer-events: none;
 }
 
 /* 城市详情面板 */

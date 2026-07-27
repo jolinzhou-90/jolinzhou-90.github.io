@@ -93,134 +93,175 @@ window.addEventListener('load', () => {
 
 // ===== 90的世界地图 =====
 const cityData = {
-    edinburgh: {
-        name: '爱丁堡', country: 'Edinburgh, UK',
-        x: 492, y: 95,
-        dates: ['2023.09 - 至今'],
-        photos: []
-    },
-    london: {
-        name: '伦敦', country: 'London, UK',
-        x: 500, y: 107,
-        dates: [],
-        photos: []
-    },
-    copenhagen: {
-        name: '哥本哈根', country: 'Copenhagen, Denmark',
-        x: 535, y: 95,
-        dates: [],
-        photos: []
-    },
-    brussels: {
-        name: '布鲁塞尔', country: 'Brussels, Belgium',
-        x: 512, y: 109,
-        dates: [],
-        photos: []
-    },
-    vienna: {
-        name: '维也纳', country: 'Vienna, Austria',
-        x: 545, y: 116,
-        dates: [],
-        photos: []
-    },
-    barcelona: {
-        name: '巴塞罗那', country: 'Barcelona, Spain',
-        x: 506, y: 135,
-        dates: [],
-        photos: []
-    },
-    tenerife: {
-        name: '特内里费', country: 'Tenerife, Spain',
-        x: 455, y: 171,
-        dates: [],
-        photos: []
-    },
-    paris: {
-        name: '巴黎', country: 'Paris, France',
-        x: 507, y: 114,
-        dates: [],
-        photos: []
-    },
-    hongkong: {
-        name: '香港', country: 'Hong Kong, China',
-        x: 817, y: 188,
-        dates: [],
-        photos: []
-    },
-    shenzhen: {
-        name: '深圳', country: 'Shenzhen, China',
-        x: 817, y: 187,
-        dates: [],
-        photos: []
-    },
-    xiamen: {
-        name: '厦门', country: 'Xiamen, China',
-        x: 828, y: 182,
-        dates: [],
-        photos: []
-    },
-    hangzhou: {
-        name: '杭州', country: 'Hangzhou, China',
-        x: 834, y: 166,
-        dates: [],
-        photos: []
-    },
-    shanghai: {
-        name: '上海', country: 'Shanghai, China',
-        x: 837, y: 163,
-        dates: [],
-        photos: []
-    },
-    beijing: {
-        name: '北京', country: 'Beijing, China',
-        x: 823, y: 139,
-        dates: [],
-        photos: []
-    },
-    shaoxing: {
-        name: '绍兴', country: 'Shaoxing, China',
-        x: 835, y: 167,
-        dates: [],
-        photos: []
-    },
-    jiaxing: {
-        name: '嘉兴', country: 'Jiaxing, China',
-        x: 835, y: 165,
-        dates: [],
-        photos: []
-    }
+    edinburgh: { name: '爱丁堡', country: 'Edinburgh, UK', lat: 55.95, lon: -3.19, dates: ['2023.09 - 至今'], photos: [] },
+    london: { name: '伦敦', country: 'London, UK', lat: 51.51, lon: -0.13, dates: [], photos: [] },
+    copenhagen: { name: '哥本哈根', country: 'Copenhagen, Denmark', lat: 55.68, lon: 12.57, dates: [], photos: [] },
+    brussels: { name: '布鲁塞尔', country: 'Brussels, Belgium', lat: 50.85, lon: 4.35, dates: [], photos: [] },
+    vienna: { name: '维也纳', country: 'Vienna, Austria', lat: 48.21, lon: 16.37, dates: [], photos: [] },
+    barcelona: { name: '巴塞罗那', country: 'Barcelona, Spain', lat: 41.39, lon: 2.17, dates: [], photos: [] },
+    tenerife: { name: '特内里费', country: 'Tenerife, Spain', lat: 28.47, lon: -16.26, dates: [], photos: [] },
+    paris: { name: '巴黎', country: 'Paris, France', lat: 48.86, lon: 2.35, dates: [], photos: [] },
+    hongkong: { name: '香港', country: 'Hong Kong, China', lat: 22.32, lon: 114.17, dates: [], photos: [] },
+    shenzhen: { name: '深圳', country: 'Shenzhen, China', lat: 22.54, lon: 114.06, dates: [], photos: [] },
+    xiamen: { name: '厦门', country: 'Xiamen, China', lat: 24.48, lon: 118.09, dates: [], photos: [] },
+    hangzhou: { name: '杭州', country: 'Hangzhou, China', lat: 30.27, lon: 120.15, dates: [], photos: [] },
+    shanghai: { name: '上海', country: 'Shanghai, China', lat: 31.23, lon: 121.47, dates: [], photos: [] },
+    beijing: { name: '北京', country: 'Beijing, China', lat: 39.90, lon: 116.41, dates: [], photos: [] },
+    shaoxing: { name: '绍兴', country: 'Shaoxing, China', lat: 30.00, lon: 120.58, dates: [], photos: [] },
+    jiaxing: { name: '嘉兴', country: 'Jiaxing, China', lat: 30.75, lon: 120.75, dates: [], photos: [] }
 };
 
-// 渲染城市标记
-const markersGroup = document.getElementById('cityMarkers');
-Object.entries(cityData).forEach(([key, city]) => {
-    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.classList.add('city-marker');
-    g.setAttribute('data-city', key);
-    g.setAttribute('transform', `translate(${city.x}, ${city.y})`);
+// 经纬度转SVG坐标 (equirectangular projection, 1000x500 viewBox)
+function lonLatToXY(lon, lat) {
+    const x = (lon + 180) / 360 * 1000;
+    const y = (90 - lat) / 180 * 500;
+    return { x, y };
+}
 
-    // 发光圈
-    const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    glow.classList.add('city-marker-glow');
-    glow.setAttribute('r', '10');
-    glow.setAttribute('cx', '0');
-    glow.setAttribute('cy', '0');
-    glow.style.transformOrigin = '0 0';
+// GeoJSON坐标转SVG路径
+function geojsonToSVGPath(coordinates) {
+    if (!coordinates || coordinates.length === 0) return '';
+    
+    function ringToPath(ring) {
+        return ring.map((coord, i) => {
+            const { x, y } = lonLatToXY(coord[0], coord[1]);
+            return `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`;
+        }).join(' ') + ' Z';
+    }
+    
+    // Polygon
+    if (Array.isArray(coordinates[0]) && !Array.isArray(coordinates[0][0])) {
+        return ringToPath(coordinates);
+    }
+    
+    // MultiPolygon or Polygon with holes
+    return coordinates.map(ring => ringToPath(ring)).join(' ');
+}
 
-    // 实心点
-    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    dot.classList.add('city-marker-dot');
-    dot.setAttribute('r', '3.5');
-    dot.setAttribute('cx', '0');
-    dot.setAttribute('cy', '0');
+// 加载并渲染世界地图
+async function loadWorldMap() {
+    try {
+        const response = await fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json');
+        const geojson = await response.json();
+        
+        const continentsGroup = document.getElementById('continentsGroup');
+        
+        geojson.features.forEach(feature => {
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            
+            if (feature.geometry.type === 'Polygon') {
+                path.setAttribute('d', geojsonToSVGPath(feature.geometry.coordinates));
+            } else if (feature.geometry.type === 'MultiPolygon') {
+                const d = feature.geometry.coordinates.map(polygon => 
+                    geojsonToSVGPath(polygon)
+                ).join(' ');
+                path.setAttribute('d', d);
+            }
+            
+            path.setAttribute('fill', '#131a3e');
+            path.setAttribute('stroke', '#1e2a5a');
+            path.setAttribute('stroke-width', '0.5');
+            continentsGroup.appendChild(path);
+        });
+        
+        // 地图加载完成后渲染城市
+        renderCities();
+    } catch (error) {
+        console.error('Failed to load world map:', error);
+        // 如果加载失败，使用备用方案
+        renderFallbackMap();
+    }
+}
 
-    g.appendChild(glow);
-    g.appendChild(dot);
-    markersGroup.appendChild(g);
+// 备用地图（如果GeoJSON加载失败）
+function renderFallbackMap() {
+    const continentsGroup = document.getElementById('continentsGroup');
+    const fallbackPaths = [
+        'M78,95 L95,78 L125,62 L165,52 L205,48 L245,55 L275,68 L295,85 L305,105 L300,130 L285,155 L265,175 L240,190 L215,195 L195,188 L175,195 L155,200 L135,195 L115,180 L95,155 L82,125 Z',
+        'M210,235 L235,225 L258,235 L272,260 L278,295 L275,335 L265,370 L248,395 L228,400 L210,385 L198,355 L190,315 L188,275 L195,250 Z',
+        'M445,68 L468,58 L492,62 L508,72 L518,88 L512,108 L498,118 L478,122 L458,118 L442,108 L435,92 Z',
+        'M438,155 L468,145 L505,148 L542,162 L562,185 L568,215 L565,255 L558,295 L545,332 L525,365 L502,382 L478,378 L455,358 L438,325 L428,285 L422,245 L425,205 L430,175 Z',
+        'M568,72 L615,58 L668,50 L725,52 L782,62 L828,78 L862,98 L878,125 L875,155 L858,178 L832,192 L805,195 L778,190 L752,195 L725,200 L698,195 L672,185 L645,172 L618,155 L592,135 L572,115 L562,95 Z',
+        'M772,305 L818,295 L862,305 L888,325 L892,355 L878,382 L848,395 L812,392 L782,375 L768,348 Z'
+    ];
+    
+    fallbackPaths.forEach(d => {
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('fill', '#131a3e');
+        path.setAttribute('stroke', '#1e2a5a');
+        path.setAttribute('stroke-width', '0.5');
+        continentsGroup.appendChild(path);
+    });
+    
+    renderCities();
+}
 
-    // 点击事件
-    g.addEventListener('click', () => openCityDetail(key));
-});
+// 渲染城市标记（区域发光效果）
+function renderCities() {
+    const markersGroup = document.getElementById('cityMarkers');
+    const glowLayer = document.getElementById('cityGlowLayer');
+    
+    Object.entries(cityData).forEach(([key, city]) => {
+        const { x, y } = lonLatToXY(city.lon, city.lat);
+        
+        // 城市区域发光（大圆圈）
+        const glowCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        glowCircle.setAttribute('cx', x);
+        glowCircle.setAttribute('cy', y);
+        glowCircle.setAttribute('r', '25');
+        glowCircle.setAttribute('fill', 'url(#cityGlow)');
+        glowCircle.setAttribute('filter', 'url(#cityAreaGlow)');
+        glowCircle.style.opacity = '0';
+        glowCircle.style.transition = 'opacity 0.3s ease';
+        glowLayer.appendChild(glowCircle);
+        
+        // 城市标记组
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.classList.add('city-marker');
+        g.setAttribute('data-city', key);
+        g.setAttribute('transform', `translate(${x}, ${y})`);
+        
+        // 发光圈
+        const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        glow.classList.add('city-marker-glow');
+        glow.setAttribute('r', '8');
+        glow.setAttribute('cx', '0');
+        glow.setAttribute('cy', '0');
+        glow.style.transformOrigin = '0 0';
+        
+        // 实心点
+        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        dot.classList.add('city-marker-dot');
+        dot.setAttribute('r', '3');
+        dot.setAttribute('cx', '0');
+        dot.setAttribute('cy', '0');
+        
+        g.appendChild(glow);
+        g.appendChild(dot);
+        markersGroup.appendChild(g);
+        
+        // 点击事件 - 点亮城市区域
+        g.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // 切换城市区域发光
+            const isActive = glowCircle.style.opacity === '1';
+            glowCircle.style.opacity = isActive ? '0' : '1';
+            
+            // 打开详情面板
+            openCityDetail(key);
+        });
+        
+        // 悬停效果
+        g.addEventListener('mouseenter', () => {
+            glowCircle.style.opacity = '0.6';
+        });
+        g.addEventListener('mouseleave', () => {
+            const isActive = glowCircle.getAttribute('data-active') === 'true';
+            glowCircle.style.opacity = isActive ? '1' : '0';
+        });
+    });
+}
 
 // 打开城市详情面板
 function openCityDetail(cityKey) {
@@ -272,3 +313,6 @@ document.querySelector('.worldmap-svg').addEventListener('click', (e) => {
         document.getElementById('cityDetailPanel').classList.remove('active');
     }
 });
+
+// 加载世界地图
+loadWorldMap();
