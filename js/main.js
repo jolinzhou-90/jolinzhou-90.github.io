@@ -122,7 +122,12 @@ const cityToCountry = {
     santorini: 'Greece',
     maldives: 'Maldives',
     mauritius: 'Mauritius',
-    seychelles: 'Seychelles'
+    seychelles: 'Seychelles',
+    // 美国城市
+    newyork: 'United States',
+    sanfrancisco: 'United States',
+    chicago: 'United States',
+    orlando: 'United States'
 };
 
 const cityData = {
@@ -154,7 +159,12 @@ const cityData = {
     santorini: { name: '圣托里尼', country: 'Santorini, Greece', lat: 36.39, lon: 25.46, dates: [], photos: [] },
     maldives: { name: '马尔代夫', country: 'Maldives', lat: 3.20, lon: 73.22, dates: [], photos: [] },
     mauritius: { name: '毛里求斯', country: 'Mauritius', lat: -20.16, lon: 57.50, dates: [], photos: [] },
-    seychelles: { name: '塞舌尔', country: 'Seychelles', lat: -4.68, lon: 55.49, dates: [], photos: [] }
+    seychelles: { name: '塞舌尔', country: 'Seychelles', lat: -4.68, lon: 55.49, dates: [], photos: [] },
+    // 美国城市
+    newyork: { name: '纽约', country: 'New York, USA', lat: 40.71, lon: -74.01, dates: [], photos: [] },
+    sanfrancisco: { name: '旧金山', country: 'San Francisco, USA', lat: 37.77, lon: -122.42, dates: [], photos: [] },
+    chicago: { name: '芝加哥', country: 'Chicago, USA', lat: 41.88, lon: -87.63, dates: [], photos: [] },
+    orlando: { name: '奥兰多', country: 'Orlando, USA', lat: 28.54, lon: -81.38, dates: [], photos: [] }
 };
 
 // 经纬度转SVG坐标 (equirectangular projection, 1000x500 viewBox)
