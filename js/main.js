@@ -254,9 +254,8 @@ function renderFallbackMap() {
     renderCities();
 }
 
-// 渲染城市标记（国家默认亮起）
+// 渲染城市标记（国家默认亮起 + 悬停显示城市浮窗）
 function renderCities() {
-    const markersGroup = document.getElementById('cityMarkers');
     const litCountries = new Set();
     
     // 收集所有需要点亮的国家
@@ -264,49 +263,69 @@ function renderCities() {
         litCountries.add(countryName);
     });
     
-    // 默认点亮所有国家 - 通过查询 DOM
+    // 默认点亮所有国家
     litCountries.forEach(countryName => {
         const paths = document.querySelectorAll(`path[data-country="${countryName}"]`);
         paths.forEach(path => {
             path.setAttribute('fill', '#f59e0b');
             path.setAttribute('filter', 'url(#glow)');
+            path.style.cursor = 'pointer';
+            
+            // 悬停显示城市信息浮窗
+            path.addEventListener('mouseenter', (e) => showCityTooltip(countryName, e));
+            path.addEventListener('mouseleave', hideCityTooltip);
         });
     });
+}
+
+// 显示城市信息浮窗
+function showCityTooltip(countryName, event) {
+    // 找到该国家的所有城市
+    const cities = Object.entries(cityData)
+        .filter(([key, city]) => cityToCountry[key] === countryName)
+        .map(([key, city]) => ({
+            name: city.name,
+            dates: city.dates.length > 0 ? city.dates.join(', ') : '待补充'
+        }));
     
-    Object.entries(cityData).forEach(([key, city]) => {
-        const { x, y } = lonLatToXY(city.lon, city.lat);
-        
-        // 城市标记组
-        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        g.classList.add('city-marker');
-        g.setAttribute('data-city', key);
-        g.setAttribute('transform', `translate(${x}, ${y})`);
-        
-        // 发光圈
-        const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        glow.classList.add('city-marker-glow');
-        glow.setAttribute('r', '8');
-        glow.setAttribute('cx', '0');
-        glow.setAttribute('cy', '0');
-        glow.style.transformOrigin = '0 0';
-        
-        // 实心点
-        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        dot.classList.add('city-marker-dot');
-        dot.setAttribute('r', '3');
-        dot.setAttribute('cx', '0');
-        dot.setAttribute('cy', '0');
-        
-        g.appendChild(glow);
-        g.appendChild(dot);
-        markersGroup.appendChild(g);
-        
-        // 点击事件 - 打开详情面板
-        g.addEventListener('click', (e) => {
-            e.stopPropagation();
-            openCityDetail(key);
-        });
-    });
+    if (cities.length === 0) return;
+    
+    // 创建或更新浮窗
+    let tooltip = document.getElementById('countryTooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'countryTooltip';
+        tooltip.className = 'country-tooltip';
+        document.body.appendChild(tooltip);
+    }
+    
+    // 填充内容
+    tooltip.innerHTML = `
+        <div class="tooltip-country-name">${countryName}</div>
+        <div class="tooltip-cities">
+            ${cities.map(city => `
+                <div class="tooltip-city-item">
+                    <span class="tooltip-city-name">${city.name}</span>
+                    <span class="tooltip-city-date">${city.dates}</span>
+                </div>
+            `).join('')}
+        </div>
+    `;
+    
+    // 定位浮窗
+    const rect = event.target.getBoundingClientRect();
+    tooltip.style.left = (rect.left + rect.width / 2) + 'px';
+    tooltip.style.top = (rect.top - 10) + 'px';
+    tooltip.style.transform = 'translate(-50%, -100%)';
+    tooltip.classList.add('active');
+}
+
+// 隐藏城市信息浮窗
+function hideCityTooltip() {
+    const tooltip = document.getElementById('countryTooltip');
+    if (tooltip) {
+        tooltip.classList.remove('active');
+    }
 }
 
 // 打开城市详情面板
