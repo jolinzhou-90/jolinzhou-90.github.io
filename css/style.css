@@ -119,7 +119,8 @@ body {
 
 /* ===== 我 - 关于 ===== */
 .about-intro { max-width:700px; margin:0 auto 40px; text-align:center; }
-.about-intro p { color:var(--text-light); margin-bottom:12px; font-size:1.05rem; }
+.about-intro p { color:var(--text-light); margin-bottom:16px; font-size:1.05rem; }
+.about-quote { font-family:'Playfair Display',serif; font-style:italic; color:var(--primary); font-size:1.1rem !important; margin-top:24px !important; }
 .personal-info { display:flex; justify-content:center; margin-bottom:20px; }
 .info-card {
     display:flex; gap:32px; padding:24px 40px; border-radius:var(--radius);
@@ -146,6 +147,30 @@ body {
 .hobby-icon i { font-size:1.3rem; color:var(--primary); }
 .hobby-card h3 { font-size:1.05rem; margin-bottom:10px; }
 .hobby-card p { font-size:.88rem; color:var(--text-light); line-height:1.7; }
+
+/* ===== 我的关键词 ===== */
+.keywords-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.keyword-card {
+    background:white; padding:28px 24px; border-radius:var(--radius);
+    border:1px solid var(--border); transition:var(--transition); position:relative; overflow:hidden;
+}
+.keyword-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg,var(--primary),var(--secondary));
+    opacity:0; transition:var(--transition);
+}
+.keyword-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--primary-light); }
+.keyword-card:hover::before { opacity:1; }
+.keyword-number {
+    font-size:.75rem; font-weight:700; color:var(--primary); letter-spacing:2px;
+    margin-bottom:12px; opacity:.6;
+}
+.keyword-title { font-size:1.1rem; margin-bottom:12px; color:var(--text); }
+.keyword-en {
+    font-family:'Playfair Display',serif; font-weight:400; font-style:italic;
+    color:var(--text-lighter); font-size:.85rem; margin-left:6px;
+}
+.keyword-card p { font-size:.88rem; color:var(--text-light); line-height:1.7; }
 
 /* ===== 胶片拉片 ===== */
 .filmstrip-wrapper {
@@ -563,6 +588,7 @@ body {
 /* ===== 响应式 ===== */
 @media (max-width:900px) {
     .hobbies-grid { grid-template-columns:repeat(2,1fr); }
+    .keywords-grid { grid-template-columns:repeat(2,1fr); }
     .contact-grid { grid-template-columns:1fr; max-width:400px; }
     .film-item { flex:0 0 250px; height:180px; }
     .work-gallery { grid-template-columns:1fr 1fr; }
@@ -583,6 +609,7 @@ body {
     .section { padding:70px 0; }
     .section-title { font-size:1.8rem; }
     .hobbies-grid { grid-template-columns:1fr; }
+    .keywords-grid { grid-template-columns:1fr; }
     .info-card { gap:20px; padding:20px; }
     .film-item { flex:0 0 220px; height:160px; }
     .filmstrip-track { padding:20px 24px; }
