@@ -141,7 +141,7 @@ function geojsonToSVGPath(coordinates) {
 // 加载并渲染世界地图
 async function loadWorldMap() {
     try {
-        const response = await fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json');
+        const response = await fetch('data/world.json');
         const geojson = await response.json();
         
         const continentsGroup = document.getElementById('continentsGroup');
