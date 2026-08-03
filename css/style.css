@@ -153,6 +153,8 @@ body {
 
 .flip-card {
     height:260px; cursor:pointer;
+    border-radius:16px; overflow:hidden;
+    border:1px solid var(--border);
 }
 .flip-card-inner {
     position:relative; width:100%; height:100%;
@@ -164,14 +166,11 @@ body {
 .flip-card-front, .flip-card-back {
     position:absolute; top:0; left:0; width:100%; height:100%;
     backface-visibility:hidden; -webkit-backface-visibility:hidden;
-    border-radius:16px; overflow:hidden;
-    border:1px solid var(--border);
 }
 
 /* 正面 */
 .flip-card-front {
     background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center;
-    position:relative; z-index:1;
 }
 .card-illustration {
     position:absolute; top:0; left:0; width:100%; height:100%;
@@ -185,7 +184,7 @@ body {
 }
 .card-front-content {
     position:relative; z-index:2; text-align:center;
-    background:rgba(255,255,255,0.92); backdrop-filter:blur(12px);
+    background:rgba(255,255,255,0.95); backdrop-filter:blur(12px);
     padding:20px 28px; border-radius:12px;
     box-shadow:0 2px 12px rgba(0,0,0,.04);
 }
@@ -202,7 +201,6 @@ body {
     transform:rotateY(180deg);
     background:linear-gradient(135deg, var(--card-accent), color-mix(in srgb, var(--card-accent) 80%, #000));
     display:flex; align-items:center; justify-content:center; padding:32px 28px;
-    z-index:1;
 }
 .flip-card-back p {
     color:white; font-size:.95rem; line-height:1.8; text-align:center;
