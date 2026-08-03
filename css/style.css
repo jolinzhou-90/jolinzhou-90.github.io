@@ -148,29 +148,64 @@ body {
 .hobby-card h3 { font-size:1.05rem; margin-bottom:10px; }
 .hobby-card p { font-size:.88rem; color:var(--text-light); line-height:1.7; }
 
-/* ===== 我的关键词 ===== */
-.keywords-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-.keyword-card {
-    background:white; padding:28px 24px; border-radius:var(--radius);
-    border:1px solid var(--border); transition:var(--transition); position:relative; overflow:hidden;
+/* ===== 我的关键词 - 翻转卡片 ===== */
+.keywords-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; perspective:1000px; }
+
+.flip-card {
+    height:260px; cursor:pointer;
 }
-.keyword-card::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:3px;
-    background:linear-gradient(90deg,var(--primary),var(--secondary));
-    opacity:0; transition:var(--transition);
+.flip-card-inner {
+    position:relative; width:100%; height:100%;
+    transition:transform 0.7s cubic-bezier(.4,0,.2,1);
+    transform-style:preserve-3d;
 }
-.keyword-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--primary-light); }
-.keyword-card:hover::before { opacity:1; }
-.keyword-number {
-    font-size:.75rem; font-weight:700; color:var(--primary); letter-spacing:2px;
-    margin-bottom:12px; opacity:.6;
+.flip-card:hover .flip-card-inner { transform:rotateY(180deg); }
+
+.flip-card-front, .flip-card-back {
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    backface-visibility:hidden; -webkit-backface-visibility:hidden;
+    border-radius:16px; overflow:hidden;
+    border:1px solid var(--border);
 }
-.keyword-title { font-size:1.1rem; margin-bottom:12px; color:var(--text); }
-.keyword-en {
-    font-family:'Playfair Display',serif; font-weight:400; font-style:italic;
-    color:var(--text-lighter); font-size:.85rem; margin-left:6px;
+
+/* 正面 */
+.flip-card-front {
+    background:white; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative;
 }
-.keyword-card p { font-size:.88rem; color:var(--text-light); line-height:1.7; }
+.card-illustration {
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    color:var(--card-accent); opacity:0.6;
+}
+.card-number {
+    position:absolute; top:16px; left:20px;
+    font-size:2.5rem; font-weight:800;
+    color:var(--card-accent); opacity:0.08;
+    line-height:1; letter-spacing:-2px;
+}
+.card-front-content {
+    position:relative; z-index:1; text-align:center;
+    background:rgba(255,255,255,0.85); backdrop-filter:blur(8px);
+    padding:20px 28px; border-radius:12px;
+}
+.card-front-content h3 {
+    font-size:1.5rem; font-weight:700; color:var(--text); margin-bottom:4px;
+}
+.card-en {
+    font-family:'Playfair Display',serif; font-style:italic;
+    font-size:.9rem; color:var(--card-accent); font-weight:400;
+}
+
+/* 背面 */
+.flip-card-back {
+    transform:rotateY(180deg);
+    background:linear-gradient(135deg, var(--card-accent), color-mix(in srgb, var(--card-accent) 80%, #000));
+    display:flex; align-items:center; justify-content:center; padding:32px 28px;
+}
+.flip-card-back p {
+    color:white; font-size:.95rem; line-height:1.8; text-align:center;
+    font-weight:400;
+}
 
 /* ===== 胶片拉片 ===== */
 .filmstrip-wrapper {
@@ -589,6 +624,7 @@ body {
 @media (max-width:900px) {
     .hobbies-grid { grid-template-columns:repeat(2,1fr); }
     .keywords-grid { grid-template-columns:repeat(2,1fr); }
+    .flip-card { height:240px; }
     .contact-grid { grid-template-columns:1fr; max-width:400px; }
     .film-item { flex:0 0 250px; height:180px; }
     .work-gallery { grid-template-columns:1fr 1fr; }
@@ -610,6 +646,7 @@ body {
     .section-title { font-size:1.8rem; }
     .hobbies-grid { grid-template-columns:1fr; }
     .keywords-grid { grid-template-columns:1fr; }
+    .flip-card { height:220px; }
     .info-card { gap:20px; padding:20px; }
     .film-item { flex:0 0 220px; height:160px; }
     .filmstrip-track { padding:20px 24px; }
