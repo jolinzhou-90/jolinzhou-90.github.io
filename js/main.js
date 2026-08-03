@@ -92,6 +92,26 @@ window.addEventListener('load', () => {
 });
 
 // ===== 90的世界地图 =====
+// 城市 → 国家映射
+const cityToCountry = {
+    edinburgh: 'United Kingdom',
+    london: 'United Kingdom',
+    copenhagen: 'Denmark',
+    brussels: 'Belgium',
+    vienna: 'Austria',
+    barcelona: 'Spain',
+    tenerife: 'Spain',
+    paris: 'France',
+    hongkong: 'China',
+    shenzhen: 'China',
+    xiamen: 'China',
+    hangzhou: 'China',
+    shanghai: 'China',
+    beijing: 'China',
+    shaoxing: 'China',
+    jiaxing: 'China'
+};
+
 const cityData = {
     edinburgh: { name: '爱丁堡', country: 'Edinburgh, UK', lat: 55.95, lon: -3.19, dates: ['2023.09 - 至今'], photos: [] },
     london: { name: '伦敦', country: 'London, UK', lat: 51.51, lon: -0.13, dates: [], photos: [] },
@@ -139,6 +159,8 @@ function geojsonToSVGPath(coordinates) {
 }
 
 // 加载并渲染世界地图
+let countryPaths = {}; // 存储国家路径引用
+
 async function loadWorldMap() {
     try {
         const response = await fetch('data/world.json');
@@ -148,6 +170,7 @@ async function loadWorldMap() {
         
         geojson.features.forEach(feature => {
             const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            const countryName = feature.properties.name;
             
             if (feature.geometry.type === 'Polygon') {
                 path.setAttribute('d', geojsonToSVGPath(feature.geometry.coordinates));
@@ -161,6 +184,15 @@ async function loadWorldMap() {
             path.setAttribute('fill', '#131a3e');
             path.setAttribute('stroke', '#1e2a5a');
             path.setAttribute('stroke-width', '0.5');
+            path.setAttribute('data-country', countryName);
+            path.style.transition = 'fill 0.5s ease, filter 0.5s ease';
+            
+            // 存储国家路径引用
+            if (!countryPaths[countryName]) {
+                countryPaths[countryName] = [];
+            }
+            countryPaths[countryName].push(path);
+            
             continentsGroup.appendChild(path);
         });
         
@@ -168,7 +200,6 @@ async function loadWorldMap() {
         renderCities();
     } catch (error) {
         console.error('Failed to load world map:', error);
-        // 如果加载失败，使用备用方案
         renderFallbackMap();
     }
 }
@@ -197,24 +228,13 @@ function renderFallbackMap() {
     renderCities();
 }
 
-// 渲染城市标记（区域发光效果）
+// 渲染城市标记（点击点亮国家）
 function renderCities() {
     const markersGroup = document.getElementById('cityMarkers');
-    const glowLayer = document.getElementById('cityGlowLayer');
+    const litCountries = new Set(); // 记录已点亮的国家
     
     Object.entries(cityData).forEach(([key, city]) => {
         const { x, y } = lonLatToXY(city.lon, city.lat);
-        
-        // 城市区域发光（大圆圈）
-        const glowCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        glowCircle.setAttribute('cx', x);
-        glowCircle.setAttribute('cy', y);
-        glowCircle.setAttribute('r', '25');
-        glowCircle.setAttribute('fill', 'url(#cityGlow)');
-        glowCircle.setAttribute('filter', 'url(#cityAreaGlow)');
-        glowCircle.style.opacity = '0';
-        glowCircle.style.transition = 'opacity 0.3s ease';
-        glowLayer.appendChild(glowCircle);
         
         // 城市标记组
         const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -241,24 +261,33 @@ function renderCities() {
         g.appendChild(dot);
         markersGroup.appendChild(g);
         
-        // 点击事件 - 点亮城市区域
+        // 点击事件 - 点亮整个国家
         g.addEventListener('click', (e) => {
             e.stopPropagation();
-            // 切换城市区域发光
-            const isActive = glowCircle.style.opacity === '1';
-            glowCircle.style.opacity = isActive ? '0' : '1';
+            const countryName = cityToCountry[key];
+            
+            if (litCountries.has(countryName)) {
+                // 取消点亮
+                litCountries.delete(countryName);
+                if (countryPaths[countryName]) {
+                    countryPaths[countryName].forEach(path => {
+                        path.setAttribute('fill', '#131a3e');
+                        path.setAttribute('filter', 'none');
+                    });
+                }
+            } else {
+                // 点亮国家
+                litCountries.add(countryName);
+                if (countryPaths[countryName]) {
+                    countryPaths[countryName].forEach(path => {
+                        path.setAttribute('fill', '#f59e0b');
+                        path.setAttribute('filter', 'url(#glow)');
+                    });
+                }
+            }
             
             // 打开详情面板
             openCityDetail(key);
-        });
-        
-        // 悬停效果
-        g.addEventListener('mouseenter', () => {
-            glowCircle.style.opacity = '0.6';
-        });
-        g.addEventListener('mouseleave', () => {
-            const isActive = glowCircle.getAttribute('data-active') === 'true';
-            glowCircle.style.opacity = isActive ? '1' : '0';
         });
     });
 }
