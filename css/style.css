@@ -501,47 +501,54 @@ body {
 .pets-section { margin-top:60px; }
 .pet-block { margin-bottom:40px; }
 
-/* 宠物卡片 */
-.pet-card {
-    width:220px; margin:0 auto 32px; padding:32px 24px;
-    border-radius:16px; text-align:center;
+/* 宠物大卡片 */
+.pet-mega-card {
+    max-width:900px; margin:0 auto; border-radius:20px; overflow:hidden;
+    background:rgba(255,255,255,.95); border:1px solid var(--border);
+    box-shadow:0 12px 40px rgba(0,0,0,.08);
     transition:var(--transition);
 }
-.pet-card-cat {
-    background:rgba(255,255,255,.95); border:1px solid var(--border);
-    box-shadow:0 8px 30px rgba(0,0,0,.08);
-}
-.pet-card-dog {
+.pet-mega-card:hover { box-shadow:0 16px 50px rgba(0,0,0,.12); }
+.pet-mega-card-dark {
     background:#111; border:1px solid #222;
-    box-shadow:0 8px 30px rgba(0,0,0,.4);
+    box-shadow:0 12px 40px rgba(0,0,0,.4);
 }
-.pet-card:hover { transform:translateY(-4px); }
-.pet-avatar {
-    width:64px; height:64px; border-radius:50%; margin:0 auto 16px;
+.pet-mega-card-dark:hover { box-shadow:0 16px 50px rgba(0,0,0,.5); }
+
+/* 大卡片头部 */
+.pet-mega-header {
+    display:flex; align-items:center; gap:16px;
+    padding:20px 28px;
+}
+.pet-mega-avatar {
+    width:48px; height:48px; border-radius:50%; flex-shrink:0;
     background:linear-gradient(135deg,#f8f0ff,#fff0f5);
     display:flex; align-items:center; justify-content:center;
 }
-.pet-avatar i { font-size:1.5rem; color:var(--primary); }
-.pet-avatar-dog {
+.pet-mega-avatar i { font-size:1.2rem; color:var(--primary); }
+.pet-mega-avatar-dark {
     background:linear-gradient(135deg,#1a1a1a,#222);
 }
-.pet-avatar-dog i { color:#666; }
-.pet-card-name { font-size:1.5rem; font-weight:700; margin-bottom:4px; }
-.pet-card-cat .pet-card-name { color:var(--text); }
-.pet-card-dog .pet-card-name { color:#fff; }
-.pet-card-tag {
-    font-family:'Playfair Display',serif; font-size:.78rem;
+.pet-mega-avatar-dark i { color:#666; }
+.pet-mega-info { display:flex; flex-direction:column; }
+.pet-mega-name { font-size:1.2rem; font-weight:700; color:var(--text); line-height:1.3; }
+.pet-mega-card-dark .pet-mega-name { color:#fff; }
+.pet-mega-tag {
+    font-family:'Playfair Display',serif; font-size:.7rem;
     letter-spacing:3px; text-transform:uppercase;
+    color:var(--text-lighter);
 }
-.pet-card-cat .pet-card-tag { color:var(--text-lighter); }
-.pet-card-dog .pet-card-tag { color:rgba(255,255,255,.3); }
+.pet-mega-card-dark .pet-mega-tag { color:rgba(255,255,255,.3); }
 
-/* 无限循环滚动 */
-.pet-scroll-track {
-    overflow:hidden; position:relative; padding:0;
-    mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent);
-    -webkit-mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent);
+/* 大卡片内滚动区 */
+.pet-mega-scroll {
+    overflow:hidden; position:relative;
+    mask-image:linear-gradient(to right,transparent,black 3%,black 97%,transparent);
+    -webkit-mask-image:linear-gradient(to right,transparent,black 3%,black 97%,transparent);
+    padding-bottom:4px;
 }
+.pet-mega-scroll-bw .pet-scroll-img { filter:grayscale(100%) brightness(.7); }
+.pet-mega-scroll-bw .pet-scroll-img:hover { filter:grayscale(100%) brightness(1); }
 .pet-scroll-inner {
     display:flex; gap:16px; width:max-content;
     animation:petScroll 30s linear infinite;
@@ -628,7 +635,7 @@ body {
     .contact-grid { grid-template-columns:1fr; max-width:400px; }
     .film-item { flex:0 0 250px; height:180px; }
     .work-gallery { grid-template-columns:1fr 1fr; }
-    .pet-card { width:180px; padding:24px 16px; }
+    .pet-mega-header { padding:16px 20px; }
     .pet-scroll-img { flex:0 0 200px; height:140px; }
 }
 @media (max-width:640px) {
