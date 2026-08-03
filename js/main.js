@@ -264,14 +264,13 @@ function renderCities() {
         litCountries.add(countryName);
     });
     
-    // 默认点亮所有国家
+    // 默认点亮所有国家 - 通过查询 DOM
     litCountries.forEach(countryName => {
-        if (countryPaths[countryName]) {
-            countryPaths[countryName].forEach(path => {
-                path.setAttribute('fill', '#f59e0b');
-                path.setAttribute('filter', 'url(#glow)');
-            });
-        }
+        const paths = document.querySelectorAll(`path[data-country="${countryName}"]`);
+        paths.forEach(path => {
+            path.setAttribute('fill', '#f59e0b');
+            path.setAttribute('filter', 'url(#glow)');
+        });
     });
     
     Object.entries(cityData).forEach(([key, city]) => {
