@@ -584,6 +584,233 @@ body {
     100% { transform:translateX(-50%); }
 }
 
+/* ===== 我的教育 ===== */
+.edu-hero {
+    text-align:center; padding:40px 20px 48px; max-width:700px; margin:0 auto;
+}
+.edu-hero-school {
+    font-size:.85rem; letter-spacing:3px; text-transform:uppercase;
+    color:var(--primary); font-weight:600; margin-bottom:12px;
+}
+.edu-hero-degree {
+    font-size:2rem; font-weight:700; color:var(--text); margin-bottom:8px;
+}
+.edu-hero-year {
+    font-size:.9rem; color:var(--text-lighter); margin-bottom:24px; letter-spacing:1px;
+}
+.edu-hero-intro {
+    font-size:1.05rem; color:var(--text-light); line-height:1.8;
+    font-family:'Playfair Display',serif; font-style:italic;
+}
+
+.edu-block { margin-top:56px; }
+.edu-block-title {
+    font-size:1.3rem; font-weight:700; color:var(--text); margin-bottom:24px;
+    display:flex; align-items:center; gap:12px;
+}
+.edu-block-num {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:32px; height:32px; border-radius:8px;
+    background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(14,165,233,.1));
+    color:var(--primary); font-size:.85rem; font-weight:700; flex-shrink:0;
+}
+.edu-section-intro {
+    font-size:1rem; color:var(--text-light); margin-bottom:20px; font-style:italic;
+}
+
+/* 学习方向四格 */
+.edu-direction-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+.edu-dir-card {
+    background:white; padding:28px 24px; border-radius:16px;
+    border:1px solid var(--border); transition:var(--transition); position:relative; overflow:hidden;
+}
+.edu-dir-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--dir-color); opacity:0; transition:var(--transition);
+}
+.edu-dir-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+.edu-dir-card:hover::before { opacity:1; }
+.edu-dir-icon {
+    width:48px; height:48px; border-radius:12px; margin-bottom:16px;
+    background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(14,165,233,.08));
+    display:flex; align-items:center; justify-content:center;
+}
+.edu-dir-icon i { font-size:1.2rem; color:var(--dir-color); }
+.edu-dir-card h4 { font-size:1.1rem; font-weight:700; margin-bottom:8px; color:var(--text); }
+.edu-dir-keywords {
+    font-size:.78rem; color:var(--dir-color); margin-bottom:12px;
+    font-weight:500; letter-spacing:.3px;
+}
+.edu-dir-card p { font-size:.88rem; color:var(--text-light); line-height:1.7; }
+
+/* 文本块 */
+.edu-text-block { max-width:700px; margin-bottom:24px; }
+.edu-text-block p { font-size:1rem; color:var(--text-light); line-height:1.8; margin-bottom:12px; }
+.edu-core-question {
+    font-family:'Playfair Display',serif; font-style:italic;
+    color:var(--primary); font-size:1.05rem !important; font-weight:500;
+    padding-left:16px; border-left:3px solid var(--primary); margin-top:16px !important;
+}
+
+/* 标签云 */
+.edu-sub-section { margin-bottom:24px; }
+.edu-sub-title { font-size:1rem; font-weight:600; color:var(--text); margin-bottom:12px; }
+.edu-tag-cloud { display:flex; flex-wrap:wrap; gap:8px; }
+.edu-tag {
+    padding:6px 14px; border-radius:20px; font-size:.82rem; font-weight:500;
+    background:rgba(99,102,241,.06); color:var(--primary); border:1px solid rgba(99,102,241,.12);
+    transition:var(--transition);
+}
+.edu-tag:hover { background:rgba(99,102,241,.12); }
+
+/* 高亮卡片 */
+.edu-highlight-card {
+    display:flex; align-items:flex-start; gap:20px; padding:24px;
+    background:linear-gradient(135deg,rgba(99,102,241,.04),rgba(14,165,233,.04));
+    border-radius:16px; border:1px solid rgba(99,102,241,.1);
+}
+.edu-highlight-icon {
+    width:52px; height:52px; border-radius:14px; flex-shrink:0;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    display:flex; align-items:center; justify-content:center;
+}
+.edu-highlight-icon i { font-size:1.3rem; color:white; }
+.edu-highlight-content h4 { font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:6px; }
+.edu-highlight-content p { font-size:.9rem; color:var(--text-light); line-height:1.7; margin-bottom:12px; }
+.edu-skill-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.edu-skill-tag {
+    padding:4px 12px; border-radius:12px; font-size:.78rem; font-weight:500;
+    background:white; color:var(--text-light); border:1px solid var(--border);
+}
+
+/* 主题卡片 */
+.edu-topic-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+.edu-topic-card {
+    background:white; padding:28px 24px; border-radius:16px;
+    border:1px solid var(--border); transition:var(--transition);
+}
+.edu-topic-card:hover { box-shadow:var(--shadow-lg); }
+.edu-topic-card h4 {
+    font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:10px;
+    display:flex; align-items:center; gap:8px;
+}
+.edu-topic-card h4 i { color:var(--primary); font-size:.9rem; }
+.edu-topic-card > p { font-size:.88rem; color:var(--text-light); line-height:1.7; margin-bottom:14px; }
+.edu-topic-list { display:flex; flex-wrap:wrap; gap:6px; }
+.edu-topic-list span {
+    padding:4px 10px; border-radius:8px; font-size:.75rem;
+    background:rgba(99,102,241,.05); color:var(--text-light); border:1px solid rgba(99,102,241,.08);
+}
+
+/* 研究项目卡片 */
+.edu-research-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+.edu-research-card {
+    background:white; padding:28px 24px; border-radius:16px;
+    border:1px solid var(--border); transition:var(--transition);
+}
+.edu-research-card:hover { box-shadow:var(--shadow-lg); transform:translateY(-2px); }
+.edu-research-label {
+    font-size:.7rem; letter-spacing:2px; text-transform:uppercase;
+    color:var(--primary); font-weight:600; margin-bottom:10px;
+}
+.edu-research-card h4 { font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:4px; }
+.edu-research-card h5 {
+    font-size:.9rem; font-weight:500; color:var(--primary); margin-bottom:12px;
+    font-style:italic; font-family:'Playfair Display',serif;
+}
+.edu-research-card p { font-size:.88rem; color:var(--text-light); line-height:1.7; margin-bottom:14px; }
+.edu-research-keywords { display:flex; flex-wrap:wrap; gap:6px; }
+.edu-research-keywords span {
+    padding:4px 10px; border-radius:8px; font-size:.75rem; font-weight:500;
+    background:rgba(99,102,241,.08); color:var(--primary);
+}
+
+/* 政策研究 */
+.edu-policy-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+.edu-policy-card {
+    background:white; padding:24px; border-radius:16px;
+    border:1px solid var(--border); transition:var(--transition);
+}
+.edu-policy-card:hover { box-shadow:var(--shadow); }
+.edu-policy-card h4 { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+.edu-policy-card p { font-size:.88rem; color:var(--text-light); line-height:1.7; }
+
+/* 研究方法 */
+.edu-method-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.edu-method-card {
+    background:white; padding:24px 20px; border-radius:16px;
+    border:1px solid var(--border); transition:var(--transition);
+}
+.edu-method-card:hover { box-shadow:var(--shadow); }
+.edu-method-card h4 {
+    font-size:.95rem; font-weight:700; color:var(--text); margin-bottom:12px;
+    display:flex; align-items:center; gap:8px;
+}
+.edu-method-card h4 i { color:var(--primary); font-size:.85rem; }
+.edu-method-card ul { list-style:none; padding:0; }
+.edu-method-card li {
+    font-size:.82rem; color:var(--text-light); padding:4px 0;
+    padding-left:14px; position:relative; line-height:1.6;
+}
+.edu-method-card li::before {
+    content:''; position:absolute; left:0; top:11px;
+    width:5px; height:5px; border-radius:50%; background:var(--primary); opacity:.4;
+}
+
+/* Beyond the Classroom */
+.edu-beyond-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+.edu-beyond-card {
+    background:white; padding:28px 24px; border-radius:16px;
+    border:1px solid var(--border); transition:var(--transition);
+    border-left:3px solid var(--primary);
+}
+.edu-beyond-card:hover { box-shadow:var(--shadow-lg); transform:translateY(-2px); }
+.edu-beyond-card h4 { font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+.edu-beyond-card p { font-size:.88rem; color:var(--text-light); line-height:1.7; }
+
+/* 学术地图 */
+.edu-map-container {
+    background:white; border-radius:20px; border:1px solid var(--border);
+    padding:40px 32px; text-align:center;
+}
+.edu-map-center {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:180px; height:80px; border-radius:16px;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    margin-bottom:32px;
+}
+.edu-map-center-label {
+    color:white; font-weight:700; font-size:1rem;
+}
+.edu-map-branches { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:32px; }
+.edu-map-branch {
+    padding:20px 16px; border-radius:12px;
+    background:rgba(99,102,241,.03); border:1px solid rgba(99,102,241,.08);
+    transition:var(--transition);
+}
+.edu-map-branch:hover { background:rgba(99,102,241,.06); }
+.edu-map-branch-title {
+    font-size:.9rem; font-weight:700; color:var(--branch-color); margin-bottom:10px;
+}
+.edu-map-branch-items { display:flex; flex-wrap:wrap; gap:4px; justify-content:center; }
+.edu-map-branch-items span {
+    padding:3px 8px; border-radius:6px; font-size:.72rem;
+    background:rgba(99,102,241,.06); color:var(--text-light);
+}
+.edu-map-core-question {
+    max-width:600px; margin:0 auto; padding:20px 24px;
+    background:linear-gradient(135deg,rgba(99,102,241,.04),rgba(14,165,233,.04));
+    border-radius:12px; border:1px solid rgba(99,102,241,.1);
+}
+.edu-map-core-label {
+    font-size:.72rem; letter-spacing:2px; text-transform:uppercase;
+    color:var(--primary); font-weight:600; display:block; margin-bottom:8px;
+}
+.edu-map-core-question p {
+    font-family:'Playfair Display',serif; font-style:italic;
+    font-size:1rem; color:var(--text); line-height:1.6;
+}
+
 /* ===== 工作 ===== */
 .work-entry {
     max-width:800px; margin:0 auto;
@@ -650,6 +877,11 @@ body {
     .contact-grid { grid-template-columns:1fr; max-width:400px; }
     .film-item { flex:0 0 250px; height:180px; }
     .work-gallery { grid-template-columns:1fr 1fr; }
+    .edu-direction-grid { grid-template-columns:1fr 1fr; }
+    .edu-topic-cards { grid-template-columns:1fr; }
+    .edu-research-cards { grid-template-columns:1fr; }
+    .edu-method-grid { grid-template-columns:repeat(2,1fr); }
+    .edu-map-branches { grid-template-columns:repeat(3,1fr); }
     .pet-mega-header { padding:16px 20px; }
     .pet-scroll-img { flex:0 0 200px; height:140px; }
 }
@@ -675,6 +907,12 @@ body {
     .film-text-panel { padding:0 24px; }
     .work-header { flex-direction:column; gap:16px; }
     .work-gallery { grid-template-columns:1fr; }
+    .edu-direction-grid { grid-template-columns:1fr; }
+    .edu-policy-grid { grid-template-columns:1fr; }
+    .edu-beyond-grid { grid-template-columns:1fr; }
+    .edu-method-grid { grid-template-columns:1fr; }
+    .edu-map-branches { grid-template-columns:repeat(2,1fr); }
+    .edu-hero-degree { font-size:1.5rem; }
     .pet-scroll-img { flex:0 0 180px; height:130px; }
     .timeline { padding-left:30px; }
     .timeline-content { padding:20px; }
