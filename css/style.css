@@ -737,6 +737,7 @@ body {
 
 /* 研究方法 */
 .edu-method-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.edu-method-3col { grid-template-columns:repeat(3,1fr); }
 .edu-method-card {
     background:white; padding:24px 20px; border-radius:16px;
     border:1px solid var(--border); transition:var(--transition);
