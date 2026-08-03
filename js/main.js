@@ -92,7 +92,7 @@ window.addEventListener('load', () => {
 });
 
 // ===== 90的世界地图 =====
-// 城市 → 国家映射
+// 城市/目的地 → 国家映射（基于地图数据中的国家名称）
 const cityToCountry = {
     edinburgh: 'United Kingdom',
     london: 'United Kingdom',
@@ -109,11 +109,24 @@ const cityToCountry = {
     shanghai: 'China',
     beijing: 'China',
     shaoxing: 'China',
-    jiaxing: 'China'
+    jiaxing: 'China',
+    // 新增目的地
+    dubai: 'United Arab Emirates',
+    bali: 'Indonesia',
+    phuket: 'Thailand',
+    krabi: 'Thailand',
+    bangkok: 'Thailand',
+    bermuda: 'Bermuda',
+    saipan: 'United States',
+    langkawi: 'Malaysia',
+    santorini: 'Greece',
+    maldives: 'Maldives',
+    mauritius: 'Mauritius',
+    seychelles: 'Seychelles'
 };
 
 const cityData = {
-    edinburgh: { name: '爱丁堡', country: 'Edinburgh, UK', lat: 55.95, lon: -3.19, dates: ['2023.09 - 至今'], photos: [] },
+    edinburgh: { name: '爱丁堡', country: 'Edinburgh, UK', lat: 55.95, lon: -3.19, dates: [], photos: [] },
     london: { name: '伦敦', country: 'London, UK', lat: 51.51, lon: -0.13, dates: [], photos: [] },
     copenhagen: { name: '哥本哈根', country: 'Copenhagen, Denmark', lat: 55.68, lon: 12.57, dates: [], photos: [] },
     brussels: { name: '布鲁塞尔', country: 'Brussels, Belgium', lat: 50.85, lon: 4.35, dates: [], photos: [] },
@@ -128,7 +141,20 @@ const cityData = {
     shanghai: { name: '上海', country: 'Shanghai, China', lat: 31.23, lon: 121.47, dates: [], photos: [] },
     beijing: { name: '北京', country: 'Beijing, China', lat: 39.90, lon: 116.41, dates: [], photos: [] },
     shaoxing: { name: '绍兴', country: 'Shaoxing, China', lat: 30.00, lon: 120.58, dates: [], photos: [] },
-    jiaxing: { name: '嘉兴', country: 'Jiaxing, China', lat: 30.75, lon: 120.75, dates: [], photos: [] }
+    jiaxing: { name: '嘉兴', country: 'Jiaxing, China', lat: 30.75, lon: 120.75, dates: [], photos: [] },
+    // 新增目的地
+    dubai: { name: '迪拜', country: 'Dubai, UAE', lat: 25.20, lon: 55.27, dates: [], photos: [] },
+    bali: { name: '巴厘岛', country: 'Bali, Indonesia', lat: -8.34, lon: 115.09, dates: [], photos: [] },
+    phuket: { name: '普吉岛', country: 'Phuket, Thailand', lat: 7.88, lon: 98.39, dates: [], photos: [] },
+    krabi: { name: '甲米', country: 'Krabi, Thailand', lat: 8.09, lon: 98.91, dates: [], photos: [] },
+    bangkok: { name: '曼谷', country: 'Bangkok, Thailand', lat: 13.76, lon: 100.50, dates: [], photos: [] },
+    bermuda: { name: '百慕大', country: 'Bermuda', lat: 32.31, lon: -64.75, dates: [], photos: [] },
+    saipan: { name: '塞班岛', country: 'Saipan, USA', lat: 15.18, lon: 145.75, dates: [], photos: [] },
+    langkawi: { name: '兰卡威', country: 'Langkawi, Malaysia', lat: 6.35, lon: 99.80, dates: [], photos: [] },
+    santorini: { name: '圣托里尼', country: 'Santorini, Greece', lat: 36.39, lon: 25.46, dates: [], photos: [] },
+    maldives: { name: '马尔代夫', country: 'Maldives', lat: 3.20, lon: 73.22, dates: [], photos: [] },
+    mauritius: { name: '毛里求斯', country: 'Mauritius', lat: -20.16, lon: 57.50, dates: [], photos: [] },
+    seychelles: { name: '塞舌尔', country: 'Seychelles', lat: -4.68, lon: 55.49, dates: [], photos: [] }
 };
 
 // 经纬度转SVG坐标 (equirectangular projection, 1000x500 viewBox)
