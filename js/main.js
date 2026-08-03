@@ -127,7 +127,20 @@ const cityToCountry = {
     newyork: 'United States',
     sanfrancisco: 'United States',
     chicago: 'United States',
-    orlando: 'United States'
+    orlando: 'United States',
+    // 新增确认城市
+    bath: 'United Kingdom',
+    rome: 'Italy',
+    milan: 'Italy',
+    florence: 'Italy',
+    venice: 'Italy',
+    okinawa: 'Japan',
+    jeju: 'Korea',
+    kualalumpur: 'Malaysia',
+    malacca: 'Malaysia',
+    athens: 'Greece',
+    amsterdam: 'Netherlands',
+    abudhabi: 'United Arab Emirates'
 };
 
 const cityData = {
@@ -164,7 +177,20 @@ const cityData = {
     newyork: { name: '纽约', country: 'New York, USA', lat: 40.71, lon: -74.01, dates: [], photos: [] },
     sanfrancisco: { name: '旧金山', country: 'San Francisco, USA', lat: 37.77, lon: -122.42, dates: [], photos: [] },
     chicago: { name: '芝加哥', country: 'Chicago, USA', lat: 41.88, lon: -87.63, dates: [], photos: [] },
-    orlando: { name: '奥兰多', country: 'Orlando, USA', lat: 28.54, lon: -81.38, dates: [], photos: [] }
+    orlando: { name: '奥兰多', country: 'Orlando, USA', lat: 28.54, lon: -81.38, dates: [], photos: [] },
+    // 新增确认城市
+    bath: { name: '巴斯', country: 'Bath, UK', lat: 51.38, lon: -2.36, dates: [], photos: [] },
+    rome: { name: '罗马', country: 'Rome, Italy', lat: 41.90, lon: 12.50, dates: [], photos: [] },
+    milan: { name: '米兰', country: 'Milan, Italy', lat: 45.46, lon: 9.19, dates: [], photos: [] },
+    florence: { name: '佛罗伦萨', country: 'Florence, Italy', lat: 43.77, lon: 11.25, dates: [], photos: [] },
+    venice: { name: '威尼斯', country: 'Venice, Italy', lat: 45.44, lon: 12.32, dates: [], photos: [] },
+    okinawa: { name: '冲绳', country: 'Okinawa, Japan', lat: 26.34, lon: 127.80, dates: [], photos: [] },
+    jeju: { name: '济州岛', country: 'Jeju, Korea', lat: 33.49, lon: 126.53, dates: [], photos: [] },
+    kualalumpur: { name: '吉隆坡', country: 'Kuala Lumpur, Malaysia', lat: 3.14, lon: 101.69, dates: [], photos: [] },
+    malacca: { name: '马六甲', country: 'Malacca, Malaysia', lat: 2.19, lon: 102.25, dates: [], photos: [] },
+    athens: { name: '雅典', country: 'Athens, Greece', lat: 37.98, lon: 23.73, dates: [], photos: [] },
+    amsterdam: { name: '阿姆斯特丹', country: 'Amsterdam, Netherlands', lat: 52.37, lon: 4.90, dates: [], photos: [] },
+    abudhabi: { name: '阿布扎比', country: 'Abu Dhabi, UAE', lat: 24.45, lon: 54.38, dates: [], photos: [] }
 };
 
 // 经纬度转SVG坐标 (equirectangular projection, 1000x500 viewBox)
