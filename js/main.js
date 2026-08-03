@@ -254,10 +254,25 @@ function renderFallbackMap() {
     renderCities();
 }
 
-// 渲染城市标记（点击点亮国家）
+// 渲染城市标记（国家默认亮起）
 function renderCities() {
     const markersGroup = document.getElementById('cityMarkers');
-    const litCountries = new Set(); // 记录已点亮的国家
+    const litCountries = new Set();
+    
+    // 收集所有需要点亮的国家
+    Object.values(cityToCountry).forEach(countryName => {
+        litCountries.add(countryName);
+    });
+    
+    // 默认点亮所有国家
+    litCountries.forEach(countryName => {
+        if (countryPaths[countryName]) {
+            countryPaths[countryName].forEach(path => {
+                path.setAttribute('fill', '#f59e0b');
+                path.setAttribute('filter', 'url(#glow)');
+            });
+        }
+    });
     
     Object.entries(cityData).forEach(([key, city]) => {
         const { x, y } = lonLatToXY(city.lon, city.lat);
@@ -287,32 +302,9 @@ function renderCities() {
         g.appendChild(dot);
         markersGroup.appendChild(g);
         
-        // 点击事件 - 点亮整个国家
+        // 点击事件 - 打开详情面板
         g.addEventListener('click', (e) => {
             e.stopPropagation();
-            const countryName = cityToCountry[key];
-            
-            if (litCountries.has(countryName)) {
-                // 取消点亮
-                litCountries.delete(countryName);
-                if (countryPaths[countryName]) {
-                    countryPaths[countryName].forEach(path => {
-                        path.setAttribute('fill', '#131a3e');
-                        path.setAttribute('filter', 'none');
-                    });
-                }
-            } else {
-                // 点亮国家
-                litCountries.add(countryName);
-                if (countryPaths[countryName]) {
-                    countryPaths[countryName].forEach(path => {
-                        path.setAttribute('fill', '#f59e0b');
-                        path.setAttribute('filter', 'url(#glow)');
-                    });
-                }
-            }
-            
-            // 打开详情面板
             openCityDetail(key);
         });
     });
