@@ -140,7 +140,12 @@ const cityToCountry = {
     malacca: 'Malaysia',
     athens: 'Greece',
     amsterdam: 'Netherlands',
-    abudhabi: 'United Arab Emirates'
+    abudhabi: 'United Arab Emirates',
+    // 新增确认城市
+    casablanca: 'Morocco',
+    belgrade: 'Serbia',
+    kotor: 'Montenegro',
+    panamacity: 'Panama'
 };
 
 const cityData = {
@@ -190,7 +195,12 @@ const cityData = {
     malacca: { name: '马六甲', country: 'Malacca, Malaysia', lat: 2.19, lon: 102.25, dates: [], photos: [] },
     athens: { name: '雅典', country: 'Athens, Greece', lat: 37.98, lon: 23.73, dates: [], photos: [] },
     amsterdam: { name: '阿姆斯特丹', country: 'Amsterdam, Netherlands', lat: 52.37, lon: 4.90, dates: [], photos: [] },
-    abudhabi: { name: '阿布扎比', country: 'Abu Dhabi, UAE', lat: 24.45, lon: 54.38, dates: [], photos: [] }
+    abudhabi: { name: '阿布扎比', country: 'Abu Dhabi, UAE', lat: 24.45, lon: 54.38, dates: [], photos: [] },
+    // 新增确认城市
+    casablanca: { name: '卡萨布兰卡', country: 'Casablanca, Morocco', lat: 33.57, lon: -7.59, dates: [], photos: [] },
+    belgrade: { name: '贝尔格莱德', country: 'Belgrade, Serbia', lat: 44.79, lon: 20.46, dates: [], photos: [] },
+    kotor: { name: '科托尔', country: 'Kotor, Montenegro', lat: 42.42, lon: 18.77, dates: [], photos: [] },
+    panamacity: { name: '巴拿马城', country: 'Panama City, Panama', lat: 8.98, lon: -79.52, dates: [], photos: [] }
 };
 
 // 经纬度转SVG坐标 (equirectangular projection, 1000x500 viewBox)
