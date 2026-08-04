@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jolin Zhou - Cinematic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html, body { height:100%; overflow:hidden; background:#0a0a0a; color:#f0f0f0; }
+        
+        /* ===== HORIZONTAL SCROLL ===== */
+        .cinematic { display:flex; height:100vh; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth; }
+        .cinematic::-webkit-scrollbar { height:3px; }
+        .cinematic::-webkit-scrollbar-track { background:#222; }
+        .cinematic::-webkit-scrollbar-thumb { background:#666; }
+        
+        .scene { 
+            min-width:100vw; height:100vh; scroll-snap-align:start; 
+            display:flex; align-items:center; justify-content:center;
+            position:relative; overflow:hidden;
+        }
+        
+        /* ===== SCENE 1: TITLE ===== */
+        .scene-title { background:#0a0a0a; flex-direction:column; text-align:center; }
+        .scene-title::before { 
+            content:''; position:absolute; inset:0; 
+            background:radial-gradient(ellipse at center, rgba(102,126,234,.15) 0%, transparent 70%);
+        }
+        .scene-title h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(4rem,10vw,8rem); font-weight:300; letter-spacing:.05em; position:relative; }
+        .scene-title h1 span { display:block; font-style:italic; font-size:.6em; color:#888; }
+        .scene-title .tagline { font-family:'Inter',sans-serif; font-size:.85rem; font-weight:200; letter-spacing:.3em; text-transform:uppercase; color:#666; margin-top:40px; position:relative; }
+        .scene-title .scroll-hint { position:absolute; bottom:40px; font-size:.7rem; letter-spacing:.2em; color:#444; animation:fadeInOut 3s infinite; }
+        @keyframes fadeInOut { 0%,100%{opacity:.3} 50%{opacity:1} }
+        
+        /* ===== SCENE 2: ABOUT ===== */
+        .scene-about { background:#111; }
+        .about-content { max-width:600px; padding:40px; }
+        .about-content p { font-family:'Cormorant Garamond',serif; font-size:1.6rem; line-height:1.8; font-weight:300; margin-bottom:32px; color:#ccc; }
+        .about-content p:first-child::first-line { font-size:2rem; color:#f0f0f0; }
+        .about-quote { font-family:'Cormorant Garamond',serif; font-size:2.5rem; font-style:italic; font-weight:300; color:#667eea; text-align:center; padding:40px; }
+        .about-meta { display:flex; gap:40px; margin-top:40px; font-family:'Inter',sans-serif; font-size:.75rem; letter-spacing:.1em; color:#666; }
+        .about-meta span { border-right:1px solid #333; padding-right:40px; }
+        .about-meta span:last-child { border:none; }
+        
+        /* ===== SCENE 3: JOURNEY ===== */
+        .scene-journey { background:#0d0d0d; }
+        .journey-container { display:flex; gap:80px; padding:40px; align-items:center; }
+        .journey-line { width:1px; height:400px; background:linear-gradient(to bottom, transparent, #667eea, transparent); position:relative; }
+        .journey-line::before { content:''; position:absolute; top:0; left:-3px; width:7px; height:7px; background:#667eea; border-radius:50%; animation:travel 4s linear infinite; }
+        @keyframes travel { 0%{top:0} 100%{top:100%} }
+        .journey-items { display:flex; flex-direction:column; gap:48px; }
+        .journey-item { opacity:.7; transition:opacity .3s; }
+        .journey-item:hover { opacity:1; }
+        .journey-item .year { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:300; color:#667eea; }
+        .journey-item .place { font-size:1rem; font-weight:300; margin-top:8px; }
+        .journey-item .note { font-size:.8rem; color:#666; margin-top:4px; font-style:italic; }
+        
+        /* ===== SCENE 4: ACADEMIC ===== */
+        .scene-academic { background:#0a0a0a; }
+        .academic-grid { display:grid; grid-template-columns:repeat(2,280px); gap:24px; padding:40px; }
+        .academic-card { border:1px solid #222; padding:32px; border-radius:8px; transition:border-color .3s, background .3s; }
+        .academic-card:hover { border-color:#667eea; background:rgba(102,126,234,.05); }
+        .academic-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:300; margin-bottom:16px; }
+        .academic-card p { font-size:.85rem; color:#888; line-height:1.7; }
+        .academic-card .tag { display:inline-block; font-size:.7rem; padding:4px 12px; border:1px solid #333; border-radius:100px; margin:4px 4px 0 0; color:#aaa; }
+        
+        /* ===== SCENE 5: CATS ===== */
+        .scene-cats { background:#111; flex-direction:column; }
+        .cats-title { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:300; margin-bottom:40px; }
+        .cats-row { display:flex; gap:16px; }
+        .cats-row img { width:200px; height:280px; object-fit:cover; border-radius:8px; filter:grayscale(40%); transition:filter .3s; }
+        .cats-row img:hover { filter:grayscale(0); }
+        
+        /* ===== SCENE 6: END ===== */
+        .scene-end { background:#0a0a0a; flex-direction:column; text-align:center; }
+        .scene-end .quote { font-family:'Cormorant Garamond',serif; font-size:3rem; font-style:italic; font-weight:300; max-width:600px; line-height:1.5; color:#888; }
+        .scene-end .credit { font-family:'Inter',sans-serif; font-size:.7rem; letter-spacing:.2em; color:#444; margin-top:60px; }
+        
+        /* NAV DOTS */
+        .nav-dots { position:fixed; right:30px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:12px; z-index:10; }
+        .nav-dots a { width:8px; height:8px; border-radius:50%; background:#333; transition:background .3s; }
+        .nav-dots a:hover { background:#667eea; }
+    </style>
+</head>
+<body>
+
+<div class="nav-dots">
+    <a href="#s1"></a><a href="#s2"></a><a href="#s3"></a><a href="#s4"></a><a href="#s5"></a><a href="#s6"></a>
+</div>
+
+<div class="cinematic">
+    <!-- SCENE 1: TITLE -->
+    <section class="scene scene-title" id="s1">
+        <h1>Jolin Zhou<span>a personal story</span></h1>
+        <p class="tagline">Economics · Policy · Life</p>
+        <span class="scroll-hint">scroll →</span>
+    </section>
+    
+    <!-- SCENE 2: ABOUT -->
+    <section class="scene scene-about" id="s2">
+        <div class="about-content">
+            <p>我是 Jolin，一个正在学习如何独立生活的大人。从本科到硕士，从国内到国外，我在不同的城市之间移动，也在不同的身份之间切换。</p>
+            <p>我学习经济学，研究社会政策和性别议题。我相信研究可以推动改变，也相信每一个数据背后都有真实的人。</p>
+            <div class="about-meta">
+                <span>2005 Born</span>
+                <span>INTJ</span>
+                <span>Virgo</span>
+                <span>Edinburgh</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SCENE 2.5: QUOTE -->
+    <section class="scene" style="background:#0a0a0a;min-width:60vw;" id="s2b">
+        <div class="about-quote">"The world is wide enough, for both you and me."</div>
+    </section>
+    
+    <!-- SCENE 3: JOURNEY -->
+    <section class="scene scene-journey" id="s3">
+        <div class="journey-container">
+            <div class="journey-line"></div>
+            <div class="journey-items">
+                <div class="journey-item"><div class="year">2024</div><div class="place">University of Edinburgh</div><div class="note">MSc Economics</div></div>
+                <div class="journey-item"><div class="year">2020</div><div class="place">DUFE</div><div class="note">Bachelor's Degree</div></div>
+                <div class="journey-item"><div class="year">2017</div><div class="place">High School</div><div class="note">Liberal arts</div></div>
+                <div class="journey-item"><div class="year">2014</div><div class="place">Middle School</div><div class="note">The beginning</div></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SCENE 4: ACADEMIC -->
+    <section class="scene scene-academic" id="s4">
+        <div class="academic-grid">
+            <div class="academic-card">
+                <h3>Research</h3>
+                <p>Welfare & Gender, China Education Expansion, Policy Research</p>
+                <span class="tag">Econometrics</span><span class="tag">Stata</span><span class="tag">R</span>
+            </div>
+            <div class="academic-card">
+                <h3>Methods</h3>
+                <p>Mixed methods, causal inference, comparative policy analysis</p>
+                <span class="tag">Quantitative</span><span class="tag">Qualitative</span>
+            </div>
+            <div class="academic-card">
+                <h3>Focus</h3>
+                <p>Intersection of economics, social policy and gender equity</p>
+                <span class="tag">Gender</span><span class="tag">Welfare</span>
+            </div>
+            <div class="academic-card">
+                <h3>Beyond</h3>
+                <p>Photography, travel, independent publishing, pet care</p>
+                <span class="tag">Creative</span><span class="tag">Life</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SCENE 5: CATS -->
+    <section class="scene scene-cats" id="s5">
+        <h2 class="cats-title">The Cats</h2>
+        <div class="cats-row">
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400" alt="Cat">
+            <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400" alt="Cat">
+            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400" alt="Cat">
+            <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400" alt="Cat">
+        </div>
+    </section>
+    
+    <!-- SCENE 6: END -->
+    <section class="scene scene-end" id="s6">
+        <p class="quote">"The world is wide enough, for both you and me."</p>
+        <p class="credit">Jolin Zhou — 2025</p>
+    </section>
+</div>
+
+</body>
+</html>

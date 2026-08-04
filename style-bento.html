@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jolin Zhou - Bento Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter','Noto Sans SC',sans-serif; background:#f5f5f7; color:#1d1d1f; padding:20px; }
+        
+        /* ===== BENTO GRID ===== */
+        .bento { 
+            display:grid; 
+            grid-template-columns:repeat(4,1fr); 
+            gap:16px; 
+            max-width:1200px; 
+            margin:0 auto;
+        }
+        .bento-card { 
+            background:white; border-radius:24px; padding:32px; 
+            overflow:hidden; position:relative;
+            transition:transform .3s ease, box-shadow .3s ease;
+        }
+        .bento-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,.08); }
+        
+        /* Card sizes */
+        .card-hero { grid-column:span 2; grid-row:span 2; padding:0; min-height:400px; display:flex; flex-direction:column; justify-content:flex-end; }
+        .card-wide { grid-column:span 2; }
+        .card-tall { grid-row:span 2; }
+        .card-square { aspect-ratio:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
+        
+        /* ===== HERO CARD ===== */
+        .card-hero { 
+            background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:white;
+            position:relative;
+        }
+        .card-hero::before { content:''; position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1502780402662-acc01917738e?w=800') center/cover; opacity:.3; }
+        .card-hero-content { position:relative; z-index:1; padding:40px; }
+        .card-hero h1 { font-size:3.5rem; font-weight:700; line-height:1; margin-bottom:12px; }
+        .card-hero p { font-size:1rem; opacity:.8; max-width:280px; }
+        .card-hero .status { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.2); backdrop-filter:blur(10px); padding:8px 16px; border-radius:100px; font-size:.8rem; margin-bottom:20px; }
+        .card-hero .status::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; animation:pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+        
+        /* ===== INFO CARD ===== */
+        .card-info { background:#1d1d1f; color:white; }
+        .card-info .label { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:#888; margin-bottom:16px; }
+        .card-info .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+        .card-info .info-item .val { font-size:1.5rem; font-weight:600; }
+        .card-info .info-item .key { font-size:.75rem; color:#888; margin-top:4px; }
+        
+        /* ===== QUOTE CARD ===== */
+        .card-quote { background:#fef3c7; display:flex; flex-direction:column; justify-content:center; }
+        .card-quote .mark { font-size:4rem; line-height:1; color:#d97706; opacity:.3; }
+        .card-quote p { font-size:1.2rem; font-style:italic; color:#92400e; line-height:1.6; }
+        
+        /* ===== TIMELINE CARD ===== */
+        .card-timeline .tl-item { padding:16px 0; border-bottom:1px solid #f0f0f0; }
+        .card-timeline .tl-item:last-child { border:none; }
+        .card-timeline .tl-year { font-size:1.8rem; font-weight:700; color:#667eea; }
+        .card-timeline .tl-title { font-size:.9rem; font-weight:600; margin-top:4px; }
+        .card-timeline .tl-desc { font-size:.8rem; color:#888; margin-top:4px; }
+        
+        /* ===== CATS CARD ===== */
+        .card-cats { padding:0; overflow:hidden; }
+        .card-cats .cat-header { padding:24px 32px 16px; }
+        .card-cats .cat-header h3 { font-size:1.2rem; }
+        .card-cats .cat-scroll { display:flex; gap:8px; overflow-x:auto; padding:0 24px 24px; scroll-snap-type:x mandatory; }
+        .card-cats .cat-scroll::-webkit-scrollbar { display:none; }
+        .card-cats .cat-scroll img { width:160px; height:160px; object-fit:cover; border-radius:16px; scroll-snap-align:start; flex-shrink:0; }
+        
+        /* ===== EDUCATION CARD ===== */
+        .card-edu h3 { font-size:1.2rem; margin-bottom:16px; }
+        .card-edu .edu-tags { display:flex; flex-wrap:wrap; gap:8px; }
+        .card-edu .edu-tags span { padding:8px 16px; background:#f0f0f5; border-radius:100px; font-size:.8rem; color:#555; }
+        
+        /* ===== SKILLS CARD ===== */
+        .card-skills h3 { font-size:1.2rem; margin-bottom:20px; }
+        .skill-bar { margin-bottom:16px; }
+        .skill-bar .bar-label { display:flex; justify-content:space-between; font-size:.8rem; margin-bottom:6px; }
+        .skill-bar .bar-track { height:6px; background:#f0f0f0; border-radius:3px; }
+        .skill-bar .bar-fill { height:100%; border-radius:3px; background:linear-gradient(90deg,#667eea,#764ba2); }
+        
+        /* ===== MAP CARD ===== */
+        .card-map { padding:0; background:#e8f4f8; }
+        .card-map .map-header { padding:24px 32px 0; }
+        .card-map .map-header h3 { font-size:1.2rem; }
+        .card-map .map-header p { font-size:.8rem; color:#888; }
+        .card-map .map-visual { padding:20px; font-size:2rem; text-align:center; }
+        .card-map .map-stats { display:flex; gap:24px; padding:0 32px 24px; }
+        .card-map .map-stats .stat { font-size:.8rem; color:#666; }
+        .card-map .map-stats .stat strong { display:block; font-size:1.5rem; color:#1d1d1f; }
+        
+        /* ===== PHOTO CARD ===== */
+        .card-photo { padding:0; }
+        .card-photo img { width:100%; height:100%; object-fit:cover; }
+        
+        @media(max-width:768px) {
+            .bento { grid-template-columns:1fr 1fr; }
+            .card-hero { grid-column:span 2; min-height:300px; }
+            .card-wide { grid-column:span 2; }
+            .card-tall { grid-row:span 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bento">
+    <!-- HERO -->
+    <div class="bento-card card-hero">
+        <div class="card-hero-content">
+            <span class="status">Available for opportunities</span>
+            <h1>Jolin Zhou</h1>
+            <p>Economics student, researcher, and storyteller. Based in Edinburgh.</p>
+        </div>
+    </div>
+    
+    <!-- INFO -->
+    <div class="bento-card card-info">
+        <div class="label">Personal Info</div>
+        <div class="info-grid">
+            <div class="info-item"><div class="val">2005</div><div class="key">Born</div></div>
+            <div class="info-item"><div class="val">INTJ</div><div class="key">MBTI</div></div>
+            <div class="info-item"><div class="val">♍</div><div class="key">Virgo</div></div>
+            <div class="info-item"><div class="val">EDI</div><div class="key">Edinburgh</div></div>
+        </div>
+    </div>
+    
+    <!-- QUOTE -->
+    <div class="bento-card card-quote">
+        <span class="mark">"</span>
+        <p>The world is wide enough, for both you and me.</p>
+    </div>
+    
+    <!-- TIMELINE -->
+    <div class="bento-card card-timeline card-tall">
+        <div class="tl-item">
+            <div class="tl-year">2024</div>
+            <div class="tl-title">University of Edinburgh</div>
+            <div class="tl-desc">MSc Economics — Welfare & Gender</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-year">2020</div>
+            <div class="tl-title">DUFE</div>
+            <div class="tl-desc">Bachelor's — Economics & Public Policy</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-year">2017</div>
+            <div class="tl-title">High School</div>
+            <div class="tl-desc">Liberal arts track</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-year">2014</div>
+            <div class="tl-title">Middle School</div>
+            <div class="tl-desc">Where curiosity began</div>
+        </div>
+    </div>
+    
+    <!-- CATS -->
+    <div class="bento-card card-cats card-wide">
+        <div class="cat-header"><h3>🐱 The Cats</h3></div>
+        <div class="cat-scroll">
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300" alt="Cat">
+            <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=300" alt="Cat">
+            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=300" alt="Cat">
+            <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=300" alt="Cat">
+            <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=300" alt="Cat">
+            <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=300" alt="Cat">
+        </div>
+    </div>
+    
+    <!-- EDUCATION -->
+    <div class="bento-card card-edu">
+        <h3>Academic Focus</h3>
+        <div class="edu-tags">
+            <span>Welfare Economics</span>
+            <span>Gender Studies</span>
+            <span>Social Policy</span>
+            <span>Econometrics</span>
+            <span>Causal Inference</span>
+        </div>
+    </div>
+    
+    <!-- SKILLS -->
+    <div class="bento-card card-skills">
+        <h3>Methods</h3>
+        <div class="skill-bar"><div class="bar-label"><span>Quantitative</span><span>85%</span></div><div class="bar-track"><div class="bar-fill" style="width:85%"></div></div></div>
+        <div class="skill-bar"><div class="bar-label"><span>Qualitative</span><span>75%</span></div><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div></div>
+        <div class="skill-bar"><div class="bar-label"><span>Research Design</span><span>80%</span></div><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div></div>
+    </div>
+    
+    <!-- MAP -->
+    <div class="bento-card card-map card-wide">
+        <div class="map-header">
+            <h3>🌍 World Map</h3>
+            <p>28 destinations and counting</p>
+        </div>
+        <div class="map-visual">🇬🇧 🇺🇸 🇯🇵 🇫🇷 🇪🇸 🇮🇹 🇨🇳 🇦🇺 🇸🇬 🇹🇭 ...</div>
+        <div class="map-stats">
+            <div class="stat"><strong>28</strong>Countries</div>
+            <div class="stat"><strong>4</strong>Continents</div>
+            <div class="stat"><strong>∞</strong>Memories</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
