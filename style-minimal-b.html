@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>简约风 B - 预览</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* 简约风B：暖色调 + 圆角 + 柔和阴影 + 日式侘寂感 */
+:root{--accent:#8b7355;--accent2:#c4a882;--text:#3d3427;--muted:#9a8e7f;--bg:#faf7f2;--bg2:#f3ede4;--card:#fff;--border:#e8dfd3;--radius:20px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:'Noto Sans SC',sans-serif;color:var(--text);background:var(--bg);line-height:1.8}
+.container{max-width:900px;margin:0 auto;padding:0 28px}
+
+.navbar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,247,242,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-container{max-width:900px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:600;color:var(--accent);text-decoration:none}
+.nav-menu{display:flex;list-style:none;gap:28px}
+.nav-link{text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:400;transition:color .3s}
+.nav-link:hover{color:var(--accent)}
+.nav-toggle{display:none}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 28px 80px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
+.hero-content{max-width:600px}
+.hero-avatar{margin-bottom:36px}
+.avatar-placeholder{width:100px;height:100px;border-radius:50%;background:var(--bg2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 8px 32px rgba(139,115,85,.12)}
+.avatar-placeholder i{font-size:2.2rem;color:var(--accent)}
+.hero-title{font-family:'Noto Serif SC',serif;font-size:2.4rem;font-weight:300;line-height:1.4;margin-bottom:16px}
+.highlight{color:var(--accent);background:none;-webkit-text-fill-color:var(--accent);font-weight:600}
+.hero-subtitle{font-size:1rem;color:var(--muted);margin-bottom:12px;letter-spacing:6px}
+.hero-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:var(--muted);margin-bottom:36px}
+.hero-buttons{display:flex;gap:14px;justify-content:center}
+.btn{display:inline-flex;align-items:center;padding:11px 24px;border-radius:24px;font-size:.88rem;font-weight:500;text-decoration:none;transition:all .3s}
+.btn-primary{background:var(--accent);color:white;box-shadow:0 4px 16px rgba(139,115,85,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(139,115,85,.35)}
+.btn-outline{border:1.5px solid var(--border);color:var(--text);background:var(--card)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.scroll-indicator{position:absolute;bottom:40px;left:50%;transform:translateX(-50%)}
+.scroll-indicator span{display:block;width:20px;height:32px;border:1.5px solid var(--border);border-radius:10px;position:relative}
+.scroll-indicator span::after{content:'';width:3px;height:6px;background:var(--muted);border-radius:2px;position:absolute;top:6px;left:50%;transform:translateX(-50%);animation:scroll 2s infinite}
+@keyframes scroll{0%,100%{opacity:1;transform:translateX(-50%) translateY(0)}50%{opacity:.3;transform:translateX(-50%) translateY(10px)}}
+
+.section{padding:100px 0}
+.section-alt{background:var(--bg2)}
+.section-dark{background:#2a2520}
+.section-title{font-family:'Noto Serif SC',serif;font-size:1.8rem;font-weight:400;text-align:center;margin-bottom:10px;color:var(--text)}
+.section-dark .section-title{color:#f3ede4}
+.section-divider{width:40px;height:2px;background:var(--accent2);border-radius:1px;margin:0 auto 16px}
+.section-desc{text-align:center;color:var(--muted);margin-bottom:40px;font-size:.95rem}
+.section-desc.light{color:rgba(243,237,228,.5)}
+.sub-title{font-family:'Noto Serif SC',serif;font-size:1.2rem;font-weight:400;margin:56px 0 24px;color:var(--accent)}
+.sub-title.light{color:var(--accent2)}
+
+.about-intro{max-width:620px;margin:0 auto 36px;text-align:left}
+.about-lead{font-family:'Noto Serif SC',serif;font-size:1.15rem;line-height:2;color:var(--text);font-weight:400;margin-bottom:20px;padding-left:20px;border-left:2px solid var(--accent2)}
+.about-intro p{color:var(--muted);margin-bottom:14px;font-size:.95rem;line-height:2}
+.about-quote-block{max-width:500px;margin:0 auto 40px;text-align:center;padding:24px 28px;background:var(--card);border-radius:var(--radius);box-shadow:0 2px 16px rgba(139,115,85,.06)}
+.quote-mark{display:none}
+.about-quote-block p{font-family:'Playfair Display',serif;font-style:italic;color:var(--accent);font-size:1.05rem;line-height:1.8;margin:0}
+.personal-info{display:flex;justify-content:center;margin-bottom:48px}
+.info-card{display:flex;gap:32px;padding:16px 32px;border-radius:var(--radius);background:var(--card);box-shadow:0 2px 12px rgba(139,115,85,.06)}
+.info-item{display:flex;flex-direction:column;gap:4px;padding:0 16px}
+.info-label{font-size:.68rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase}
+.info-value{font-size:.88rem;color:var(--text);font-weight:500}
+.info-value.mbti{color:var(--accent)}
+
+.keywords-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.flip-card{height:240px;cursor:pointer}
+.flip-card-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip-card:hover .flip-card-inner{transform:rotateY(180deg)}
+.flip-card-front,.flip-card-back{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:var(--radius);overflow:hidden;transition:visibility 0s}
+.flip-card-front{background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;visibility:visible}
+.flip-card:hover .flip-card-front{visibility:hidden;transition-delay:.3s}
+.card-illustration{position:absolute;top:0;left:0;width:100%;height:100%;color:var(--accent);opacity:.06}
+.card-number{position:absolute;top:14px;left:18px;font-family:'Playfair Display',serif;font-size:2rem;color:var(--accent2);opacity:.2}
+.card-front-content{position:relative;z-index:2;text-align:center;padding:20px}
+.card-front-content h3{font-family:'Noto Serif SC',serif;font-size:1.3rem;font-weight:400;margin-bottom:4px;color:var(--text)}
+.card-en{font-family:'Playfair Display',serif;font-style:italic;font-size:.82rem;color:var(--accent)}
+.flip-card-back{transform:rotateY(180deg);background:linear-gradient(135deg,var(--accent),var(--accent2));visibility:hidden;display:flex;align-items:center;justify-content:center;padding:28px}
+.flip-card:hover .flip-card-back{visibility:visible;transition-delay:.3s}
+.flip-card-back p{color:rgba(255,255,255,.9);font-size:.9rem;line-height:1.9;text-align:center}
+
+.hobbies-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.hobby-card{background:var(--card);padding:28px 20px;border-radius:var(--radius);text-align:center;border:1px solid var(--border);transition:all .3s}
+.hobby-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(139,115,85,.1)}
+.hobby-icon{width:48px;height:48px;border-radius:12px;background:var(--bg2);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.hobby-icon i{font-size:1.1rem;color:var(--accent)}
+.hobby-card h3{font-size:.92rem;font-weight:500;margin-bottom:8px}
+.hobby-card p{font-size:.82rem;color:var(--muted);line-height:1.7}
+
+.filmstrip-wrapper{position:relative;padding:0 0 40px;overflow:hidden}
+.filmstrip-track{display:flex;gap:16px;padding:20px 60px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;cursor:grab}
+.filmstrip-track::-webkit-scrollbar{display:none}
+.film-item{flex:0 0 280px;height:200px;border-radius:var(--radius);position:relative;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.film-item:hover{transform:scale(1.03)}
+.film-img{width:100%;height:100%;background-size:cover;background-position:center}
+.film-number{position:absolute;bottom:12px;right:16px;font-family:'Playfair Display',serif;font-size:1.8rem;color:rgba(255,255,255,.25)}
+.film-text-panel{max-width:900px;margin:24px auto 0;padding:0 60px;min-height:60px;text-align:center}
+.film-text-title{font-family:'Noto Serif SC',serif;font-size:1.1rem;color:#fff;margin-bottom:6px}
+.film-text-desc{font-size:.85rem;color:rgba(255,255,255,.5)}
+
+.pets-section{margin-top:60px}
+.pet-block{margin-bottom:36px}
+.pet-mega-card{max-width:800px;margin:0 auto;border-radius:var(--radius);overflow:hidden;background:var(--card);border:1px solid var(--border);box-shadow:0 4px 20px rgba(139,115,85,.06)}
+.pet-mega-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent2),var(--accent),var(--accent2))}
+.pet-mega-card:hover{box-shadow:0 8px 32px rgba(139,115,85,.12);transform:translateY(-2px)}
+.pet-mega-card-dark{background:#1a1714;border-color:#3d3427}
+.pet-mega-card-dark::before{background:linear-gradient(90deg,#5a4d3e,#8b7355,#5a4d3e)}
+.pet-mega-header{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px solid var(--border)}
+.pet-mega-card-dark .pet-mega-header{border-bottom-color:#3d3427}
+.pet-mega-avatar{width:40px;height:40px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center}
+.pet-mega-avatar i{font-size:1rem;color:var(--accent)}
+.pet-mega-avatar-dark{background:#2a2520}
+.pet-mega-avatar-dark i{color:#8b7355}
+.pet-mega-info{display:flex;flex-direction:column}
+.pet-mega-name{font-family:'Noto Serif SC',serif;font-size:1rem;font-weight:600;color:var(--text)}
+.pet-mega-card-dark .pet-mega-name{color:#f3ede4}
+.pet-mega-tag{font-size:.6rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.pet-mega-scroll{overflow:hidden;position:relative;padding:10px 0}
+.pet-mega-scroll-bw .pet-scroll-img{filter:grayscale(100%) brightness(.6)}
+.pet-scroll-inner{display:flex;gap:12px;width:max-content;animation:petScroll 30s linear infinite}
+.pet-scroll-inner:hover{animation-play-state:paused}
+.pet-scroll-reverse{animation-direction:reverse}
+.pet-scroll-img{flex:0 0 240px;height:160px;border-radius:12px;object-fit:cover}
+@keyframes petScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+.worldmap-section{margin-top:60px;padding-bottom:20px}
+.worldmap-subtitle{text-align:center;color:rgba(255,255,255,.3);font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;margin-bottom:28px}
+.worldmap-container{position:relative;max-width:900px;margin:0 auto;border-radius:var(--radius);overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.worldmap-svg{width:100%;height:auto;display:block}
+.worldmap-hint{text-align:center;color:rgba(255,255,255,.2);font-size:.78rem;margin-top:14px}
+.city-detail-panel{display:none}
+
+.timeline{position:relative;padding-left:36px;max-width:700px;margin:0 auto}
+.timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:1.5px;background:var(--accent2)}
+.timeline-item{position:relative;margin-bottom:32px}
+.timeline-dot{position:absolute;left:-30px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--accent2);border:2px solid var(--bg)}
+.timeline-content{background:var(--card);padding:22px 24px;border-radius:var(--radius);border:1px solid var(--border);transition:all .3s}
+.timeline-content:hover{box-shadow:0 4px 16px rgba(139,115,85,.08)}
+.timeline-date{font-size:.78rem;font-weight:500;color:var(--accent);margin-bottom:8px}
+.timeline-content h3{font-family:'Noto Serif SC',serif;font-size:1.05rem;font-weight:600;margin-bottom:2px}
+.timeline-content h4{font-size:.88rem;color:var(--muted);font-weight:400}
+.timeline-major{font-style:italic;color:var(--accent);font-weight:500}
+.timeline-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{font-size:.72rem;padding:4px 10px;border-radius:12px;background:var(--bg2);color:var(--muted);border:none}
+.timeline-courses{font-size:.82rem;color:var(--muted);margin-top:6px}
+
+.edu-expanded{margin-top:40px;padding-top:40px;border-top:1px solid var(--border)}
+.edu-expanded-intro{max-width:600px;margin-bottom:36px}
+.edu-expanded-intro p{font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:var(--muted);line-height:1.8}
+.edu-block{margin-top:44px}
+.edu-block-title{font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:400;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:var(--accent)}
+.edu-block-num{font-size:.75rem;color:var(--muted)}
+.edu-direction-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.edu-dir-card{background:var(--card);padding:24px 20px;border-radius:var(--radius);border:1px solid var(--border);transition:all .3s}
+.edu-dir-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(139,115,85,.08)}
+.edu-dir-card::before{display:none}
+.edu-dir-icon{width:40px;height:40px;border-radius:10px;background:var(--bg2);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.edu-dir-icon i{font-size:1rem;color:var(--accent)}
+.edu-dir-card h4{font-family:'Noto Serif SC',serif;font-size:.95rem;font-weight:600;margin-bottom:6px}
+.edu-dir-keywords{font-size:.72rem;color:var(--accent);margin-bottom:8px}
+.edu-dir-card p{font-size:.82rem;color:var(--muted);line-height:1.7}
+.edu-sub-section{margin-bottom:18px}
+.edu-sub-title{font-size:.88rem;font-weight:500;margin-bottom:10px;color:var(--text)}
+.edu-tag-cloud{display:flex;flex-wrap:wrap;gap:6px}
+.edu-tag{padding:5px 12px;border-radius:16px;font-size:.78rem;background:var(--bg2);color:var(--accent);border:none}
+.edu-research-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.edu-research-card{background:var(--card);padding:22px 18px;border-radius:var(--radius);border:1px solid var(--border);transition:all .3s}
+.edu-research-card:hover{box-shadow:0 6px 20px rgba(139,115,85,.08);transform:translateY(-2px)}
+.edu-research-label{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.edu-research-card h4{font-size:.9rem;font-weight:600;margin-bottom:6px}
+.edu-research-card p{font-size:.78rem;color:var(--muted);line-height:1.7;margin-bottom:10px}
+.edu-research-keywords{display:flex;flex-wrap:wrap;gap:4px}
+.edu-research-keywords span{padding:3px 8px;border-radius:8px;font-size:.68rem;background:var(--bg2);color:var(--accent)}
+.edu-method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.edu-method-3col{grid-template-columns:repeat(3,1fr)}
+.edu-method-card{background:var(--card);padding:22px 18px;border-radius:var(--radius);border:1px solid var(--border)}
+.edu-method-card h4{font-size:.88rem;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.edu-method-card h4 i{color:var(--accent);font-size:.8rem}
+.edu-method-card ul{list-style:none;padding:0}
+.edu-method-card li{font-size:.78rem;color:var(--muted);padding:3px 0 3px 14px;position:relative}
+.edu-method-card li::before{content:'○';position:absolute;left:0;font-size:.5rem;color:var(--accent2);top:5px}
+.edu-beyond-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.edu-beyond-card{background:var(--card);padding:22px 20px;border-radius:var(--radius);border:1px solid var(--border);border-left:3px solid var(--accent2)}
+.edu-beyond-card:hover{box-shadow:0 6px 20px rgba(139,115,85,.08);transform:translateY(-2px)}
+.edu-beyond-card h4{font-size:.92rem;font-weight:500;margin-bottom:6px}
+.edu-beyond-card p{font-size:.82rem;color:var(--muted);line-height:1.7}
+.edu-section-intro{font-size:.88rem;color:var(--muted);margin-bottom:16px;font-style:italic}
+
+.work-entry{max-width:700px;margin:0 auto;background:var(--card);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden}
+.work-header{display:flex;gap:20px;padding:28px 28px 0;align-items:flex-start}
+.work-logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center}
+.work-logo i{font-size:1.1rem;color:white}
+.work-info h3{font-family:'Noto Serif SC',serif;font-size:1.05rem;margin-bottom:4px}
+.work-meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.work-position{font-size:.85rem;color:var(--muted)}
+.work-date{font-size:.82rem;color:var(--accent);font-weight:500}
+.work-tags{display:flex;flex-wrap:wrap;gap:6px}
+.work-desc{padding:16px 28px}
+.work-desc p{font-size:.88rem;color:var(--muted)}
+.work-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:0 2px 2px}
+.work-gallery-item{height:140px;background-size:cover;background-position:center;border-radius:4px}
+
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:700px;margin:0 auto}
+.contact-item{text-align:center;padding:28px 16px;border-radius:var(--radius);background:var(--card);border:1px solid var(--border);transition:all .3s}
+.contact-item:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(139,115,85,.08)}
+.contact-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.contact-icon i{font-size:1.1rem;color:white}
+.contact-item h3{font-size:.92rem;margin-bottom:6px}
+.contact-item p{font-size:.82rem;color:var(--muted);margin-bottom:2px}
+.contact-link{font-size:.82rem;color:var(--accent);text-decoration:none}
+
+.footer{background:#2a2520;color:rgba(243,237,228,.4);text-align:center;padding:32px 24px;font-size:.82rem}
+</style>
+</head>
+<body>
+<nav class="navbar"><div class="nav-container"><a href="#" class="nav-logo">你好90</a><ul class="nav-menu"><li><a href="#about" class="nav-link">我</a></li><li><a href="#life" class="nav-link">生活</a></li><li><a href="#education" class="nav-link">教育</a></li><li><a href="#work" class="nav-link">工作</a></li><li><a href="#contact" class="nav-link">联系</a></li></ul></div></nav>
+
+<section class="hero"><div class="hero-content"><div class="hero-avatar"><div class="avatar-placeholder"><i class="fas fa-user"></i></div></div><h1 class="hero-title">你好，我是 <span class="highlight">Jolin</span></h1><p class="hero-subtitle">自洽｜真诚｜勇敢</p><p class="hero-quote">"The World is Wide Enough, for both you and me"</p><div class="hero-buttons"><a href="#about" class="btn btn-primary">了解更多</a><a href="#contact" class="btn btn-outline">联系90</a></div></div><div class="scroll-indicator"><span></span></div></section>
+
+<section class="section" id="about"><div class="container"><h2 class="section-title">我</h2><div class="section-divider"></div>
+<div class="about-intro"><p class="about-lead">我是 Jolin，一个正在学习如何独立生活、独立思考，也独立选择自己人生方向的人。</p><p>我学习经济学，也对社会、政策以及人与人之间的关系保持好奇。比起给自己定义一个固定的身份，我更喜欢不断尝试新的事情，在不同的城市生活、旅行、学习和认识这个世界。</p><p>我相信，自由并不意味着永远向前，而是拥有选择停下来、重新开始，以及按照自己喜欢的方式生活的能力。</p></div>
+<div class="about-quote-block"><p>The world is wide enough, for both you and me.</p></div>
+<div class="personal-info"><div class="info-card"><div class="info-item"><span class="info-label">出生</span><span class="info-value">2005.08</span></div><div class="info-item"><span class="info-label">星座</span><span class="info-value">处女座</span></div><div class="info-item"><span class="info-label">MBTI</span><span class="info-value mbti">INTJ</span></div><div class="info-item"><span class="info-label">坐标</span><span class="info-value">爱丁堡</span></div></div></div>
+
+<h3 class="sub-title">我是谁</h3>
+<div class="keywords-grid">
+<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-number">01</div><div class="card-front-content"><h3>自治</h3><span class="card-en">Independent</span></div></div><div class="flip-card-back"><p>习惯自己做决定，也愿意承担选择之后的结果。</p></div></div></div>
+<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-number">02</div><div class="card-front-content"><h3>好奇</h3><span class="card-en">Curious</span></div></div><div class="flip-card-back"><p>对经济、社会、城市、文化以及人与人的关系保持兴趣。</p></div></div></div>
+<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-number">03</div><div class="card-front-content"><h3>探索</h3><span class="card-en">Explore</span></div></div><div class="flip-card-back"><p>喜欢旅行，也喜欢真正走进一个地方。</p></div></div></div>
+<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-number">04</div><div class="card-front-content"><h3>真诚</h3><span class="card-en">Sincere</span></div></div><div class="flip-card-back"><p>希望和世界建立真实的连接。</p></div></div></div>
+<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-number">05</div><div class="card-front-content"><h3>自洽</h3><span class="card-en">Authentic</span></div></div><div class="flip-card-back"><p>不太在意标准答案，更在意答案是不是属于自己。</p></div></div></div>
+<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-number">06</div><div class="card-front-content"><h3>勇敢</h3><span class="card-en">Brave</span></div></div><div class="flip-card-back"><p>愿意走出熟悉的环境，然后重新开始。</p></div></div></div>
+</div>
+
+<h3 class="sub-title">兴趣爱好</h3>
+<div class="hobbies-grid"><div class="hobby-card"><div class="hobby-icon"><i class="fas fa-plane"></i></div><h3>旅游</h3><p>40+国家</p></div><div class="hobby-card"><div class="hobby-icon"><i class="fas fa-music"></i></div><h3>音乐</h3><p>钢琴8年·R&B</p></div><div class="hobby-card"><div class="hobby-icon"><i class="fas fa-theater-masks"></i></div><h3>音乐剧</h3><p>Hamilton</p></div><div class="hobby-card"><div class="hobby-icon"><i class="fas fa-dumbbell"></i></div><h3>健身</h3><p>力量·Lagree</p></div></div>
+</div></section>
+
+<section class="section section-dark" id="life"><div class="container"><h2 class="section-title">我的生活</h2><div class="section-divider"></div></div>
+<div class="filmstrip-wrapper"><div class="filmstrip-track"><div class="film-item"><div class="film-img" style="background-image:url('images/life/life1.jpg')"></div><div class="film-number">01</div></div><div class="film-item"><div class="film-img" style="background-image:url('https://picsum.photos/seed/travel1/500/350')"></div><div class="film-number">02</div></div><div class="film-item"><div class="film-img" style="background-image:url('https://picsum.photos/seed/city2/500/350')"></div><div class="film-number">03</div></div></div></div>
+<div class="pets-section"><div class="container"><h3 class="sub-title light">我的宠物</h3></div><div class="pet-block"><div class="pet-mega-card"><div class="pet-mega-header"><div class="pet-mega-avatar"><i class="fas fa-cat"></i></div><div class="pet-mega-info"><div class="pet-mega-name">麻将</div><div class="pet-mega-tag">CAT</div></div></div><div class="pet-mega-scroll"><div class="pet-scroll-inner"><img class="pet-scroll-img" src="images/cat/cat1.JPG"><img class="pet-scroll-img" src="images/cat/cat2.jpg"><img class="pet-scroll-img" src="images/cat/cat3.JPG"><img class="pet-scroll-img" src="images/cat/cat1.JPG"><img class="pet-scroll-img" src="images/cat/cat2.jpg"><img class="pet-scroll-img" src="images/cat/cat3.JPG"></div></div></div></div></div>
+</section>
+
+<section class="section" id="education"><div class="container"><h2 class="section-title">我的教育</h2><div class="section-divider"></div>
+<div class="timeline">
+<div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">2017 - 2020</div><h3>杭州市公益中学</h3><h4>初中</h4></div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">2020 - 2023</div><h3>杭州外国语学校</h3><h4>高中</h4><div class="timeline-tags"><span class="tag">IGCSE</span><span class="tag">Alevel</span></div></div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">2022 - 2027</div><h3>爱丁堡大学</h3><h4>University of Edinburgh</h4><h4 class="timeline-major">Social Policy and Economics</h4>
+<div class="edu-expanded"><div class="edu-expanded-intro"><p>My academic journey sits at the intersection of economics, social policy and public policy.</p></div>
+<div class="edu-block"><h3 class="edu-block-title"><span class="edu-block-num">01</span> 学习方向</h3><div class="edu-direction-grid"><div class="edu-dir-card"><div class="edu-dir-icon"><i class="fas fa-chart-line"></i></div><h4>Economics</h4><p>使用经济学理论理解市场与资源配置。</p></div><div class="edu-dir-card"><div class="edu-dir-icon"><i class="fas fa-landmark"></i></div><h4>Social Policy</h4><p>关注社会政策如何影响不同群体。</p></div><div class="edu-dir-card"><div class="edu-dir-icon"><i class="fas fa-venus-mars"></i></div><h4>Gender</h4><p>研究制度如何塑造性别关系。</p></div><div class="edu-dir-card"><div class="edu-dir-icon"><i class="fas fa-microscope"></i></div><h4>Research</h4><p>定量和定性方法建立论证。</p></div></div></div>
+<div class="edu-block"><h3 class="edu-block-title"><span class="edu-block-num">02</span> 学术领域</h3><div class="edu-sub-section"><h4 class="edu-sub-title">Economics</h4><div class="edu-tag-cloud"><span class="edu-tag">Micro</span><span class="edu-tag">Macro</span><span class="edu-tag">Econometrics</span><span class="edu-tag">Game Theory</span></div></div><div class="edu-sub-section"><h4 class="edu-sub-title">Social Policy</h4><div class="edu-tag-cloud"><span class="edu-tag">Welfare</span><span class="edu-tag">Gender</span><span class="edu-tag">Inequality</span></div></div></div>
+<div class="edu-block"><h3 class="edu-block-title"><span class="edu-block-num">03</span> 研究项目</h3><div class="edu-research-cards"><div class="edu-research-card"><div class="edu-research-label">Welfare</div><h4>Gender Pay Equality</h4><p>福利国家模式对性别薪酬的影响。</p></div><div class="edu-research-card"><div class="edu-research-label">Comparative</div><h4>CEE Welfare Regime</h4><p>中东欧福利体制比较研究。</p></div><div class="edu-research-card"><div class="edu-research-label">Policy</div><h4>Policy & Inequality</h4><p>政策如何影响个人权利与机会。</p></div></div></div>
+<div class="edu-block"><h3 class="edu-block-title"><span class="edu-block-num">04</span> Methods</h3><div class="edu-method-grid edu-method-3col"><div class="edu-method-card"><h4><i class="fas fa-chart-bar"></i> Quantitative</h4><ul><li>Econometrics</li><li>Statistics</li></ul></div><div class="edu-method-card"><h4><i class="fas fa-file-alt"></i> Qualitative</h4><ul><li>Policy analysis</li><li>Case studies</li></ul></div><div class="edu-method-card"><h4><i class="fas fa-drafting-compass"></i> Design</h4><ul><li>Research questions</li><li>Ethics</li></ul></div></div></div>
+<div class="edu-block"><h3 class="edu-block-title"><span class="edu-block-num">05</span> Beyond</h3><div class="edu-beyond-grid"><div class="edu-beyond-card"><h4>Think structurally</h4><p>从制度出发思考。</p></div><div class="edu-beyond-card"><h4>Question assumptions</h4><p>追问分类的成立。</p></div><div class="edu-beyond-card"><h4>Connect disciplines</h4><p>连接证据与关怀。</p></div><div class="edu-beyond-card"><h4>Curiosity → Research</h4><p>把好奇变成研究。</p></div></div></div>
+</div></div></div></div></section>
+
+<section class="section section-alt" id="work"><div class="container"><h2 class="section-title">我的工作</h2><div class="section-divider"></div>
+<div class="work-entry"><div class="work-header"><div class="work-logo"><i class="fas fa-briefcase"></i></div><div class="work-info"><h3>阿里巴巴 · 钉钉</h3><div class="work-meta"><span class="work-position">金融行业</span><span class="work-date">2026.06 - 09</span></div></div></div><div class="work-desc"><p>工作内容待补充...</p></div><div class="work-gallery"><div class="work-gallery-item" style="background-image:url('images/work/work1.jpg')"></div><div class="work-gallery-item" style="background-image:url('images/work/work2.jpg')"></div><div class="work-gallery-item" style="background-image:url('images/work/work3.jpg')"></div></div></div>
+</div></section>
+
+<section class="section" id="contact"><div class="container"><h2 class="section-title">联系90</h2><div class="section-divider"></div>
+<div class="contact-grid"><div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><h3>邮箱</h3><p>Jolin_ZhouZX@outlook.com</p></div><div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><h3>电话</h3><p>+86 19143593508</p></div><div class="contact-item"><div class="contact-icon"><i class="fab fa-linkedin"></i></div><h3>LinkedIn</h3><a href="#" class="contact-link">查看主页</a></div></div>
+</div></section>
+
+<footer class="footer"><p>&copy; 2025 你好90 · Jolin Zhou</p></footer>
+</body>
+</html>

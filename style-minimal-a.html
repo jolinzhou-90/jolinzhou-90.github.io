@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>简约风 A - 预览</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* 简约风A：大量留白 + 细线条 + 克制配色 + 精致排版 */
+:root { --accent:#2d2d2d; --muted:#999; --border:#eee; --bg:#fff; --bg2:#fafafa; }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:'Inter','Noto Sans SC',sans-serif;color:var(--accent);background:var(--bg);line-height:1.8;font-weight:300}
+.container{max-width:800px;margin:0 auto;padding:0 32px}
+
+/* 导航 */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-container{max-width:800px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-size:1rem;font-weight:600;color:var(--accent);text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+.nav-menu{display:flex;list-style:none;gap:32px}
+.nav-link{text-decoration:none;color:var(--muted);font-size:.8rem;font-weight:400;letter-spacing:1px;text-transform:uppercase;transition:color .3s}
+.nav-link:hover{color:var(--accent)}
+.nav-toggle{display:none}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 32px 80px;background:var(--bg)}
+.hero-avatar{margin-bottom:40px}
+.avatar-placeholder{width:80px;height:80px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto;background:transparent}
+.avatar-placeholder i{font-size:1.8rem;color:var(--muted)}
+.hero-title{font-size:2.2rem;font-weight:300;line-height:1.3;margin-bottom:16px;letter-spacing:-0.5px}
+.highlight{font-weight:600;background:none;-webkit-text-fill-color:var(--accent)}
+.hero-subtitle{font-size:.85rem;color:var(--muted);margin-bottom:12px;letter-spacing:6px;text-transform:uppercase;font-weight:400}
+.hero-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:var(--muted);margin-bottom:40px}
+.hero-buttons{display:flex;gap:16px;justify-content:center}
+.btn{display:inline-flex;align-items:center;padding:10px 24px;font-size:.8rem;font-weight:500;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .3s}
+.btn-primary{background:var(--accent);color:white;border:1px solid var(--accent)}
+.btn-primary:hover{background:transparent;color:var(--accent)}
+.btn-outline{border:1px solid var(--border);color:var(--accent);background:transparent}
+.btn-outline:hover{border-color:var(--accent)}
+.scroll-indicator{position:absolute;bottom:40px;left:50%;transform:translateX(-50%)}
+.scroll-indicator span{display:block;width:1px;height:40px;background:var(--border);position:relative}
+.scroll-indicator span::after{content:'';width:1px;height:8px;background:var(--muted);position:absolute;top:0;left:0;animation:scrollDown 2s infinite}
+@keyframes scrollDown{0%{transform:translateY(0);opacity:1}100%{transform:translateY(32px);opacity:0}}
+
+/* Section */
+.section{padding:120px 0}
+.section-alt{background:var(--bg2)}
+.section-dark{background:#111}
+.section-title{font-size:1.6rem;font-weight:300;text-align:center;margin-bottom:8px;letter-spacing:2px}
+.section-dark .section-title{color:#fff}
+.section-divider{width:24px;height:1px;background:var(--accent);margin:0 auto 16px}
+.section-desc{text-align:center;color:var(--muted);margin-bottom:48px;font-size:.9rem;font-weight:300}
+.section-desc.light{color:rgba(255,255,255,.4)}
+.sub-title{font-size:1.1rem;font-weight:500;margin:64px 0 24px;color:var(--accent);letter-spacing:1px}
+.sub-title.light{color:#fff}
+
+/* About */
+.about-intro{max-width:600px;margin:0 auto 40px;text-align:left}
+.about-lead{font-size:1.1rem;line-height:2;color:var(--accent);font-weight:400;margin-bottom:20px;padding-left:20px;border-left:1.5px solid var(--accent)}
+.about-intro p{color:#666;margin-bottom:14px;font-size:.92rem;line-height:2;font-weight:300}
+.about-quote-block{max-width:500px;margin:0 auto 48px;text-align:center;padding:32px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.quote-mark{display:none}
+.about-quote-block p{font-family:'Playfair Display',serif;font-style:italic;color:var(--accent);font-size:1.1rem;line-height:1.8;margin:0}
+.personal-info{display:flex;justify-content:center;margin-bottom:64px}
+.info-card{display:flex;gap:40px;padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.info-item{display:flex;flex-direction:column;gap:4px;padding:0 16px}
+.info-label{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:2px}
+.info-value{font-size:.85rem;color:var(--accent);font-weight:500}
+.info-value.mbti{color:var(--accent);font-weight:600}
+
+/* Keywords */
+.keywords-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.flip-card{height:240px;cursor:pointer;background:var(--bg)}
+.flip-card-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip-card:hover .flip-card-inner{transform:rotateY(180deg)}
+.flip-card-front,.flip-card-back{position:absolute;top:0;left:0;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;align-items:center;justify-content:center;transition:visibility 0s}
+.flip-card-front{background:var(--bg);visibility:visible}
+.flip-card:hover .flip-card-front{visibility:hidden;transition-delay:.3s}
+.card-illustration{position:absolute;top:0;left:0;width:100%;height:100%;color:var(--accent);opacity:.08}
+.card-number{position:absolute;top:16px;left:20px;font-size:2rem;font-weight:200;color:var(--muted);opacity:.3;letter-spacing:-1px}
+.card-front-content{position:relative;z-index:2;text-align:center;padding:20px}
+.card-front-content h3{font-size:1.3rem;font-weight:300;margin-bottom:4px;letter-spacing:2px}
+.card-en{font-family:'Playfair Display',serif;font-style:italic;font-size:.8rem;color:var(--muted)}
+.flip-card-back{transform:rotateY(180deg);background:var(--accent);visibility:hidden}
+.flip-card:hover .flip-card-back{visibility:visible;transition-delay:.3s}
+.flip-card-back p{color:rgba(255,255,255,.8);font-size:.88rem;line-height:1.9;font-weight:300;text-align:center;padding:24px}
+
+/* Hobbies */
+.hobbies-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.hobby-card{background:var(--bg);padding:40px 24px;text-align:center;transition:background .3s}
+.hobby-card:hover{background:var(--bg2)}
+.hobby-icon{margin-bottom:16px}
+.hobby-icon i{font-size:1.2rem;color:var(--muted)}
+.hobby-card h3{font-size:.85rem;font-weight:500;margin-bottom:8px;letter-spacing:1px}
+.hobby-card p{font-size:.78rem;color:var(--muted);line-height:1.8;font-weight:300}
+
+/* Filmstrip */
+.filmstrip-wrapper{position:relative;padding:0 0 40px;overflow:hidden}
+.filmstrip-track{display:flex;gap:12px;padding:20px 60px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;cursor:grab}
+.filmstrip-track::-webkit-scrollbar{display:none}
+.film-item{flex:0 0 280px;height:200px;border-radius:2px;position:relative;overflow:hidden;filter:grayscale(30%);transition:all .4s}
+.film-item:hover{filter:grayscale(0%);transform:scale(1.02)}
+.film-img{width:100%;height:100%;background-size:cover;background-position:center}
+.film-number{position:absolute;bottom:12px;right:16px;font-size:1.5rem;font-weight:200;color:rgba(255,255,255,.3)}
+.film-text-panel{max-width:800px;margin:24px auto 0;padding:0 60px;min-height:60px;text-align:center}
+.film-text-title{font-size:1rem;font-weight:400;color:#fff;margin-bottom:6px}
+.film-text-desc{font-size:.82rem;color:rgba(255,255,255,.4);font-weight:300}
+
+/* Pets */
+.pets-section{margin-top:80px}
+.pet-block{margin-bottom:40px}
+.pet-mega-card{max-width:800px;margin:0 auto;border-radius:2px;overflow:hidden;background:#fff;border:1px solid var(--border)}
+.pet-mega-card::before{display:none}
+.pet-mega-card:hover{box-shadow:none}
+.pet-mega-card-dark{background:#111;border-color:#222}
+.pet-mega-header{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px solid var(--border)}
+.pet-mega-card-dark .pet-mega-header{border-bottom-color:#222}
+.pet-mega-avatar{width:32px;height:32px;border-radius:50%;background:transparent;border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.pet-mega-avatar i{font-size:.8rem;color:var(--muted)}
+.pet-mega-avatar-dark{background:transparent;border-color:#333}
+.pet-mega-avatar-dark i{color:#666}
+.pet-mega-info{display:flex;flex-direction:column}
+.pet-mega-name{font-size:.9rem;font-weight:500;color:var(--accent)}
+.pet-mega-card-dark .pet-mega-name{color:#ccc}
+.pet-mega-tag{font-size:.6rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.pet-mega-card-dark .pet-mega-tag{color:rgba(255,255,255,.2)}
+.pet-mega-scroll{overflow:hidden;position:relative;padding:8px 0}
+.pet-mega-scroll-bw .pet-scroll-img{filter:grayscale(100%) brightness(.6)}
+.pet-scroll-inner{display:flex;gap:12px;width:max-content;animation:petScroll 30s linear infinite}
+.pet-scroll-inner:hover{animation-play-state:paused}
+.pet-scroll-reverse{animation-direction:reverse}
+.pet-scroll-img{flex:0 0 220px;height:150px;border-radius:2px;object-fit:cover}
+@keyframes petScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* Worldmap placeholder */
+.worldmap-section{margin-top:80px;padding-bottom:20px}
+.worldmap-subtitle{text-align:center;color:rgba(255,255,255,.3);font-family:'Playfair Display',serif;font-style:italic;font-size:.9rem;margin-bottom:32px}
+.worldmap-container{position:relative;max-width:800px;margin:0 auto;border-radius:2px;overflow:hidden;border:1px solid #222}
+.worldmap-svg{width:100%;height:auto;display:block}
+.worldmap-hint{text-align:center;color:rgba(255,255,255,.2);font-size:.75rem;margin-top:16px;letter-spacing:1px}
+.city-detail-panel{display:none}
+
+/* Timeline */
+.timeline{position:relative;padding-left:32px;max-width:600px;margin:0 auto}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border)}
+.timeline-item{position:relative;margin-bottom:40px}
+.timeline-dot{position:absolute;left:-37px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--bg);border:1.5px solid var(--muted)}
+.timeline-content{padding:0;border:none;background:transparent}
+.timeline-content:hover{box-shadow:none}
+.timeline-date{font-size:.75rem;font-weight:500;color:var(--muted);letter-spacing:1px;margin-bottom:6px}
+.timeline-content h3{font-size:1rem;font-weight:500;margin-bottom:2px}
+.timeline-content h4{font-size:.85rem;color:var(--muted);font-weight:300}
+.timeline-major{font-style:italic;color:var(--accent);font-weight:400}
+.timeline-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{font-size:.7rem;padding:3px 8px;border-radius:0;background:transparent;color:var(--muted);border:1px solid var(--border);letter-spacing:.5px}
+.timeline-courses{font-size:.82rem;color:var(--muted);margin-top:6px;font-weight:300}
+
+/* Edu expanded */
+.edu-expanded{margin-top:48px;padding-top:48px;border-top:1px solid var(--border)}
+.edu-expanded-intro{max-width:600px;margin-bottom:40px}
+.edu-expanded-intro p{font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:var(--muted);line-height:1.8}
+.edu-block{margin-top:48px}
+.edu-block-title{font-size:1rem;font-weight:500;margin-bottom:20px;display:flex;align-items:center;gap:10px;letter-spacing:1px}
+.edu-block-num{font-size:.7rem;font-weight:400;color:var(--muted);letter-spacing:1px}
+.edu-direction-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.edu-dir-card{background:var(--bg);padding:28px 24px;transition:background .3s}
+.edu-dir-card:hover{background:var(--bg2)}
+.edu-dir-card::before{display:none}
+.edu-dir-icon{margin-bottom:12px}
+.edu-dir-icon i{font-size:1rem;color:var(--muted)}
+.edu-dir-card h4{font-size:.9rem;font-weight:500;margin-bottom:6px}
+.edu-dir-keywords{font-size:.72rem;color:var(--muted);margin-bottom:8px;letter-spacing:.5px}
+.edu-dir-card p{font-size:.82rem;color:var(--muted);line-height:1.8;font-weight:300}
+.edu-sub-section{margin-bottom:20px}
+.edu-sub-title{font-size:.85rem;font-weight:500;margin-bottom:10px;color:var(--accent)}
+.edu-tag-cloud{display:flex;flex-wrap:wrap;gap:6px}
+.edu-tag{padding:4px 12px;border-radius:0;font-size:.75rem;font-weight:400;background:transparent;color:var(--muted);border:1px solid var(--border)}
+.edu-research-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.edu-research-card{background:var(--bg);padding:24px 20px}
+.edu-research-card:hover{box-shadow:none;transform:none}
+.edu-research-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.edu-research-card h4{font-size:.88rem;font-weight:500;margin-bottom:8px}
+.edu-research-card p{font-size:.78rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:10px}
+.edu-research-keywords{display:flex;flex-wrap:wrap;gap:4px}
+.edu-research-keywords span{padding:2px 8px;font-size:.68rem;background:transparent;border:1px solid var(--border);color:var(--muted)}
+.edu-method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.edu-method-3col{grid-template-columns:repeat(3,1fr)}
+.edu-method-card{background:var(--bg);padding:24px 20px}
+.edu-method-card:hover{box-shadow:none}
+.edu-method-card h4{font-size:.85rem;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.edu-method-card h4 i{color:var(--muted);font-size:.8rem}
+.edu-method-card ul{list-style:none;padding:0}
+.edu-method-card li{font-size:.78rem;color:var(--muted);padding:3px 0;padding-left:12px;position:relative;font-weight:300}
+.edu-method-card li::before{content:'·';position:absolute;left:0;color:var(--muted)}
+.edu-beyond-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.edu-beyond-card{background:var(--bg);padding:24px 20px;border-left:none}
+.edu-beyond-card:hover{box-shadow:none;transform:none;background:var(--bg2)}
+.edu-beyond-card h4{font-size:.88rem;font-weight:500;margin-bottom:6px}
+.edu-beyond-card p{font-size:.78rem;color:var(--muted);line-height:1.8;font-weight:300}
+.edu-section-intro{font-size:.88rem;color:var(--muted);margin-bottom:16px;font-style:italic;font-weight:300}
+
+/* Work */
+.work-entry{max-width:600px;margin:0 auto;border:1px solid var(--border);border-radius:0;overflow:hidden;background:transparent}
+.work-entry:hover{box-shadow:none}
+.work-header{display:flex;gap:20px;padding:28px 28px 0;align-items:flex-start}
+.work-logo{width:40px;height:40px;border-radius:0;background:var(--accent);display:flex;align-items:center;justify-content:center}
+.work-logo i{font-size:1rem;color:white}
+.work-info h3{font-size:1rem;font-weight:500;margin-bottom:4px}
+.work-meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.work-position{font-size:.82rem;color:var(--muted);font-weight:300}
+.work-date{font-size:.82rem;color:var(--muted)}
+.work-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.work-desc{padding:16px 28px}
+.work-desc p{font-size:.85rem;color:var(--muted);font-weight:300}
+.work-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;padding:0}
+.work-gallery-item{height:140px;background-size:cover;background-position:center;transition:filter .3s}
+.work-gallery-item:hover{filter:brightness(1.05)}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;max-width:600px;margin:0 auto;border:1px solid var(--border)}
+.contact-item{text-align:center;padding:32px 16px;background:var(--bg);transition:background .3s}
+.contact-item:hover{background:var(--bg2);transform:none;box-shadow:none;border:none}
+.contact-icon{width:40px;height:40px;border-radius:0;background:transparent;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.contact-icon i{font-size:1rem;color:var(--muted)}
+.contact-item h3{font-size:.82rem;font-weight:500;margin-bottom:6px;letter-spacing:1px}
+.contact-item p{font-size:.78rem;color:var(--muted);margin-bottom:2px;font-weight:300}
+.contact-link{font-size:.78rem;color:var(--muted);text-decoration:none;font-weight:400;border-bottom:1px solid var(--border)}
+
+/* Footer */
+.footer{background:var(--bg);border-top:1px solid var(--border);color:var(--muted);text-align:center;padding:32px 24px;font-size:.75rem;letter-spacing:1px}
+</style>
+</head>
+<body>
+<nav class="navbar"><div class="nav-container"><a href="#" class="nav-logo">你好90</a><ul class="nav-menu"><li><a href="#about" class="nav-link">我</a></li><li><a href="#life" class="nav-link">生活</a></li><li><a href="#education" class="nav-link">教育</a></li><li><a href="#work" class="nav-link">工作</a></li><li><a href="#contact" class="nav-link">联系</a></li></ul></div></nav>
+
+<section class="hero" id="hero">
+<div class="hero-content">
+<div class="hero-avatar"><div class="avatar-placeholder"><i class="fas fa-user"></i></div></div>
+<h1 class="hero-title">你好，我是 <span class="highlight">Jolin</span></h1>
+<p class="hero-subtitle">自洽｜真诚｜勇敢</p>
+<p class="hero-quote">"The World is Wide Enough, for both you and me"</p>
+<div class="hero-buttons"><a href="#about" class="btn btn-primary">了解更多</a><a href="#contact" class="btn btn-outline">联系90</a></div>
+</div>
+<div class="scroll-indicator"><span></span></div>
+</section>
+
+<section class="section" id="about">
+<div class="container">
+<h2 class="section-title">我</h2><div class="section-divider"></div>
+<div class="about-intro">
+<p class="about-lead">我是 Jolin，一个正在学习如何独立生活、独立思考，也独立选择自己人生方向的人。</p>
+<p>我学习经济学，也对社会、政策以及人与人之间的关系保持好奇。比起给自己定义一个固定的身份，我更喜欢不断尝试新的事情，在不同的城市生活、旅行、学习和认识这个世界。</p>
+<p>我相信，自由并不意味着永远向前，而是拥有选择停下来、重新开始，以及按照自己喜欢的方式生活的能力。</p>
+</div>
+<div class="about-quote-block"><p>The world is wide enough, for both you and me.</p></div>
+<div class="personal-info"><div class="info-card">
+<div class="info-item"><span class="info-label">出生</span><span class="info-value">2005.08</span></div>
+<div class="info-item"><span class="info-label">星座</span><span class="info-value">处女座</span></div>
+<div class="info-item"><span class="info-label">MBTI</span><span class="info-value mbti">INTJ</span></div>
+<div class="info-item"><span class="info-label">坐标</span><span class="info-value">爱丁堡</span></div>
+</div></div>
+
+<h3 class="sub-title">我是谁</h3>
+<div class="keywords-grid">
+<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-number">01</div><div class="card-front-content"><h3>自治</h3><span class="card-en">Independent</span></div></div><div class="flip-card-back"><p>习惯自己做决定，也愿意承担选择之后的结果。</p></div></div></div>
+<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-number">02</div><div class="card-front-content"><h3>好奇</h3><span class="card-en">Curious</span></div></div><div class="flip-card-back"><p>对经济、社会、城市、文化以及人与人的关系保持兴趣。</p></div></div></div>
+<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-number">03</div><div class="card-front-content"><h3>探索</h3><span class="card-en">Explore</span></div></div><div class="flip-card-back"><p>喜欢旅行，也喜欢真正走进一个地方，而不只是完成一张景点清单。</p></div></div></div>
+<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-number">04</div><div class="card-front-content"><h3>真诚</h3><span class="card-en">Sincere</span></div></div><div class="flip-card-back"><p>希望和世界建立真实的连接，也希望自己始终诚实地面对自己的选择。</p></div></div></div>
+<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-number">05</div><div class="card-front-content"><h3>自洽</h3><span class="card-en">Authentic</span></div></div><div class="flip-card-back"><p>不太在意人生有没有一套标准答案，更在意答案是不是属于自己。</p></div></div></div>
+<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><div class="card-number">06</div><div class="card-front-content"><h3>勇敢</h3><span class="card-en">Brave</span></div></div><div class="flip-card-back"><p>愿意走出熟悉的环境，也愿意承认自己不知道，然后重新开始。</p></div></div></div>
+</div>
+
+<h3 class="sub-title">兴趣爱好</h3>
+<div class="hobbies-grid">
+<div class="hobby-card"><div class="hobby-icon"><i class="fas fa-plane"></i></div><h3>旅游</h3><p>40+国家，地图加载30%</p></div>
+<div class="hobby-card"><div class="hobby-icon"><i class="fas fa-music"></i></div><h3>音乐</h3><p>钢琴8年，R&B</p></div>
+<div class="hobby-card"><div class="hobby-icon"><i class="fas fa-theater-masks"></i></div><h3>音乐剧</h3><p>Hamilton</p></div>
+<div class="hobby-card"><div class="hobby-icon"><i class="fas fa-dumbbell"></i></div><h3>健身</h3><p>力量训练+Lagree+游泳</p></div>
+</div>
+</div>
+</section>
+
+<section class="section section-dark" id="life">
+<div class="container"><h2 class="section-title">我的生活</h2><div class="section-divider"></div></div>
+<div class="filmstrip-wrapper">
+<div class="filmstrip-track">
+<div class="film-item"><div class="film-img" style="background-image:url('images/life/life1.jpg')"></div><div class="film-number">01</div></div>
+<div class="film-item"><div class="film-img" style="background-image:url('https://picsum.photos/seed/travel1/500/350')"></div><div class="film-number">02</div></div>
+<div class="film-item"><div class="film-img" style="background-image:url('https://picsum.photos/seed/city2/500/350')"></div><div class="film-number">03</div></div>
+<div class="film-item"><div class="film-img" style="background-image:url('https://picsum.photos/seed/nature3/500/350')"></div><div class="film-number">04</div></div>
+</div>
+</div>
+<div class="pets-section"><div class="container"><h3 class="sub-title light">我的宠物</h3></div>
+<div class="pet-block"><div class="pet-mega-card">
+<div class="pet-mega-header"><div class="pet-mega-avatar"><i class="fas fa-cat"></i></div><div class="pet-mega-info"><div class="pet-mega-name">麻将</div><div class="pet-mega-tag">CAT</div></div></div>
+<div class="pet-mega-scroll"><div class="pet-scroll-inner"><img class="pet-scroll-img" src="images/cat/cat1.JPG"><img class="pet-scroll-img" src="images/cat/cat2.jpg"><img class="pet-scroll-img" src="images/cat/cat3.JPG"><img class="pet-scroll-img" src="images/cat/cat4.JPG"><img class="pet-scroll-img" src="images/cat/cat1.JPG"><img class="pet-scroll-img" src="images/cat/cat2.jpg"><img class="pet-scroll-img" src="images/cat/cat3.JPG"><img class="pet-scroll-img" src="images/cat/cat4.JPG"></div></div>
+</div></div></div>
+</section>
+
+<section class="section" id="education">
+<div class="container">
+<h2 class="section-title">我的教育</h2><div class="section-divider"></div>
+<div class="timeline">
+<div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">2017 - 2020</div><h3>杭州市公益中学</h3><h4>初中</h4></div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">2020 - 2023</div><h3>杭州外国语学校</h3><h4>高中</h4><div class="timeline-tags"><span class="tag">IGCSE</span><span class="tag">Alevel</span></div></div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">2022 - 2027</div><h3>爱丁堡大学</h3><h4>University of Edinburgh</h4><h4 class="timeline-major">Social Policy and Economics (MA Hons)</h4><div class="timeline-tags"><span class="tag">宏观经济</span><span class="tag">微观经济</span><span class="tag">计量经济</span></div>
+<div class="edu-expanded">
+<div class="edu-expanded-intro"><p>My academic journey sits at the intersection of economics, social policy and public policy.</p></div>
+<div class="edu-block"><h3 class="edu-block-title"><span class="edu-block-num">01</span> 学习方向</h3>
+<div class="edu-direction-grid">
+<div class="edu-dir-card"><div class="edu-dir-icon"><i class="fas fa-chart-line"></i></div><h4>Economics</h4><div class="edu-dir-keywords">Markets · Institutions</div><p>使用经济学理论理解市场与资源配置。</p></div>
+<div class="edu-dir-card"><div class="edu-dir-icon"><i class="fas fa-landmark"></i></div><h4>Social Policy</h4><div class="edu-dir-keywords">Welfare · Inequality</div><p>关注社会政策如何影响不同群体的生活机会。</p></div>
+<div class="edu-dir-card"><div class="edu-dir-icon"><i class="fas fa-venus-mars"></i></div><h4>Gender & Equality</h4><div class="edu-dir-keywords">Pay gap · Labour</div><p>研究制度如何塑造性别关系。</p></div>
+<div class="edu-dir-card"><div class="edu-dir-icon"><i class="fas fa-microscope"></i></div><h4>Research</h4><div class="edu-dir-keywords">Econometrics · Design</div><p>使用定量和定性方法建立论证。</p></div>
+</div></div>
+<div class="edu-block"><h3 class="edu-block-title"><span class="edu-block-num">02</span> 学术领域</h3>
+<div class="edu-sub-section"><h4 class="edu-sub-title">Economics</h4><div class="edu-tag-cloud"><span class="edu-tag">Microeconomics</span><span class="edu-tag">Macroeconomics</span><span class="edu-tag">Econometrics</span><span class="edu-tag">Game Theory</span><span class="edu-tag">Labour Markets</span></div></div>
+<div class="edu-sub-section"><h4 class="edu-sub-title">Social Policy</h4><div class="edu-tag-cloud"><span class="edu-tag">Welfare States</span><span class="edu-tag">Gender & Welfare</span><span class="edu-tag">Inequality</span><span class="edu-tag">CEE Welfare</span></div></div>
+</div>
+<div class="edu-block"><h3 class="edu-block-title"><span class="edu-block-num">03</span> 研究项目</h3>
+<div class="edu-research-cards">
+<div class="edu-research-card"><div class="edu-research-label">Welfare & Gender</div><h4>Welfare State Policies & Gender Pay Equality</h4><p>探索不同福利国家模式对性别薪酬不平等的影响。</p><div class="edu-research-keywords"><span>Welfare</span><span>Gender</span><span>Pay Gap</span></div></div>
+<div class="edu-research-card"><div class="edu-research-label">Comparative</div><h4>CEE: A Distinctive Welfare Regime?</h4><p>比较中东欧国家是否构成独特的福利体制。</p><div class="edu-research-keywords"><span>CEE</span><span>Regimes</span><span>Policy</span></div></div>
+<div class="edu-research-card"><div class="edu-research-label">Policy</div><h4>Abortion Policy & Education Inequality</h4><p>研究政策如何影响个人权利与机会。</p><div class="edu-research-keywords"><span>Policy</span><span>Education</span><span>Inequality</span></div></div>
+</div></div>
+<div class="edu-block"><h3 class="edu-block-title"><span class="edu-block-num">04</span> Research Methods</h3>
+<div class="edu-method-grid edu-method-3col">
+<div class="edu-method-card"><h4><i class="fas fa-chart-bar"></i> Quantitative</h4><ul><li>Econometrics</li><li>Statistical analysis</li></ul></div>
+<div class="edu-method-card"><h4><i class="fas fa-file-alt"></i> Qualitative</h4><ul><li>Policy analysis</li><li>Case studies</li></ul></div>
+<div class="edu-method-card"><h4><i class="fas fa-drafting-compass"></i> Research Design</h4><ul><li>Research questions</li><li>Ethics</li></ul></div>
+</div></div>
+<div class="edu-block"><h3 class="edu-block-title"><span class="edu-block-num">05</span> Beyond the Classroom</h3>
+<div class="edu-beyond-grid">
+<div class="edu-beyond-card"><h4>Think structurally</h4><p>从制度和结构出发思考问题。</p></div>
+<div class="edu-beyond-card"><h4>Question assumptions</h4><p>追问分类为什么成立。</p></div>
+<div class="edu-beyond-card"><h4>Connect disciplines</h4><p>连接经济学的证据与社会政策的关怀。</p></div>
+<div class="edu-beyond-card"><h4>Turn curiosity into research</h4><p>把好奇变成可以被研究的问题。</p></div>
+</div></div>
+</div>
+</div></div>
+</div>
+</section>
+
+<section class="section section-alt" id="work">
+<div class="container"><h2 class="section-title">我的工作</h2><div class="section-divider"></div>
+<div class="work-entry"><div class="work-header"><div class="work-logo"><i class="fas fa-briefcase"></i></div><div class="work-info"><h3>阿里巴巴 · 钉钉</h3><div class="work-meta"><span class="work-position">客发行业团队-金融行业</span><span class="work-date">2026.06 - 2026.09</span></div><div class="work-tags"><span class="tag">金融</span><span class="tag">出海</span></div></div></div><div class="work-desc"><p>工作内容待补充...</p></div><div class="work-gallery"><div class="work-gallery-item" style="background-image:url('images/work/work1.jpg')"></div><div class="work-gallery-item" style="background-image:url('images/work/work2.jpg')"></div><div class="work-gallery-item" style="background-image:url('images/work/work3.jpg')"></div></div></div>
+</div></section>
+
+<section class="section" id="contact">
+<div class="container"><h2 class="section-title">联系90</h2><div class="section-divider"></div>
+<div class="contact-grid">
+<div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><h3>邮箱</h3><p>Jolin_ZhouZX@outlook.com</p></div>
+<div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><h3>电话</h3><p>+86 19143593508</p></div>
+<div class="contact-item"><div class="contact-icon"><i class="fab fa-linkedin"></i></div><h3>LinkedIn</h3><a href="#" class="contact-link">查看主页</a></div>
+</div></div></section>
+
+<footer class="footer"><p>&copy; 2025 你好90 · Jolin Zhou</p></footer>
+</body>
+</html>
