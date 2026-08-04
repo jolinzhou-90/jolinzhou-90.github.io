@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jolin Zhou - Newspaper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter','Noto Serif SC',serif;background:#fdfbf5;color:#2c2c2c;max-width:1000px;margin:0 auto;padding:40px 30px}
+        
+        /* MASTHEAD */
+        .masthead{text-align:center;padding:32px 0 16px;border-bottom:3px double #2c2c2c}
+        .masthead .date{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:8px}
+        .masthead h1{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;letter-spacing:.02em}
+        .masthead .tagline{font-size:.75rem;font-style:italic;color:#666;margin-top:8px}
+        .masthead .rule{display:flex;align-items:center;gap:12px;margin-top:16px;font-size:.65rem;color:#aaa}
+        .masthead .rule::before,.masthead .rule::after{content:'';flex:1;height:1px;background:#2c2c2c}
+        
+        /* COLUMNS */
+        .cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-bottom:1px solid #ddd}
+        .col{padding:24px 20px;border-right:1px solid #ddd}
+        .col:last-child{border:none}
+        .col h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:12px;line-height:1.3}
+        .col p{font-size:.82rem;line-height:1.8;margin-bottom:12px;text-align:justify}
+        .col .dropcap::first-letter{font-family:'Playfair Display',serif;font-size:3rem;float:left;line-height:.9;margin:4px 8px 0 0;font-weight:700}
+        
+        /* SECTION HEAD */
+        .sec-head{text-align:center;padding:32px 0 16px;border-bottom:1px solid #ddd}
+        .sec-head h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700}
+        .sec-head .sub{font-size:.75rem;font-style:italic;color:#888;margin-top:6px}
+        
+        /* KEYWORDS */
+        .kw-row{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border-bottom:1px solid #ddd}
+        .kw{padding:20px 16px;border-right:1px solid #eee;text-align:center}
+        .kw:last-child{border:none}
+        .kw .cn{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:4px}
+        .kw .en{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#999;margin-bottom:8px}
+        .kw p{font-size:.7rem;color:#666;line-height:1.5}
+        
+        /* TIMELINE */
+        .tl-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid #ddd}
+        .tl{padding:24px 20px;border-right:1px solid #eee}
+        .tl:last-child{border:none}
+        .tl .year{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#8b4513;margin-bottom:4px}
+        .tl h4{font-size:.9rem;font-weight:600;margin-bottom:4px}
+        .tl .school{font-size:.8rem;color:#666;font-style:italic;margin-bottom:8px}
+        .tl p{font-size:.75rem;color:#888;line-height:1.6}
+        .tl .tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+        .tl .tags span{font-size:.6rem;padding:2px 8px;border:1px solid #ccc;color:#666}
+        
+        /* ACADEMIC */
+        .acad-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-bottom:1px solid #ddd}
+        .acad{padding:20px;border-right:1px solid #eee}
+        .acad:last-child{border:none}
+        .acad h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:10px;font-style:italic}
+        .acad .tag-list{display:flex;flex-wrap:wrap;gap:6px}
+        .acad .tag-list span{font-size:.68rem;padding:3px 8px;border:1px solid #ddd;color:#555}
+        
+        /* RESEARCH */
+        .res-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-bottom:1px solid #ddd}
+        .res{padding:24px 20px;border-right:1px solid #eee}
+        .res:last-child{border:none}
+        .res .label{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:#8b4513;margin-bottom:8px;font-weight:600}
+        .res h4{font-family:'Playfair Display',serif;font-size:.95rem;margin-bottom:8px;line-height:1.4}
+        .res p{font-size:.75rem;color:#666;line-height:1.7}
+        
+        /* HOBBIES */
+        .hobby-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid #ddd}
+        .hobby{padding:20px;text-align:center;border-right:1px solid #eee}
+        .hobby:last-child{border:none}
+        .hobby .icon{font-size:1.3rem;margin-bottom:6px}
+        .hobby h4{font-size:.85rem;font-weight:600;margin-bottom:4px}
+        .hobby p{font-size:.7rem;color:#888;line-height:1.5}
+        
+        /* PETS */
+        .pets-row{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid #ddd}
+        .pet{padding:20px;border-right:1px solid #eee}
+        .pet:last-child{border:none}
+        .pet h4{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:12px}
+        .pet .pet-scroll{display:flex;gap:6px;overflow-x:auto}
+        .pet .pet-scroll::-webkit-scrollbar{display:none}
+        .pet .pet-scroll img{width:80px;height:80px;object-fit:cover;border:1px solid #ddd;flex-shrink:0}
+        
+        /* FOOTER */
+        .footer-row{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:24px 0}
+        .footer-work{padding-right:20px;border-right:1px solid #ddd}
+        .footer-contact{padding-left:20px}
+        .footer-work h4,.footer-contact h4{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#8b4513;margin-bottom:10px;font-weight:600}
+        .footer-work h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:6px}
+        .footer-work .meta{font-size:.78rem;color:#888;margin-bottom:8px}
+        .footer-work .tags{display:flex;gap:4px}
+        .footer-work .tags span{font-size:.6rem;padding:2px 8px;border:1px solid #ccc}
+        .footer-contact p{font-size:.8rem;color:#666;margin-bottom:6px}
+        .footer-contact a{color:#8b4513;text-decoration:none}
+        .colophon{text-align:center;padding:32px 0;font-size:.7rem;color:#aaa;font-style:italic;border-top:3px double #2c2c2c;margin-top:20px}
+        
+        @media(max-width:768px){
+            .cols,.kw-row,.tl-row,.acad-cols,.res-cols,.hobby-cols,.pets-row,.footer-row{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+    <!-- MASTHEAD -->
+    <header class="masthead">
+        <p class="date">Tuesday, July 21, 2025 · Edinburgh</p>
+        <h1>The Jolin Times</h1>
+        <p class="tagline">"The world is wide enough, for both you and me."</p>
+        <div class="rule">自洽 · 真诚 · 勇敢</div>
+    </header>
+    
+    <!-- ABOUT -->
+    <div class="cols">
+        <div class="col">
+            <h3>关于我</h3>
+            <p class="dropcap">我是 Jolin，一个正在学习如何独立生活、独立思考，也独立选择自己人生方向的人。</p>
+            <p>我学习经济学，也对社会、政策以及人与人之间的关系保持好奇。比起给自己定义一个固定的身份，我更喜欢不断尝试新的事情。</p>
+        </div>
+        <div class="col">
+            <h3>自由与选择</h3>
+            <p>我相信，自由并不意味着永远向前，而是拥有选择停下来、重新开始，以及按照自己喜欢的方式生活的能力。</p>
+            <p>我希望以后可以去更多地方看看。不是匆匆打卡，而是真正住下来，走进街道、市场、咖啡馆和普通人的日常。</p>
+        </div>
+        <div class="col">
+            <h3>个人信息</h3>
+            <p><strong>出生：</strong>2005.08</p>
+            <p><strong>星座：</strong>处女座</p>
+            <p><strong>MBTI：</strong>INTJ</p>
+            <p><strong>坐标：</strong>爱丁堡</p>
+            <p style="margin-top:12px;font-style:italic;color:#8b4513">"The world is wide enough, for both you and me."</p>
+        </div>
+    </div>
+    
+    <!-- KEYWORDS -->
+    <div class="sec-head"><h2>Keywords</h2><p class="sub">六个词定义自己</p></div>
+    <div class="kw-row">
+        <div class="kw"><div class="cn">自治</div><div class="en">Independent</div><p>习惯自己做决定，也愿意承担结果</p></div>
+        <div class="kw"><div class="cn">好奇</div><div class="en">Curious</div><p>对经济、社会、文化保持兴趣</p></div>
+        <div class="kw"><div class="cn">探索</div><div class="en">Explore</div><p>真正走进一个地方</p></div>
+        <div class="kw"><div class="cn">真诚</div><div class="en">Sincere</div><p>和世界建立真实连接</p></div>
+        <div class="kw"><div class="cn">自洽</div><div class="en">Authentic</div><p>答案属于自己</p></div>
+        <div class="kw"><div class="cn">勇敢</div><div class="en">Brave</div><p>愿意重新开始</p></div>
+    </div>
+    
+    <!-- EDUCATION -->
+    <div class="sec-head"><h2>Education</h2><p class="sub">学术旅程</p></div>
+    <div class="tl-row">
+        <div class="tl"><div class="year">2022</div><h4>爱丁堡大学</h4><div class="school">Social Policy and Economics (MA Hons)</div><div class="tags"><span>宏观经济</span><span>微观经济</span><span>计量经济</span></div></div>
+        <div class="tl"><div class="year">2020</div><h4>杭州外国语学校</h4><div class="school">高中 · IGCSE / A-Level</div><p>数学｜高数｜物理｜经济</p></div>
+        <div class="tl"><div class="year">2017</div><h4>杭州市公益中学</h4><div class="school">初中</div></div>
+    </div>
+    
+    <!-- ACADEMIC FIELDS -->
+    <div class="acad-cols">
+        <div class="acad"><h4>Economics</h4><div class="tag-list"><span>Microeconomics</span><span>Macroeconomics</span><span>Econometrics</span><span>Game Theory</span><span>Labour Markets</span><span>Public Economics</span></div></div>
+        <div class="acad"><h4>Social Policy</h4><div class="tag-list"><span>Welfare States</span><span>Comparative</span><span>Gender & Welfare</span><span>Inequality</span><span>CEE Welfare</span></div></div>
+        <div class="acad"><h4>Gender & Equality</h4><div class="tag-list"><span>Gender Pay Gap</span><span>Women's Labour</span><span>Care Responsibilities</span></div></div>
+    </div>
+    
+    <!-- RESEARCH -->
+    <div class="sec-head"><h2>Research</h2><p class="sub">研究项目</p></div>
+    <div class="res-cols">
+        <div class="res"><div class="label">Welfare & Gender</div><h4>The Impact of Welfare State Policies on Gender Pay Equality</h4><p>How different welfare models influence gender pay inequality in labour markets.</p></div>
+        <div class="res"><div class="label">Comparative</div><h4>Are CEE Countries a Distinctive Welfare Regime?</h4><p>Whether CEE countries constitute a distinctive welfare regime.</p></div>
+        <div class="res"><div class="label">Policy</div><h4>Abortion Policy & Education Inequality</h4><p>Policy implications and institutional structures shaping opportunities.</p></div>
+    </div>
+    
+    <!-- HOBBIES -->
+    <div class="sec-head"><h2>Hobbies</h2><p class="sub">生活之外</p></div>
+    <div class="hobby-cols">
+        <div class="hobby"><div class="icon">✈</div><h4>旅游</h4><p>40+国家<br>地图加载30%</p></div>
+        <div class="hobby"><div class="icon">♪</div><h4>音乐</h4><p>钢琴8年<br>R&B</p></div>
+        <div class="hobby"><div class="icon">♫</div><h4>音乐剧</h4><p>Hamilton<br>用音乐讲故事</p></div>
+        <div class="hobby"><div class="icon">◉</div><h4>健身</h4><p>3年+<br>Lagree · 游泳</p></div>
+    </div>
+    
+    <!-- PETS -->
+    <div class="sec-head"><h2>Pets</h2><p class="sub">毛茸茸的家人</p></div>
+    <div class="pets-row">
+        <div class="pet"><h4>🐱 麻将</h4><div class="pet-scroll"><img src="images/cat/cat1.JPG" alt="麻将"><img src="images/cat/cat2.jpg" alt="麻将"><img src="images/cat/cat3.JPG" alt="麻将"><img src="images/cat/cat4.JPG" alt="麻将"><img src="images/cat/cat5.JPG" alt="麻将"><img src="images/cat/cat6.JPG" alt="麻将"><img src="images/cat/cat7.JPG" alt="麻将"><img src="images/cat/cat8.JPG" alt="麻将"></div></div>
+        <div class="pet"><h4>🐶 Samuel</h4><div class="pet-scroll"><img src="images/dog/dog1.JPG" alt="Samuel"><img src="images/dog/dog2.JPG" alt="Samuel"><img src="images/dog/dog3.JPG" alt="Samuel"><img src="images/dog/dog4.JPG" alt="Samuel"><img src="images/dog/dog5.JPG" alt="Samuel"><img src="images/dog/dog6.JPG" alt="Samuel"></div></div>
+    </div>
+    
+    <!-- FOOTER -->
+    <div class="footer-row">
+        <div class="footer-work">
+            <h4>Work Experience</h4>
+            <h3>阿里巴巴 · 钉钉</h3>
+            <div class="meta">客发行业团队-金融&健康&产投&出海 · 2026.06-2026.09</div>
+            <div class="tags"><span>金融</span><span>健康</span><span>产投</span><span>出海</span></div>
+        </div>
+        <div class="footer-contact">
+            <h4>Contact</h4>
+            <p>Jolin_ZhouZX@outlook.com</p>
+            <p>+44 7949365290</p>
+            <p><a href="https://uk.linkedin.com/in/zixuan-zhou-21a9902b7">LinkedIn →</a></p>
+        </div>
+    </div>
+    
+    <div class="colophon">© 2025 The Jolin Times · Jolin Zhou · All Rights Reserved</div>
+</body>
+</html>
