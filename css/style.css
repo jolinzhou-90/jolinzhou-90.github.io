@@ -118,18 +118,46 @@ body {
 .sub-title.light { color:#fff; }
 
 /* ===== 我 - 关于 ===== */
-.about-intro { max-width:700px; margin:0 auto 40px; text-align:center; }
-.about-intro p { color:var(--text-light); margin-bottom:16px; font-size:1.05rem; }
-.about-quote { font-family:'Playfair Display',serif; font-style:italic; color:var(--primary); font-size:1.1rem !important; margin-top:24px !important; }
-.personal-info { display:flex; justify-content:center; margin-bottom:20px; }
-.info-card {
-    display:flex; gap:32px; padding:24px 40px; border-radius:var(--radius);
-    background:linear-gradient(135deg,rgba(99,102,241,.05),rgba(14,165,233,.05));
-    border:1px solid var(--border); flex-wrap:wrap; justify-content:center;
+.about-intro { max-width:680px; margin:0 auto 32px; text-align:left; }
+.about-lead {
+    font-size:1.25rem; line-height:1.9; color:var(--text); font-weight:500;
+    margin-bottom:20px; position:relative; padding-left:24px;
 }
-.info-item { text-align:center; }
-.info-label { display:block; font-size:.78rem; color:var(--text-lighter); margin-bottom:4px; text-transform:uppercase; letter-spacing:1px; }
-.info-value { font-size:1rem; font-weight:600; color:var(--text); }
+.about-lead::before {
+    content:''; position:absolute; left:0; top:8px; bottom:8px;
+    width:3px; border-radius:2px; background:var(--primary);
+}
+.about-intro p { color:var(--text-light); margin-bottom:14px; font-size:1rem; line-height:1.9; }
+
+.about-quote-block {
+    max-width:600px; margin:0 auto 40px; text-align:center;
+    padding:28px 32px; position:relative;
+    background:linear-gradient(135deg, rgba(99,102,241,.04), rgba(139,92,246,.04));
+    border-radius:16px;
+}
+.quote-mark {
+    font-family:'Playfair Display',serif; font-size:3rem; line-height:1;
+    color:var(--primary); opacity:0.2; position:absolute;
+}
+.quote-mark:first-child { top:8px; left:16px; }
+.quote-mark.end { top:auto; bottom:0; right:16px; left:auto; }
+.about-quote-block p {
+    font-family:'Playfair Display',serif; font-style:italic;
+    color:var(--primary); font-size:1.2rem; line-height:1.7;
+    margin:0; position:relative; z-index:1;
+}
+
+.personal-info { display:flex; justify-content:center; margin-bottom:48px; }
+.info-card {
+    display:flex; align-items:center; gap:0; padding:16px 32px; border-radius:var(--radius);
+    background:white; border:1px solid var(--border); box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+.info-item { display:flex; align-items:center; gap:10px; padding:0 24px; }
+.info-icon { font-size:1.1rem; color:var(--primary); opacity:0.7; }
+.info-text { display:flex; flex-direction:column; gap:2px; }
+.info-label { font-size:.7rem; color:var(--text-lighter); text-transform:uppercase; letter-spacing:1px; }
+.info-value { font-size:.9rem; color:var(--text); font-weight:600; }
+.info-divider { width:1px; height:28px; background:var(--border); }
 .info-value.mbti { color:var(--primary); }
 
 /* ===== 兴趣爱好 ===== */
