@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jolin Zhou - Version A (Single Page, Compact Edu)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root{--primary:#6366f1;--primary-dark:#4f46e5;--primary-light:#818cf8;--secondary:#0ea5e9;--text:#1e293b;--text-light:#64748b;--text-lighter:#94a3b8;--bg:#fff;--bg-alt:#f8fafc;--bg-dark:#0f172a;--border:#e2e8f0;--radius:12px;--radius-card:16px;--radius-sm:8px;--shadow:0 4px 6px -1px rgba(0,0,0,.1);--shadow-lg:0 20px 25px -5px rgba(0,0,0,.1);--transition:all .3s cubic-bezier(.4,0,.2,1)}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth;scroll-padding-top:80px}
+        body{font-family:'Noto Sans SC',sans-serif;color:var(--text);background:var(--bg);line-height:1.7;overflow-x:hidden}
+        .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+        /* NAV */
+        .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:var(--transition)}
+        .navbar.scrolled{border-bottom-color:var(--border)}
+        .nav-container{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px}
+        .nav-logo{font-size:1.3rem;font-weight:700;color:var(--primary);text-decoration:none}
+        .nav-menu{display:flex;list-style:none;gap:4px}
+        .nav-link{text-decoration:none;color:var(--text-light);font-size:.92rem;font-weight:500;padding:8px 16px;border-radius:var(--radius-sm);transition:var(--transition)}
+        .nav-link:hover,.nav-link.active{color:var(--primary);background:rgba(99,102,241,.08)}
+
+        /* HERO */
+        .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;background:linear-gradient(135deg,#f0f4ff 0%,#faf5ff 50%,#fff1f2 100%)}
+        .hero-avatar{margin-bottom:32px}
+        .avatar-placeholder{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--secondary));display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 20px 40px rgba(99,102,241,.3)}
+        .avatar-placeholder i{font-size:3.5rem;color:#fff}
+        .hero-title{font-size:3rem;font-weight:700;line-height:1.2;margin-bottom:16px}
+        .highlight{background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero-subtitle{font-size:1.2rem;color:var(--text-light);margin-bottom:12px;letter-spacing:4px}
+        .hero-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:var(--text-lighter);margin-bottom:36px}
+
+        /* SECTIONS */
+        .section{padding:100px 0}
+        .section-alt{background:var(--bg-alt)}
+        .section-dark{background:var(--bg-dark)}
+        .section-title{font-size:2.2rem;font-weight:700;text-align:center;margin-bottom:12px}
+        .section-dark .section-title{color:#fff}
+        .section-divider{width:50px;height:4px;background:linear-gradient(135deg,var(--primary),var(--secondary));border-radius:2px;margin:0 auto 20px}
+        .sub-title{font-size:1.4rem;font-weight:600;margin:48px 0 24px}
+        .sub-title.light{color:#fff}
+
+        /* ABOUT */
+        .about-intro{max-width:680px;margin:0 auto 32px;text-align:left}
+        .about-lead{font-size:1.25rem;line-height:1.9;font-weight:500;margin-bottom:20px;position:relative;padding-left:24px}
+        .about-lead::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:2px;background:var(--primary)}
+        .about-intro p{color:var(--text-light);margin-bottom:14px;font-size:1rem;line-height:1.9}
+        .about-quote-block{max-width:600px;margin:0 auto 40px;text-align:center;padding:28px 32px;background:linear-gradient(135deg,rgba(99,102,241,.04),rgba(139,92,246,.04));border-radius:var(--radius-card);position:relative}
+        .quote-mark{font-family:'Playfair Display',serif;font-size:3rem;line-height:1;color:var(--primary);opacity:.2;position:absolute}
+        .quote-mark:first-child{top:8px;left:16px}
+        .quote-mark.end{bottom:0;right:16px}
+        .about-quote-block p{font-family:'Playfair Display',serif;font-style:italic;color:var(--primary);font-size:1.2rem;margin:0;position:relative;z-index:1}
+        .personal-info{display:flex;justify-content:center;margin-bottom:48px}
+        .info-card{display:flex;align-items:center;padding:16px 32px;border-radius:var(--radius);background:#fff;border:1px solid var(--border);box-shadow:0 2px 12px rgba(0,0,0,.04)}
+        .info-item{display:flex;align-items:center;gap:10px;padding:0 24px}
+        .info-label{font-size:.7rem;color:var(--text-lighter);text-transform:uppercase;letter-spacing:1px}
+        .info-value{font-size:.9rem;font-weight:600}
+        .info-value.mbti{color:var(--primary)}
+
+        /* KEYWORDS */
+        .keywords-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;perspective:1000px}
+        .flip-card{height:260px;cursor:pointer}
+        .flip-card-inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+        .flip-card:hover .flip-card-inner{transform:rotateY(180deg)}
+        .flip-card-front,.flip-card-back{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:var(--radius-card);overflow:hidden;border:1px solid var(--border)}
+        .flip-card-front{background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;visibility:visible}
+        .flip-card:hover .flip-card-front{visibility:hidden;transition-delay:.35s}
+        .card-illustration{position:absolute;top:0;left:0;width:100%;height:100%;color:var(--card-accent);opacity:.5}
+        .card-number{position:absolute;top:16px;left:20px;font-size:2.5rem;font-weight:800;color:var(--card-accent);opacity:.07;line-height:1}
+        .card-front-content{position:relative;z-index:2;text-align:center;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);padding:20px 28px;border-radius:var(--radius);box-shadow:0 2px 12px rgba(0,0,0,.04)}
+        .card-front-content h3{font-size:1.5rem;font-weight:700;margin-bottom:4px}
+        .card-en{font-family:'Playfair Display',serif;font-style:italic;font-size:.9rem;color:var(--card-accent)}
+        .flip-card-back{transform:rotateY(180deg);background:linear-gradient(135deg,var(--card-accent),color-mix(in srgb,var(--card-accent) 80%,#000));display:flex;align-items:center;justify-content:center;padding:32px 28px;visibility:hidden}
+        .flip-card:hover .flip-card-back{visibility:visible;transition-delay:.35s}
+        .flip-card-back p{color:#fff;font-size:.95rem;line-height:1.8;text-align:center}
+
+        /* HOBBIES */
+        .hobbies-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+        .hobby-card{background:#fff;padding:28px 24px;border-radius:var(--radius-card);text-align:center;border:1px solid var(--border);transition:var(--transition)}
+        .hobby-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--primary-light)}
+        .hobby-icon{width:56px;height:56px;border-radius:var(--radius);background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(14,165,233,.1));display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+        .hobby-icon i{font-size:1.3rem;color:var(--primary)}
+        .hobby-card h3{font-size:1.1rem;margin-bottom:10px}
+        .hobby-card p{font-size:.88rem;color:var(--text-light);line-height:1.7}
+
+        /* FILMSTRIP */
+        .filmstrip-wrapper{position:relative;padding:0 0 60px;overflow:hidden}
+        .filmstrip-track{display:flex;gap:20px;padding:20px 60px;overflow-x:auto;scrollbar-width:none}
+        .filmstrip-track::-webkit-scrollbar{display:none}
+        .film-item{flex:0 0 300px;height:220px;border-radius:var(--radius);position:relative;overflow:hidden;transition:var(--transition);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+        .film-item:hover{transform:scale(1.05);z-index:2}
+        .film-img{width:100%;height:100%;background-size:cover;background-position:center;transition:var(--transition)}
+        .film-item:hover .film-img{transform:scale(1.1)}
+        .film-number{position:absolute;bottom:12px;right:16px;font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:rgba(255,255,255,.3)}
+
+        /* PETS */
+        .pets-section{margin-top:60px}
+        .pet-mega-card{max-width:900px;margin:0 auto 40px;border-radius:var(--radius-card);overflow:hidden;background:#fff;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.06);position:relative}
+        .pet-mega-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#c4b5fd,#a78bfa,#818cf8)}
+        .pet-mega-header{display:flex;align-items:center;gap:14px;padding:18px 24px;border-bottom:1px solid var(--border)}
+        .pet-mega-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#f5f3ff,#fdf2f8);display:flex;align-items:center;justify-content:center}
+        .pet-mega-avatar i{font-size:1.1rem;color:var(--primary)}
+        .pet-mega-name{font-size:1.15rem;font-weight:700}
+        .pet-mega-tag{font-family:'Playfair Display',serif;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-lighter)}
+        .pet-mega-scroll{overflow:hidden;mask-image:linear-gradient(to right,transparent,black 4%,black 96%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,black 4%,black 96%,transparent);padding:12px 0 8px}
+        .pet-scroll-inner{display:flex;gap:16px;width:max-content;animation:petScroll 30s linear infinite}
+        .pet-scroll-inner:hover{animation-play-state:paused}
+        .pet-scroll-img{flex:0 0 260px;height:180px;border-radius:var(--radius);object-fit:cover}
+        @keyframes petScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        /* WORLD MAP placeholder */
+        .worldmap-section{margin-top:60px;padding-bottom:20px}
+        .worldmap-subtitle{text-align:center;color:rgba(255,255,255,.4);font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;margin-top:-12px;margin-bottom:32px}
+        .worldmap-container{position:relative;max-width:1000px;margin:0 auto;border-radius:var(--radius-card);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);background:#0a0e27;padding:60px;text-align:center;color:rgba(255,255,255,.3);font-size:1.2rem}
+        .worldmap-hint{text-align:center;color:rgba(255,255,255,.25);font-size:.82rem;margin-top:16px}
+
+        /* ===== EDUCATION - COMPACT TAB VERSION ===== */
+        .timeline{position:relative;padding-left:40px;max-width:800px;margin:0 auto}
+        .timeline::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--primary),var(--secondary))}
+        .timeline-item{position:relative;margin-bottom:36px}
+        .timeline-item:last-child{margin-bottom:0}
+        .timeline-dot{position:absolute;left:-33px;top:8px;width:14px;height:14px;border-radius:50%;background:var(--primary);border:3px solid #fff;box-shadow:0 0 0 3px var(--primary-light)}
+        .timeline-content{background:#fff;padding:24px 28px;border-radius:var(--radius-card);border:1px solid var(--border);transition:var(--transition)}
+        .timeline-content:hover{box-shadow:var(--shadow);border-color:var(--primary-light)}
+        .timeline-date{display:inline-block;font-size:.82rem;font-weight:600;color:var(--primary);background:rgba(99,102,241,.08);padding:4px 12px;border-radius:var(--radius-sm);margin-bottom:10px}
+        .timeline-content h3{font-size:1.1rem;margin-bottom:2px}
+        .timeline-content h4{font-size:.92rem;color:var(--text-light);font-weight:400;margin-bottom:4px}
+        .timeline-major{font-style:italic;color:var(--primary);font-weight:500}
+        .timeline-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+        .tag{font-size:.78rem;padding:4px 10px;border-radius:var(--radius-sm);background:var(--bg-alt);color:var(--text-light);border:1px solid var(--border)}
+
+        /* Academic Statement */
+        .edu-statement{max-width:640px;margin:0 auto 40px;padding:32px 0 32px 28px;border-left:2px solid rgba(99,102,241,.3);position:relative}
+        .edu-statement::before{content:'';position:absolute;left:-1px;top:0;width:2px;height:40px;background:var(--primary)}
+        .edu-statement p{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text);line-height:2}
+        .edu-statement p em{font-style:italic;color:var(--primary);font-weight:500}
+
+        /* ===== TAB SYSTEM for 01-04 ===== */
+        .edu-tabs{max-width:800px;margin:0 auto}
+        .edu-tab-nav{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:32px}
+        .edu-tab-btn{
+            flex:1;padding:14px 20px;background:none;border:none;border-bottom:2px solid transparent;
+            margin-bottom:-2px;cursor:pointer;font-size:.88rem;font-weight:600;color:var(--text-lighter);
+            transition:var(--transition);font-family:'Noto Sans SC',sans-serif;
+        }
+        .edu-tab-btn:hover{color:var(--text)}
+        .edu-tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}
+        .edu-tab-btn .tab-num{font-size:.7rem;color:var(--text-lighter);margin-right:6px;font-weight:400}
+        .edu-tab-btn.active .tab-num{color:var(--primary)}
+
+        .edu-tab-panel{display:none;animation:tabFade .4s ease}
+        .edu-tab-panel.active{display:block}
+        @keyframes tabFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+        /* Tab 01: Direction cards - compact 2x2 */
+        .tab-dir-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        .tab-dir-card{padding:20px;border-radius:var(--radius-card);border:1px solid var(--border);transition:var(--transition);position:relative;overflow:hidden}
+        .tab-dir-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--dir-color);opacity:0;transition:var(--transition)}
+        .tab-dir-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+        .tab-dir-card:hover::before{opacity:1}
+        .tab-dir-card h4{font-size:1.1rem;font-weight:700;margin-bottom:6px}
+        .tab-dir-card .keywords{font-size:.75rem;color:var(--dir-color);font-weight:500;margin-bottom:8px}
+        .tab-dir-card p{font-size:.85rem;color:var(--text-light);line-height:1.6}
+
+        /* Tab 02: Tag clouds - compact */
+        .tab-field{margin-bottom:20px}
+        .tab-field:last-child{margin-bottom:0}
+        .tab-field h4{font-size:.95rem;font-weight:600;margin-bottom:10px;color:var(--text)}
+        .tab-tag-cloud{display:flex;flex-wrap:wrap;gap:6px}
+        .tab-tag-cloud span{padding:5px 12px;border-radius:var(--radius-sm);font-size:.78rem;font-weight:500;background:rgba(99,102,241,.06);color:var(--primary);border:1px solid rgba(99,102,241,.12);transition:var(--transition)}
+        .tab-tag-cloud span:hover{background:rgba(99,102,241,.12)}
+
+        /* Tab 03: Research - compact list */
+        .tab-research-item{padding:20px 0;border-bottom:1px solid var(--border)}
+        .tab-research-item:last-child{border:none}
+        .tab-research-item .label{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);font-weight:600;margin-bottom:6px}
+        .tab-research-item h4{font-size:1rem;font-weight:700;margin-bottom:6px;line-height:1.4}
+        .tab-research-item p{font-size:.85rem;color:var(--text-light);line-height:1.6;margin-bottom:8px}
+        .tab-research-item .kw{display:flex;flex-wrap:wrap;gap:4px}
+        .tab-research-item .kw span{font-size:.7rem;padding:3px 8px;border-radius:var(--radius-sm);background:rgba(99,102,241,.08);color:var(--primary)}
+
+        /* Tab 04: Methods - compact 3 col */
+        .tab-method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        .tab-method-card{padding:20px;border-radius:var(--radius-card);border:1px solid var(--border)}
+        .tab-method-card h4{font-size:1rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+        .tab-method-card h4 i{color:var(--primary);font-size:.85rem}
+        .tab-method-card ul{list-style:none;padding:0}
+        .tab-method-card li{font-size:.82rem;color:var(--text-light);padding:3px 0 3px 14px;position:relative;line-height:1.5}
+        .tab-method-card li::before{content:'';position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--primary);opacity:.4}
+
+        /* Tab 05: Beyond */
+        .tab-beyond-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        .tab-beyond-card{padding:20px;border-radius:var(--radius-card);border:1px solid var(--border);border-left:3px solid var(--primary);transition:var(--transition)}
+        .tab-beyond-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+        .tab-beyond-card h4{font-size:1rem;font-weight:700;margin-bottom:6px}
+        .tab-beyond-card p{font-size:.85rem;color:var(--text-light);line-height:1.6}
+
+        /* WORK */
+        .work-entry{max-width:800px;margin:0 auto;background:#fff;border-radius:var(--radius-card);border:1px solid var(--border);overflow:hidden;transition:var(--transition)}
+        .work-entry:hover{box-shadow:var(--shadow-lg)}
+        .work-header{display:flex;gap:24px;padding:32px 32px 0;align-items:flex-start}
+        .work-logo{width:56px;height:56px;border-radius:var(--radius);background:linear-gradient(135deg,var(--primary),var(--secondary));display:flex;align-items:center;justify-content:center}
+        .work-logo i{font-size:1.3rem;color:#fff}
+        .work-info h3{font-size:1.2rem;margin-bottom:4px}
+        .work-meta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+        .work-position{font-size:.9rem;color:var(--text-light)}
+        .work-date{font-size:.85rem;color:var(--primary);font-weight:500}
+        .work-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+        .work-desc{padding:20px 32px}
+        .work-desc p{font-size:.92rem;color:var(--text-light)}
+        .work-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:0 2px 2px}
+        .work-gallery-item{height:160px;background-size:cover;background-position:center;border-radius:4px;transition:var(--transition);cursor:pointer}
+        .work-gallery-item:hover{filter:brightness(1.1)}
+
+        /* CONTACT */
+        .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:800px;margin:0 auto}
+        .contact-item{text-align:center;padding:32px 20px;border-radius:var(--radius-card);border:1px solid var(--border);transition:var(--transition)}
+        .contact-item:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--primary-light)}
+        .contact-icon{width:56px;height:56px;border-radius:var(--radius);background:linear-gradient(135deg,var(--primary),var(--secondary));display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+        .contact-icon i{font-size:1.3rem;color:#fff}
+        .contact-item h3{font-size:1.1rem;margin-bottom:8px}
+        .contact-item p{font-size:.88rem;color:var(--text-light);margin-bottom:2px}
+        .contact-link{font-size:.88rem;color:var(--primary);text-decoration:none;font-weight:500}
+        .contact-link:hover{text-decoration:underline}
+
+        /* FOOTER */
+        .footer{background:var(--bg-dark);color:var(--text-lighter);text-align:center;padding:32px 24px;font-size:.9rem}
+
+        /* RESPONSIVE */
+        @media(max-width:768px){
+            .keywords-grid,.tab-dir-grid,.tab-beyond-grid{grid-template-columns:1fr}
+            .tab-method-grid{grid-template-columns:1fr}
+            .contact-grid{grid-template-columns:1fr;max-width:400px}
+            .edu-tab-nav{flex-wrap:wrap}
+            .edu-tab-btn{flex:none;width:50%}
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">你好90</a>
+            <ul class="nav-menu">
+                <li><a href="#about" class="nav-link">我</a></li>
+                <li><a href="#life" class="nav-link">我的生活</a></li>
+                <li><a href="#education" class="nav-link">我的教育</a></li>
+                <li><a href="#work" class="nav-link">我的工作</a></li>
+                <li><a href="#contact" class="nav-link">联系我</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="hero-avatar"><div class="avatar-placeholder"><i class="fas fa-user"></i></div></div>
+        <h1 class="hero-title">你好，我是 <span class="highlight">Jolin</span></h1>
+        <p class="hero-subtitle">自洽｜真诚｜勇敢</p>
+        <p class="hero-quote">"The World is Wide Enough, for both you and me"</p>
+    </section>
+
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">我</h2><div class="section-divider"></div>
+            <div class="about-intro">
+                <p class="about-lead">我是 Jolin，一个正在学习如何独立生活的大人。从本科到硕士，从国内到国外，我在不同的城市之间移动，也在不同的身份之间切换。</p>
+                <p>我学习经济学，也对社会、政策以及人与人之间的关系保持好奇。比起给自己定义一个固定的身份，我更喜欢不断尝试新的事情，在不同的城市生活、旅行、学习和认识这个世界。</p>
+                <p>我相信，自由并不意味着永远向前，而是拥有选择停下来、重新开始，以及按照自己喜欢的方式生活的能力。</p>
+                <p>我希望以后可以去更多地方看看。不是匆匆打卡，而是真正住下来，走进街道、市场、咖啡馆和普通人的日常，像当地人一样生活一段时间。</p>
+            </div>
+            <div class="about-quote-block"><span class="quote-mark">&ldquo;</span><p>The world is wide enough, for both you and me.</p><span class="quote-mark end">&rdquo;</span></div>
+            <div class="personal-info"><div class="info-card">
+                <div class="info-item"><span class="info-label">出生</span><span class="info-value">2005.08</span></div>
+                <div class="info-item"><span class="info-label">星座</span><span class="info-value">处女座</span></div>
+                <div class="info-item"><span class="info-label">MBTI</span><span class="info-value mbti">INTJ</span></div>
+                <div class="info-item"><span class="info-label">坐标</span><span class="info-value">爱丁堡</span></div>
+            </div></div>
+            <h3 class="sub-title">我是谁</h3>
+            <div class="keywords-grid">
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front" style="--card-accent:#6366f1"><svg class="card-illustration" viewBox="0 0 200 200"><circle cx="100" cy="70" r="22" stroke="currentColor" stroke-width="1.5" opacity=".3"/><path d="M60 140C60 110,80 95,100 95C120 95,140 110,140 140" stroke="currentColor" stroke-width="1.5" opacity=".3"/></svg><div class="card-number">01</div><div class="card-front-content"><h3>自治</h3><span class="card-en">Independent</span></div></div><div class="flip-card-back" style="--card-accent:#6366f1"><p>习惯自己做决定，也愿意承担选择之后的结果。</p></div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front" style="--card-accent:#8b5cf6"><svg class="card-illustration" viewBox="0 0 200 200"><circle cx="85" cy="80" r="30" stroke="currentColor" stroke-width="1.5" opacity=".3"/><line x1="107" y1="102" x2="130" y2="130" stroke="currentColor" stroke-width="1.5" opacity=".3"/></svg><div class="card-number">02</div><div class="card-front-content"><h3>好奇</h3><span class="card-en">Curious</span></div></div><div class="flip-card-back" style="--card-accent:#8b5cf6"><p>对经济、社会、城市、文化以及人与人的关系保持兴趣。</p></div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front" style="--card-accent:#0ea5e9"><svg class="card-illustration" viewBox="0 0 200 200"><path d="M40 150L70 100L90 120L120 70L160 150" stroke="currentColor" stroke-width="1.5" opacity=".3" fill="none"/></svg><div class="card-number">03</div><div class="card-front-content"><h3>探索</h3><span class="card-en">Explore</span></div></div><div class="flip-card-back" style="--card-accent:#0ea5e9"><p>喜欢旅行，也喜欢真正走进一个地方。</p></div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front" style="--card-accent:#f59e0b"><svg class="card-illustration" viewBox="0 0 200 200"><path d="M100 140C100 140,55 110,55 80C55 60,72 50,85 55C92 58,97 65,100 72C103 65,108 58,115 55C128 50,145 60,145 80C145 110,100 140,100 140Z" stroke="currentColor" stroke-width="1.5" opacity=".3" fill="none"/></svg><div class="card-number">04</div><div class="card-front-content"><h3>真诚</h3><span class="card-en">Sincere</span></div></div><div class="flip-card-back" style="--card-accent:#f59e0b"><p>希望和世界建立真实的连接。</p></div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front" style="--card-accent:#10b981"><svg class="card-illustration" viewBox="0 0 200 200"><circle cx="100" cy="100" r="45" stroke="currentColor" stroke-width="1.5" opacity=".25"/><circle cx="100" cy="100" r="25" stroke="currentColor" stroke-width="1" opacity=".2"/><circle cx="100" cy="100" r="5" fill="currentColor" opacity=".2"/></svg><div class="card-number">05</div><div class="card-front-content"><h3>自洽</h3><span class="card-en">Authentic</span></div></div><div class="flip-card-back" style="--card-accent:#10b981"><p>不在意标准答案，更在意答案是否属于自己。</p></div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front" style="--card-accent:#ef4444"><svg class="card-illustration" viewBox="0 0 200 200"><path d="M100 40L100 160" stroke="currentColor" stroke-width="1.5" opacity=".2"/><path d="M100 40L75 75L100 65L125 75Z" stroke="currentColor" stroke-width="1.5" opacity=".3" fill="none"/></svg><div class="card-number">06</div><div class="card-front-content"><h3>勇敢</h3><span class="card-en">Brave</span></div></div><div class="flip-card-back" style="--card-accent:#ef4444"><p>愿意走出熟悉的环境，也愿意重新开始。</p></div></div></div>
+            </div>
+            <h3 class="sub-title">兴趣爱好</h3>
+            <div class="hobbies-grid">
+                <div class="hobby-card"><div class="hobby-icon"><i class="fas fa-plane"></i></div><h3>旅游</h3><p>至今旅行过40+国家<br>地图加载30%</p></div>
+                <div class="hobby-card"><div class="hobby-icon"><i class="fas fa-music"></i></div><h3>音乐</h3><p>钢琴学习8年<br>喜欢R&B</p></div>
+                <div class="hobby-card"><div class="hobby-icon"><i class="fas fa-theater-masks"></i></div><h3>音乐剧</h3><p>Hamilton<br>用音乐讲述故事</p></div>
+                <div class="hobby-card"><div class="hobby-icon"><i class="fas fa-dumbbell"></i></div><h3>健身</h3><p>健身3年+<br>Lagree · 游泳</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark" id="life">
+        <div class="container"><h2 class="section-title">我的生活</h2><div class="section-divider"></div></div>
+        <div class="filmstrip-wrapper"><div class="filmstrip-track">
+            <div class="film-item"><div class="film-img" style="background:linear-gradient(135deg,#667eea,#764ba2)"></div><div class="film-number">01</div></div>
+            <div class="film-item"><div class="film-img" style="background:linear-gradient(135deg,#f093fb,#f5576c)"></div><div class="film-number">02</div></div>
+            <div class="film-item"><div class="film-img" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"></div><div class="film-number">03</div></div>
+            <div class="film-item"><div class="film-img" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"></div><div class="film-number">04</div></div>
+            <div class="film-item"><div class="film-img" style="background:linear-gradient(135deg,#fa709a,#fee140)"></div><div class="film-number">05</div></div>
+        </div></div>
+        <div class="pets-section"><div class="container"><h3 class="sub-title light">我的宠物</h3></div>
+            <div class="pet-mega-card"><div class="pet-mega-header"><div class="pet-mega-avatar"><i class="fas fa-cat"></i></div><div><div class="pet-mega-name">麻将</div><div class="pet-mega-tag">CAT</div></div></div><div class="pet-mega-scroll"><div class="pet-scroll-inner"><img class="pet-scroll-img" src="images/cat/cat1.JPG"><img class="pet-scroll-img" src="images/cat/cat2.jpg"><img class="pet-scroll-img" src="images/cat/cat3.JPG"><img class="pet-scroll-img" src="images/cat/cat4.JPG"><img class="pet-scroll-img" src="images/cat/cat5.JPG"><img class="pet-scroll-img" src="images/cat/cat6.JPG"><img class="pet-scroll-img" src="images/cat/cat7.JPG"><img class="pet-scroll-img" src="images/cat/cat8.JPG"><img class="pet-scroll-img" src="images/cat/cat1.JPG"><img class="pet-scroll-img" src="images/cat/cat2.jpg"><img class="pet-scroll-img" src="images/cat/cat3.JPG"><img class="pet-scroll-img" src="images/cat/cat4.JPG"><img class="pet-scroll-img" src="images/cat/cat5.JPG"><img class="pet-scroll-img" src="images/cat/cat6.JPG"><img class="pet-scroll-img" src="images/cat/cat7.JPG"><img class="pet-scroll-img" src="images/cat/cat8.JPG"></div></div></div>
+            <div class="pet-mega-card" style="background:#111;border-color:#222"><div class="pet-mega-header" style="border-color:#222"><div class="pet-mega-avatar" style="background:#1a1a1a"><i class="fas fa-dog" style="color:#888"></i></div><div><div class="pet-mega-name" style="color:#eee">Samuel</div><div class="pet-mega-tag" style="color:rgba(255,255,255,.25)">DOG</div></div></div><div class="pet-mega-scroll"><div class="pet-scroll-inner"><img class="pet-scroll-img" src="images/dog/dog1.JPG" style="filter:grayscale(100%) brightness(.65)"><img class="pet-scroll-img" src="images/dog/dog2.JPG" style="filter:grayscale(100%) brightness(.65)"><img class="pet-scroll-img" src="images/dog/dog3.JPG" style="filter:grayscale(100%) brightness(.65)"><img class="pet-scroll-img" src="images/dog/dog4.JPG" style="filter:grayscale(100%) brightness(.65)"><img class="pet-scroll-img" src="images/dog/dog5.JPG" style="filter:grayscale(100%) brightness(.65)"><img class="pet-scroll-img" src="images/dog/dog6.JPG" style="filter:grayscale(100%) brightness(.65)"><img class="pet-scroll-img" src="images/dog/dog1.JPG" style="filter:grayscale(100%) brightness(.65)"><img class="pet-scroll-img" src="images/dog/dog2.JPG" style="filter:grayscale(100%) brightness(.65)"><img class="pet-scroll-img" src="images/dog/dog3.JPG" style="filter:grayscale(100%) brightness(.65)"><img class="pet-scroll-img" src="images/dog/dog4.JPG" style="filter:grayscale(100%) brightness(.65)"><img class="pet-scroll-img" src="images/dog/dog5.JPG" style="filter:grayscale(100%) brightness(.65)"><img class="pet-scroll-img" src="images/dog/dog6.JPG" style="filter:grayscale(100%) brightness(.65)"></div></div></div>
+        </div>
+        <div class="worldmap-section"><div class="container"><h3 class="sub-title light">90的世界地图</h3><p class="worldmap-subtitle">人的本质是流浪...</p></div><div class="worldmap-container">🗺️ World Map (28 destinations)</div><p class="worldmap-hint">点击点亮的城市，查看旅行记忆</p></div>
+    </section>
+
+    <!-- ===== EDUCATION WITH TABS ===== -->
+    <section class="section" id="education">
+        <div class="container">
+            <h2 class="section-title">我的教育</h2><div class="section-divider"></div>
+            <div class="timeline">
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">2017 - 2020</div><h3>杭州市公益中学</h3><h4>初中</h4></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">2020 - 2023</div><h3>杭州外国语学校</h3><h4>高中</h4><div class="timeline-tags"><span class="tag">IGCSE</span><span class="tag">Alevel</span></div><p style="font-size:.88rem;color:var(--text-light);margin-top:8px">课程：数学｜高等数学｜物理｜化学｜生物｜经济</p></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">2022 - 2027</div><h3>爱丁堡大学</h3><h4>University of Edinburgh</h4><h4 class="timeline-major">Social Policy and Economics（MA Hons）</h4><div class="timeline-tags"><span class="tag">宏观经济</span><span class="tag">微观经济</span><span class="tag">计量经济</span></div></div></div>
+            </div>
+
+            <!-- Academic Statement -->
+            <div class="edu-statement"><p>My academic journey sits at the intersection of <em>economics</em>, <em>social policy</em> and <em>sociology</em>. Through my studies, I have developed a particular interest in how institutions and public policies shape people's opportunities, choices and everyday lives.</p></div>
+
+            <!-- TAB NAVIGATION for 01-05 -->
+            <div class="edu-tabs">
+                <div class="edu-tab-nav">
+                    <button class="edu-tab-btn active" data-tab="tab1"><span class="tab-num">01</span>学习方向</button>
+                    <button class="edu-tab-btn" data-tab="tab2"><span class="tab-num">02</span>学术领域</button>
+                    <button class="edu-tab-btn" data-tab="tab3"><span class="tab-num">03</span>研究项目</button>
+                    <button class="edu-tab-btn" data-tab="tab4"><span class="tab-num">04</span>研究方法</button>
+                    <button class="edu-tab-btn" data-tab="tab5"><span class="tab-num">05</span>课堂之外</button>
+                </div>
+
+                <!-- Tab 01 -->
+                <div class="edu-tab-panel active" id="tab1">
+                    <div class="tab-dir-grid">
+                        <div class="tab-dir-card" style="--dir-color:#6366f1"><h4>Economics</h4><div class="keywords">Quantitative · Markets · Institutions · Macro</div><p>学习如何使用经济学理论和数据理解市场、激励与资源配置。</p></div>
+                        <div class="tab-dir-card" style="--dir-color:#0ea5e9"><h4>Social Policy</h4><div class="keywords">Welfare · Inequality · Social protection · Policy</div><p>关注社会政策如何影响不同群体的生活机会，以及国家如何回应社会风险。</p></div>
+                        <div class="tab-dir-card" style="--dir-color:#f59e0b"><h4>Gender & Equality</h4><div class="keywords">Gender inequality · Labour · Pay gap · Care</div><p>研究制度和政策如何塑造性别关系，以及形式平等为何不一定带来实际平等。</p></div>
+                        <div class="tab-dir-card" style="--dir-color:#10b981"><h4>Research</h4><div class="keywords">Econometrics · Design · Comparative Analysis</div><p>学习如何从现实问题提出研究问题，并使用定量和定性方法建立论证。</p></div>
+                    </div>
+                </div>
+
+                <!-- Tab 02 -->
+                <div class="edu-tab-panel" id="tab2">
+                    <div class="tab-field"><h4>Economics</h4><div class="tab-tag-cloud"><span>Microeconomics</span><span>Macroeconomics</span><span>Econometrics</span><span>Game Theory</span><span>Firms, Markets & Competition</span><span>Institutional Economics</span><span>Financial Crises</span><span>Labour Markets</span><span>Public Economics</span></div></div>
+                    <div class="tab-field"><h4>Social Policy</h4><div class="tab-tag-cloud"><span>Welfare States</span><span>Comparative Social Policy</span><span>Gender & Welfare</span><span>Inequality</span><span>Social Protection</span><span>Esping-Andersen Typology</span><span>CEE Welfare</span></div></div>
+                    <div class="tab-field"><h4>Gender & Equality</h4><div class="tab-tag-cloud"><span>Gender Relations</span><span>Gender Pay Gap</span><span>Women's Labour Participation</span><span>Care Responsibilities</span></div></div>
+                </div>
+
+                <!-- Tab 03 -->
+                <div class="edu-tab-panel" id="tab3">
+                    <div class="tab-research-item"><div class="label">Welfare & Gender</div><h4>The Impact of Welfare State Policies on Gender Pay Equality</h4><p>Explored how different welfare state models influence gender pay inequality and assessed the effectiveness of welfare policies in reducing gender disparities.</p><div class="kw"><span>Welfare States</span><span>Gender Equality</span><span>Gender Pay Gap</span><span>Labour Markets</span></div></div>
+                    <div class="tab-research-item"><div class="label">Comparative Policy</div><h4>Are CEE Countries a Distinctive Welfare Regime?</h4><p>A comparative examination of whether CEE countries constitute a distinctive welfare regime and how their institutional characteristics overlap with established typologies.</p><div class="kw"><span>CEE</span><span>Welfare Regimes</span><span>Comparative Social Policy</span><span>Institutional Analysis</span></div></div>
+                    <div class="tab-research-item"><div class="label">Policy Research</div><h4>Abortion Policy & Education Inequality</h4><p>Examined the policy implications of abortion legislation in Texas, and explored differences between Chinese and Western education systems.</p><div class="kw"><span>Abortion Policy</span><span>Education Policy</span><span>Institutional Structures</span><span>Inequality</span></div></div>
+                </div>
+
+                <!-- Tab 04 -->
+                <div class="edu-tab-panel" id="tab4">
+                    <div class="tab-method-grid">
+                        <div class="tab-method-card"><h4><i class="fas fa-chart-bar"></i> Quantitative</h4><ul><li>Econometrics</li><li>Statistical analysis</li><li>Regression-based analysis</li></ul></div>
+                        <div class="tab-method-card"><h4><i class="fas fa-file-alt"></i> Qualitative</h4><ul><li>Policy analysis</li><li>Comparative case studies</li><li>Literature review</li></ul></div>
+                        <div class="tab-method-card"><h4><i class="fas fa-drafting-compass"></i> Research Design</h4><ul><li>Research questions</li><li>Conceptual frameworks</li><li>Validity & reliability</li><li>Ethical considerations</li></ul></div>
+                    </div>
+                </div>
+
+                <!-- Tab 05 -->
+                <div class="edu-tab-panel" id="tab5">
+                    <p style="font-size:.95rem;color:var(--text-light);font-style:italic;margin-bottom:20px">University has taught me more than economic models and policy theories.</p>
+                    <div class="tab-beyond-grid">
+                        <div class="tab-beyond-card"><h4>Think structurally</h4><p>从个人经历背后的制度和结构出发思考问题。</p></div>
+                        <div class="tab-beyond-card"><h4>Question assumptions</h4><p>不再只接受现成的 classification，而会问它为什么成立。</p></div>
+                        <div class="tab-beyond-card"><h4>Connect disciplines</h4><p>经济学关注 incentives 和 markets，社会政策关注 institutions 和 inequality。</p></div>
+                        <div class="tab-beyond-card"><h4>Turn curiosity into research</h4><p>从"这个问题很有意思"到把它变成可研究、可验证的问题。</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt" id="work">
+        <div class="container">
+            <h2 class="section-title">我的工作</h2><div class="section-divider"></div>
+            <div class="work-entry">
+                <div class="work-header"><div class="work-logo"><i class="fas fa-briefcase"></i></div><div class="work-info"><h3>阿里巴巴 · 钉钉</h3><div class="work-meta"><span class="work-position">客发行业团队-金融&健康&产投&出海-金融行业</span><span class="work-date">2026.06 - 2026.09</span></div><div class="work-tags"><span class="tag">金融</span><span class="tag">健康</span><span class="tag">产投</span><span class="tag">出海</span></div></div></div>
+                <div class="work-desc"><p>工作内容待补充...</p></div>
+                <div class="work-gallery"><div class="work-gallery-item" style="background:linear-gradient(135deg,#667eea,#764ba2)"></div><div class="work-gallery-item" style="background:linear-gradient(135deg,#f093fb,#f5576c)"></div><div class="work-gallery-item" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title">联系90</h2><div class="section-divider"></div>
+            <p style="text-align:center;color:var(--text-light);margin-bottom:40px">期待与你的交流</p>
+            <div class="contact-grid">
+                <div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><h3>邮箱</h3><p>Jolin_ZhouZX@outlook.com</p><p>ZhouZX_Jolin@163.com</p></div>
+                <div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><h3>电话</h3><p>+86 19143593508</p><p>+44 7949365290</p></div>
+                <div class="contact-item"><div class="contact-icon"><i class="fab fa-linkedin"></i></div><h3>LinkedIn</h3><a href="https://uk.linkedin.com/in/zixuan-zhou-21a9902b7" class="contact-link">查看我的 LinkedIn</a></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer"><div class="container"><p>&copy; 2025 你好90 · Jolin Zhou. All Rights Reserved.</p></div></footer>
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.edu-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.edu-tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.edu-tab-panel').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>
