@@ -110,7 +110,6 @@ document.querySelectorAll('.edu-tab-btn').forEach(btn => {
 (function() {
     const bookPages = document.querySelectorAll('.book-content');
     const bookDots = document.querySelectorAll('.book-dot');
-    const bookChapterNum = document.getElementById('bookChapterNum');
     const bookFlipLayer = document.getElementById('bookFlipLayer');
     const bookPrev = document.getElementById('bookPrev');
     const bookNext = document.getElementById('bookNext');
@@ -119,7 +118,6 @@ document.querySelectorAll('.edu-tab-btn').forEach(btn => {
     let isAnimating = false;
 
     function updateBookUI() {
-        bookChapterNum.textContent = String(current).padStart(2, '0');
         bookDots.forEach(d => d.classList.toggle('active', +d.dataset.page === current));
         bookPrev.disabled = current === 1;
         bookNext.disabled = current === total;
@@ -132,7 +130,7 @@ document.querySelectorAll('.edu-tab-btn').forEach(btn => {
         // Create flip page
         const flipEl = document.createElement('div');
         flipEl.className = 'book-flip-page';
-        flipEl.style.background = '#fdfbf7';
+        flipEl.style.background = getComputedStyle(document.documentElement).getPropertyValue('--bg-alt').trim();
         bookFlipLayer.appendChild(flipEl);
 
         // Hide current content
