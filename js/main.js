@@ -1,3 +1,29 @@
+// ===== 页面切换系统 =====
+function showPage(pageId) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    // Show target
+    const target = document.getElementById('page-' + pageId);
+    if (target) target.classList.add('active');
+    // Update nav
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    const activeLink = document.querySelector('.nav-link[data-page="' + pageId + '"]');
+    if (activeLink) activeLink.classList.add('active');
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    // Close mobile menu
+    document.getElementById('navMenu').classList.remove('active');
+    // Re-observe fade-in elements in the new page
+    document.querySelectorAll('#page-' + pageId + ' .fade-in').forEach(el => {
+        el.classList.remove('visible');
+        observer.observe(el);
+    });
+    // Trigger map render if navigating to life page
+    if (pageId === 'life') {
+        loadWorldMap();
+    }
+}
+
 // ===== 导航栏 =====
 const navbar = document.getElementById('navbar');
 const navToggle = document.getElementById('navToggle');
@@ -6,25 +32,9 @@ const navLinks = document.querySelectorAll('.nav-link');
 
 window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 50);
-    updateActiveLink();
 });
 
 navToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
-navLinks.forEach(link => link.addEventListener('click', () => navMenu.classList.remove('active')));
-
-function updateActiveLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const scrollPos = window.scrollY + 100;
-    sections.forEach(section => {
-        const top = section.offsetTop, height = section.offsetHeight, id = section.getAttribute('id');
-        if (scrollPos >= top && scrollPos < top + height) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
-            });
-        }
-    });
-}
 
 // ===== 胶片拉片交互 =====
 const filmTrack = document.getElementById('filmstripTrack');

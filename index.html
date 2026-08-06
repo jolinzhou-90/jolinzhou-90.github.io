@@ -12,19 +12,22 @@
     <!-- 导航栏 -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#hero" class="nav-logo">你好90</a>
+            <a class="nav-logo" onclick="showPage('about')">你好90</a>
             <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#about" class="nav-link">我</a></li>
-                <li><a href="#life" class="nav-link">我的生活</a></li>
-                <li><a href="#education" class="nav-link">我的教育</a></li>
-                <li><a href="#work" class="nav-link">我的工作</a></li>
-                <li><a href="#contact" class="nav-link">联系我</a></li>
+                <li><a class="nav-link active" data-page="about" onclick="showPage('about')">我</a></li>
+                <li><a class="nav-link" data-page="life" onclick="showPage('life')">我的生活</a></li>
+                <li><a class="nav-link" data-page="education" onclick="showPage('education')">我的教育</a></li>
+                <li><a class="nav-link" data-page="work" onclick="showPage('work')">我的工作</a></li>
+                <li><a class="nav-link" data-page="contact" onclick="showPage('contact')">联系我</a></li>
             </ul>
         </div>
     </nav>
+
+    <!-- ===== PAGE: 我 ===== -->
+    <div class="page active" id="page-about">
 
     <!-- Hero -->
     <section class="hero" id="hero">
@@ -38,8 +41,8 @@
             <p class="hero-subtitle">自洽｜真诚｜勇敢</p>
             <p class="hero-quote">"The World is Wide Enough, for both you and me"</p>
             <div class="hero-buttons">
-                <a href="#about" class="btn btn-primary">了解更多</a>
-                <a href="#contact" class="btn btn-outline">联系90</a>
+                <a class="btn btn-primary" onclick="showPage('about')">了解更多</a>
+                <a class="btn btn-outline" onclick="showPage('contact')">联系90</a>
             </div>
         </div>
         <div class="scroll-indicator"><span></span></div>
@@ -265,6 +268,11 @@
         </div>
     </section>
 
+    </div><!-- /page-about -->
+
+    <!-- ===== PAGE: 我的生活 ===== -->
+    <div class="page" id="page-life">
+
     <!-- 我的生活 - 胶片拉片式横向滚动 -->
     <section class="section section-dark" id="life">
         <div class="container">
@@ -451,6 +459,11 @@
             <p class="worldmap-hint">点击点亮的城市，查看旅行记忆</p>
         </div>
     </section>
+
+    </div><!-- /page-life -->
+
+    <!-- ===== PAGE: 我的教育 ===== -->
+    <div class="page" id="page-education">
 
     <!-- 我的教育 -->
     <section class="section" id="education">
@@ -662,6 +675,11 @@
         </div>
     </section>
 
+    </div><!-- /page-education -->
+
+    <!-- ===== PAGE: 我的工作 ===== -->
+    <div class="page" id="page-work">
+
     <!-- 我的工作 -->
     <section class="section section-alt" id="work">
         <div class="container">
@@ -698,6 +716,11 @@
         </div>
     </section>
 
+    </div><!-- /page-work -->
+
+    <!-- ===== PAGE: 联系我 ===== -->
+    <div class="page" id="page-contact">
+
     <!-- 联系我 -->
     <section class="section" id="contact">
         <div class="container">
@@ -725,6 +748,8 @@
             </div>
         </div>
     </section>
+
+    </div><!-- /page-contact -->
 
     <!-- 页脚 -->
     <footer class="footer">
