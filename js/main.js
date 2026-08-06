@@ -96,6 +96,16 @@ document.querySelectorAll('.hobby-card, .timeline-item, .contact-item, .about-in
     observer.observe(el);
 });
 
+// ===== 教育板块 Tab 切换 =====
+document.querySelectorAll('.edu-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.edu-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.edu-tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+});
+
 // ===== 页面加载 =====
 window.addEventListener('load', () => {
     document.querySelector('.hero-content').classList.add('fade-in', 'visible');
