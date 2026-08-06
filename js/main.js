@@ -106,6 +106,71 @@ document.querySelectorAll('.edu-tab-btn').forEach(btn => {
     });
 });
 
+// ===== 书本翻页 =====
+(function() {
+    const bookPages = document.querySelectorAll('.book-content');
+    const bookDots = document.querySelectorAll('.book-dot');
+    const bookChapterNum = document.getElementById('bookChapterNum');
+    const bookFlipLayer = document.getElementById('bookFlipLayer');
+    const bookPrev = document.getElementById('bookPrev');
+    const bookNext = document.getElementById('bookNext');
+    const total = bookPages.length;
+    let current = 1;
+    let isAnimating = false;
+
+    function updateBookUI() {
+        bookChapterNum.textContent = String(current).padStart(2, '0');
+        bookDots.forEach(d => d.classList.toggle('active', +d.dataset.page === current));
+        bookPrev.disabled = current === 1;
+        bookNext.disabled = current === total;
+    }
+
+    function flipTo(page, direction) {
+        if (isAnimating || page === current || page < 1 || page > total) return;
+        isAnimating = true;
+
+        // Create flip page
+        const flipEl = document.createElement('div');
+        flipEl.className = 'book-flip-page';
+        flipEl.style.background = '#fdfbf7';
+        bookFlipLayer.appendChild(flipEl);
+
+        // Hide current content
+        bookPages.forEach(p => p.classList.remove('active'));
+
+        // Show new content after half animation
+        setTimeout(() => {
+            const target = document.querySelector('.book-content[data-page="' + page + '"]');
+            if (target) target.classList.add('active');
+            current = page;
+            updateBookUI();
+        }, 300);
+
+        // Animate
+        if (direction === 'forward') {
+            flipEl.classList.add('flip-forward');
+        } else {
+            flipEl.classList.add('flip-back');
+        }
+
+        setTimeout(() => {
+            bookFlipLayer.removeChild(flipEl);
+            isAnimating = false;
+        }, 650);
+    }
+
+    bookPrev.addEventListener('click', () => flipTo(current - 1, 'back'));
+    bookNext.addEventListener('click', () => flipTo(current + 1, 'forward'));
+    bookDots.forEach(d => {
+        d.addEventListener('click', () => {
+            const target = +d.dataset.page;
+            flipTo(target, target > current ? 'forward' : 'back');
+        });
+    });
+
+    updateBookUI();
+})();
+
 // ===== 页面加载 =====
 window.addEventListener('load', () => {
     document.querySelector('.hero-content').classList.add('fade-in', 'visible');
