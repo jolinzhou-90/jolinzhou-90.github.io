@@ -127,6 +127,9 @@ document.querySelectorAll('.edu-tab-btn').forEach(btn => {
         if (isAnimating || page === current || page < 1 || page > total) return;
         isAnimating = true;
 
+        const leftPage = document.querySelector('.book-page-left');
+        const rightPage = document.querySelector('.book-page-right');
+
         // Create flip page
         const flipEl = document.createElement('div');
         flipEl.className = 'book-flip-page';
@@ -136,13 +139,17 @@ document.querySelectorAll('.edu-tab-btn').forEach(btn => {
         // Hide current content
         bookPages.forEach(p => p.classList.remove('active'));
 
-        // Show new content after half animation
+        // Add shadow to underlying pages
+        if (leftPage) leftPage.classList.add('flip-shadow');
+        if (rightPage) rightPage.classList.add('flip-shadow');
+
+        // Show new content at midpoint of animation
         setTimeout(() => {
             const target = document.querySelector('.book-content[data-page="' + page + '"]');
             if (target) target.classList.add('active');
             current = page;
             updateBookUI();
-        }, 300);
+        }, 350);
 
         // Animate
         if (direction === 'forward') {
@@ -151,10 +158,13 @@ document.querySelectorAll('.edu-tab-btn').forEach(btn => {
             flipEl.classList.add('flip-back');
         }
 
+        // Clean up after animation
         setTimeout(() => {
             bookFlipLayer.removeChild(flipEl);
+            if (leftPage) leftPage.classList.remove('flip-shadow');
+            if (rightPage) rightPage.classList.remove('flip-shadow');
             isAnimating = false;
-        }, 650);
+        }, 750);
     }
 
     bookPrev.addEventListener('click', () => flipTo(current - 1, 'back'));
@@ -164,6 +174,17 @@ document.querySelectorAll('.edu-tab-btn').forEach(btn => {
             const target = +d.dataset.page;
             flipTo(target, target > current ? 'forward' : 'back');
         });
+    });
+
+    // 键盘左右键翻页
+    document.addEventListener('keydown', (e) => {
+        const bookWrapper = document.querySelector('.book-wrapper');
+        if (!bookWrapper) return;
+        const rect = bookWrapper.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight && rect.bottom > 0;
+        if (!inView) return;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); flipTo(current + 1, 'forward'); }
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); flipTo(current - 1, 'back'); }
     });
 
     updateBookUI();

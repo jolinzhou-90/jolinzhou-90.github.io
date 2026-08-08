@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 · 三种小王子风格</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{background:#eef0f4;padding:48px 20px}
+        h1{text-align:center;font-size:1.1rem;color:#64748b;font-weight:400;margin-bottom:8px}
+        .sub{text-align:center;font-size:.78rem;color:#94a3b8;margin-bottom:40px}
+        .grid{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+        .card{flex:1;min-width:300px;max-width:340px;border-radius:20px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.06)}
+        .card-top{height:380px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+        .card-bottom{padding:16px 20px;background:white}
+        .card-tag{font-size:.65rem;color:#94a3b8;letter-spacing:2px;margin-bottom:4px}
+        .card-name{font-size:.9rem;color:#1e293b;font-weight:500;margin-bottom:6px}
+        .card-desc{font-size:.72rem;color:#64748b;line-height:1.6}
+        .caption{text-align:center;margin-top:14px;font-family:'Playfair Display',serif;font-style:italic;font-size:.78rem;color:#888}
+
+        /* 线条动画 */
+        .ink{stroke-linecap:round;stroke-linejoin:round;fill:none;stroke-dasharray:500;stroke-dashoffset:500;animation:draw 2s cubic-bezier(.4,0,.2,1) forwards}
+        .i1{animation-delay:.06s}.i2{animation-delay:.14s}.i3{animation-delay:.22s}.i4{animation-delay:.32s}.i5{animation-delay:.42s}.i6{animation-delay:.52s}.i7{animation-delay:.64s}.i8{animation-delay:.76s}.i9{animation-delay:.88s}.i10{animation-delay:1s}.i11{animation-delay:1.12s}.i12{animation-delay:1.24s}.i13{animation-delay:1.36s}.i14{animation-delay:1.48s}
+        @keyframes draw{to{stroke-dashoffset:0}}
+    </style>
+</head>
+<body>
+<h1>Page 01 · 三种小王子风格</h1>
+<p class="sub">同一构图：左读书 · 右办公 · 无人物发型/表情</p>
+<div class="grid">
+
+<!-- ==================== A: 原版墨水+黄水彩 ==================== -->
+<div class="card">
+    <div class="card-top" style="background:white">
+        <svg viewBox="0 0 300 340" width="300" height="340">
+            <!-- 黄色水彩（直接显示） -->
+            <path d="M78 118Q76 112 80 109Q84 106 88 109Q92 106 94 112" fill="#f5d820" opacity=".7"/>
+            <path d="M78 142L78 168Q78 172 82 172L94 172Q98 172 98 168L98 142Z" fill="#f5d820" opacity=".7"/>
+            <path d="M84 142L88 145L92 142Z" fill="#f5d820" opacity=".7"/>
+            <path d="M198 118Q196 112 200 109Q204 106 208 109Q212 106 214 112" fill="#f5d820" opacity=".7"/>
+            <path d="M198 142L198 168Q198 172 202 172L214 172Q218 172 218 168L218 142Z" fill="#f5d820" opacity=".7"/>
+            <path d="M204 142L208 145L212 142Z" fill="#f5d820" opacity=".7"/>
+            <path d="M40 45L42 50L47 51L43 54L44 59L40 56L36 59L37 54L33 51L38 50Z" fill="#f5d820" opacity=".65"/>
+            <path d="M145 28L147 32L151 33L148 36L149 40L145 37L141 40L142 36L139 33L143 32Z" fill="#f5d820" opacity=".65"/>
+            <path d="M260 40L262 44L266 45L263 48L264 52L260 49L256 52L257 48L254 45L258 44Z" fill="#f5d820" opacity=".65"/>
+            <circle cx="272" cy="80" r="11" fill="#f5d820" opacity=".6"/>
+
+            <!-- 地面 -->
+            <path class="ink" d="M15 190Q80 185 150 188Q220 191 285 186" stroke="#2a2a2a" stroke-width=".8"/>
+
+            <!-- 左：书桌 -->
+            <path class="ink i1" d="M22 160L118 160" stroke="#2a2a2a" stroke-width=".7"/>
+            <path class="ink i1" d="M22 160L22 188" stroke="#2a2a2a" stroke-width=".7"/>
+            <path class="ink i2" d="M118 160L118 188" stroke="#2a2a2a" stroke-width=".7"/>
+            <path class="ink i2" d="M35 160L35 188" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i2" d="M105 160L105 188" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i3" d="M35 170L105 170" stroke="#2a2a2a" stroke-width=".4"/>
+            <path class="ink i3" d="M35 180L105 180" stroke="#2a2a2a" stroke-width=".4"/>
+            <path class="ink i4" d="M70 170L70 180" stroke="#2a2a2a" stroke-width=".4"/>
+            <circle class="ink i4" cx="52" cy="175" r="1.2" stroke="#2a2a2a"/>
+            <circle class="ink i4" cx="88" cy="175" r="1.2" stroke="#2a2a2a"/>
+            <!-- 桌上书堆 -->
+            <g class="ink i5" stroke="#2a2a2a">
+                <rect x="28" y="150" width="14" height="10" rx="1" stroke-width=".5"/>
+                <path d="M28 155L42 155" stroke-width=".3"/>
+                <rect x="30" y="144" width="12" height="6" rx="1" stroke-width=".5"/>
+            </g>
+            <!-- 台灯 -->
+            <g class="ink i6" stroke="#2a2a2a">
+                <path d="M100 160L100 146" stroke-width=".5"/>
+                <path d="M94 146L106 146" stroke-width=".5"/>
+                <path d="M96 146L96 140Q100 137 104 140L104 146" stroke-width=".5"/>
+            </g>
+            <!-- 椅子 -->
+            <g class="ink i3" stroke="#2a2a2a">
+                <path d="M62 188L62 168" stroke-width=".6"/>
+                <path d="M62 168L62 156" stroke-width=".5"/>
+                <path d="M62 156L70 156" stroke-width=".5"/>
+                <path d="M62 188L70 188" stroke-width=".5"/>
+                <path d="M70 188L70 178" stroke-width=".5"/>
+                <path d="M70 178L62 178" stroke-width=".5"/>
+            </g>
+            <!-- 读书小人 -->
+            <circle class="ink i4" cx="88" cy="125" r="10" stroke="#2a2a2a" stroke-width=".8"/>
+            <path class="ink i4" d="M78 118Q76 112 80 109Q84 106 88 109Q92 106 94 112" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i5" d="M86 135L86 142" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i5" d="M90 135L90 142" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i5" d="M78 142L78 168Q78 172 82 172L94 172Q98 172 98 168L98 142" stroke="#2a2a2a" stroke-width=".6"/>
+            <path class="ink i6" d="M78 158L98 158" stroke="#2a2a2a" stroke-width=".4"/>
+            <path class="ink i6" d="M84 142L88 145L92 142" stroke="#2a2a2a" stroke-width=".4"/>
+            <path class="ink i6" d="M78 148L70 160" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i6" d="M98 148L106 160" stroke="#2a2a2a" stroke-width=".5"/>
+            <circle class="ink i7" cx="69" cy="162" r="1.8" stroke="#2a2a2a"/>
+            <circle class="ink i7" cx="107" cy="162" r="1.8" stroke="#2a2a2a"/>
+            <!-- 手中书 -->
+            <g class="ink i7" stroke="#2a2a2a">
+                <path d="M62 164L70 168L86 168L94 164" stroke-width=".5"/>
+                <path d="M62 162L70 166L86 166L94 162" stroke-width=".5"/>
+                <path d="M70 166L70 168" stroke-width=".4"/>
+                <path d="M86 166L86 168" stroke-width=".4"/>
+                <path d="M66 164L74 165" stroke-width=".25"/>
+                <path d="M82 165L90 164" stroke-width=".25"/>
+            </g>
+            <path class="ink i7" d="M83 172L83 186" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i7" d="M93 172L93 186" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i8" d="M80 186L86 186" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i8" d="M90 186L96 186" stroke="#2a2a2a" stroke-width=".5"/>
+
+            <!-- 右：办公桌 -->
+            <path class="ink i1" d="M182 160L278 160" stroke="#2a2a2a" stroke-width=".7"/>
+            <path class="ink i1" d="M182 160L182 188" stroke="#2a2a2a" stroke-width=".7"/>
+            <path class="ink i2" d="M278 160L278 188" stroke="#2a2a2a" stroke-width=".7"/>
+            <path class="ink i2" d="M195 160L195 188" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i2" d="M265 160L265 188" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i3" d="M195 170L265 170" stroke="#2a2a2a" stroke-width=".4"/>
+            <path class="ink i3" d="M195 180L265 180" stroke="#2a2a2a" stroke-width=".4"/>
+            <path class="ink i4" d="M230 170L230 180" stroke="#2a2a2a" stroke-width=".4"/>
+            <circle class="ink i4" cx="212" cy="175" r="1.2" stroke="#2a2a2a"/>
+            <circle class="ink i4" cx="248" cy="175" r="1.2" stroke="#2a2a2a"/>
+            <!-- 电脑 -->
+            <g class="ink i5" stroke="#2a2a2a">
+                <rect x="210" y="134" width="32" height="22" rx="1.5" stroke-width=".6"/>
+                <path d="M226 156L226 160" stroke-width=".5"/>
+                <path d="M220 160L232 160" stroke-width=".5"/>
+                <path d="M214 140L238 140" stroke-width=".25" opacity=".5"/>
+                <path d="M214 144L234 144" stroke-width=".25" opacity=".5"/>
+                <path d="M214 148L236 148" stroke-width=".25" opacity=".5"/>
+            </g>
+            <!-- 咖啡杯 -->
+            <g class="ink i6" stroke="#2a2a2a">
+                <path d="M260 148L260 157Q260 159 262 159L268 159Q270 159 270 157L270 148Z" stroke-width=".5"/>
+                <path d="M270 151Q273 151 273 154Q273 157 270 157" stroke-width=".4"/>
+                <path d="M263 144Q264 140 263 137" stroke-width=".3" opacity=".4"/>
+                <path d="M266 143Q267 139 266 136" stroke-width=".3" opacity=".4"/>
+            </g>
+            <!-- 小盆栽 -->
+            <g class="ink i7" stroke="#2a2a2a">
+                <path d="M190 152L190 160L198 160L198 152" stroke-width=".5"/>
+                <path d="M194 152L194 146" stroke-width=".4"/>
+                <path d="M192 148Q194 144 196 148" stroke-width=".4"/>
+            </g>
+            <!-- 椅子 -->
+            <g class="ink i3" stroke="#2a2a2a">
+                <path d="M200 188L200 168" stroke-width=".6"/>
+                <path d="M200 168L200 156" stroke-width=".5"/>
+                <path d="M200 156L208 156" stroke-width=".5"/>
+                <path d="M200 188L208 188" stroke-width=".5"/>
+                <path d="M208 188L208 178" stroke-width=".5"/>
+                <path d="M208 178L200 178" stroke-width=".5"/>
+            </g>
+            <!-- 办公小人 -->
+            <circle class="ink i4" cx="208" cy="125" r="10" stroke="#2a2a2a" stroke-width=".8"/>
+            <path class="ink i4" d="M198 118Q196 112 200 109Q204 106 208 109Q212 106 214 112" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i5" d="M206 135L206 142" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i5" d="M210 135L210 142" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i5" d="M198 142L198 168Q198 172 202 172L214 172Q218 172 218 168L218 142" stroke="#2a2a2a" stroke-width=".6"/>
+            <path class="ink i6" d="M198 158L218 158" stroke="#2a2a2a" stroke-width=".4"/>
+            <path class="ink i6" d="M204 142L208 145L212 142" stroke="#2a2a2a" stroke-width=".4"/>
+            <path class="ink i6" d="M198 148L190 162" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i6" d="M218 148L226 162" stroke="#2a2a2a" stroke-width=".5"/>
+            <circle class="ink i7" cx="189" cy="164" r="1.8" stroke="#2a2a2a"/>
+            <circle class="ink i7" cx="227" cy="164" r="1.8" stroke="#2a2a2a"/>
+            <path class="ink i7" d="M203 172L203 186" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i7" d="M213 172L213 186" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i8" d="M200 186L206 186" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i8" d="M210 186L216 186" stroke="#2a2a2a" stroke-width=".5"/>
+
+            <!-- 中间虚线连接 -->
+            <path class="ink i9" d="M110 145Q150 130 190 145" stroke="#2a2a2a" stroke-width=".5" stroke-dasharray="3 4"/>
+            <g class="ink i10" stroke="#2a2a2a">
+                <path d="M146 132L148 136L152 137L149 140L150 144L146 141L142 144L143 140L140 137L144 136Z" stroke-width=".4"/>
+            </g>
+
+            <!-- 星星轮廓 -->
+            <path class="ink i8" d="M40 45L42 50L47 51L43 54L44 59L40 56L36 59L37 54L33 51L38 50Z" stroke="#2a2a2a" stroke-width=".5"/>
+            <path class="ink i9" d="M145 28L147 32L151 33L148 36L149 40L145 37L141 40L142 36L139 33L143 32Z" stroke="#2a2a2a" stroke-width=".4"/>
+            <path class="ink i10" d="M260 40L262 44L266 45L263 48L264 52L260 49L256 52L257 48L254 45L258 44Z" stroke="#2a2a2a" stroke-width=".5"/>
+            <!-- 太阳 -->
+            <circle class="ink i10" cx="272" cy="80" r="11" stroke="#2a2a2a" stroke-width=".6"/>
+            <!-- 带环行星 -->
+            <g>
+                <circle class="ink i11" cx="38" cy="88" r="7" stroke="#2a2a2a" stroke-width=".5"/>
+                <ellipse class="ink i11" cx="38" cy="88" rx="11" ry="2.5" stroke="#2a2a2a" stroke-width=".4" transform="rotate(-15 38 88)"/>
+            </g>
+        </svg>
+    </div>
+    <div class="card-bottom">
+        <div class="card-tag">STYLE A</div>
+        <div class="card-name">墨水线条 + 黄色水彩</div>
+        <div class="card-desc">白底，1px黑墨水线，黄色水彩直接填充（无动画）。无人物发型/表情细节。排线阴影。</div>
+    </div>
+    <div class="caption">The Little One Between Two Worlds</div>
+</div>
+
+<!-- ==================== B: 深蓝夜空版（参考图1） ==================== -->
+<div class="card">
+    <div class="card-top" style="background:#3d5a80">
+        <svg viewBox="0 0 300 340" width="300" height="340">
+            <!-- 黄色元素（直接显示） -->
+            <path d="M78 118Q76 112 80 109Q84 106 88 109Q92 106 94 112" fill="#e9c46a" opacity=".8"/>
+            <path d="M78 142L78 168Q78 172 82 172L94 172Q98 172 98 168L98 142Z" fill="#e9c46a" opacity=".8"/>
+            <path d="M84 142L88 145L92 142Z" fill="#e9c46a" opacity=".8"/>
+            <path d="M198 118Q196 112 200 109Q204 106 208 109Q212 106 214 112" fill="#e9c46a" opacity=".8"/>
+            <path d="M198 142L198 168Q198 172 202 172L214 172Q218 172 218 168L218 142Z" fill="#e9c46a" opacity=".8"/>
+            <path d="M204 142L208 145L212 142Z" fill="#e9c46a" opacity=".8"/>
+
+            <!-- 地面（粉紫色星球表面） -->
+            <ellipse cx="150" cy="240" rx="130" ry="100" fill="#c4956a" opacity=".35"/>
+            <path class="ink" d="M15 200Q80 192 150 196Q220 200 285 194" stroke="#e8ddd0" stroke-width=".8"/>
+            <!-- 星球表面纹理 -->
+            <path class="ink i2" d="M60 230Q80 220 100 228" stroke="#e8ddd0" stroke-width=".4" opacity=".3"/>
+            <path class="ink i3" d="M120 250Q150 240 180 248" stroke="#e8ddd0" stroke-width=".4" opacity=".3"/>
+            <path class="ink i4" d="M200 235Q220 225 240 232" stroke="#e8ddd0" stroke-width=".4" opacity=".3"/>
+            <path class="ink i5" d="M80 260Q110 250 140 258" stroke="#e8ddd0" stroke-width=".4" opacity=".25"/>
+            <path class="ink i6" d="M160 270Q190 260 220 268" stroke="#e8ddd0" stroke-width=".4" opacity=".25"/>
+
+            <!-- 左：书桌 -->
+            <path class="ink i1" d="M22 160L118 160" stroke="#e8ddd0" stroke-width=".7"/>
+            <path class="ink i1" d="M22 160L22 192" stroke="#e8ddd0" stroke-width=".7"/>
+            <path class="ink i2" d="M118 160L118 192" stroke="#e8ddd0" stroke-width=".7"/>
+            <path class="ink i2" d="M35 160L35 192" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i2" d="M105 160L105 192" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i3" d="M35 172L105 172" stroke="#e8ddd0" stroke-width=".4"/>
+            <path class="ink i3" d="M35 182L105 182" stroke="#e8ddd0" stroke-width=".4"/>
+            <path class="ink i4" d="M70 172L70 182" stroke="#e8ddd0" stroke-width=".4"/>
+            <!-- 桌上书 -->
+            <g class="ink i5" stroke="#e8ddd0">
+                <rect x="28" y="150" width="14" height="10" rx="1" stroke-width=".5"/>
+                <rect x="30" y="144" width="12" height="6" rx="1" stroke-width=".5"/>
+            </g>
+            <!-- 台灯 -->
+            <g class="ink i6" stroke="#e8ddd0">
+                <path d="M100 160L100 146" stroke-width=".5"/>
+                <path d="M94 146L106 146" stroke-width=".5"/>
+                <path d="M96 146L96 140Q100 137 104 140L104 146" stroke-width=".5"/>
+            </g>
+            <!-- 椅子 -->
+            <g class="ink i3" stroke="#e8ddd0">
+                <path d="M62 192L62 168" stroke-width=".6"/>
+                <path d="M62 168L62 156" stroke-width=".5"/>
+                <path d="M62 156L70 156" stroke-width=".5"/>
+                <path d="M62 192L70 192" stroke-width=".5"/>
+                <path d="M70 192L70 180" stroke-width=".5"/>
+                <path d="M70 180L62 180" stroke-width=".5"/>
+            </g>
+            <!-- 读书小人 -->
+            <circle class="ink i4" cx="88" cy="125" r="10" stroke="#e8ddd0" stroke-width=".8"/>
+            <path class="ink i4" d="M78 118Q76 112 80 109Q84 106 88 109Q92 106 94 112" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i5" d="M86 135L86 142" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i5" d="M90 135L90 142" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i5" d="M78 142L78 168Q78 172 82 172L94 172Q98 172 98 168L98 142" stroke="#e8ddd0" stroke-width=".6"/>
+            <path class="ink i6" d="M78 158L98 158" stroke="#e8ddd0" stroke-width=".4"/>
+            <path class="ink i6" d="M84 142L88 145L92 142" stroke="#e8ddd0" stroke-width=".4"/>
+            <path class="ink i6" d="M78 148L70 160" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i6" d="M98 148L106 160" stroke="#e8ddd0" stroke-width=".5"/>
+            <circle class="ink i7" cx="69" cy="162" r="1.8" stroke="#e8ddd0"/>
+            <circle class="ink i7" cx="107" cy="162" r="1.8" stroke="#e8ddd0"/>
+            <g class="ink i7" stroke="#e8ddd0">
+                <path d="M62 164L70 168L86 168L94 164" stroke-width=".5"/>
+                <path d="M62 162L70 166L86 166L94 162" stroke-width=".5"/>
+            </g>
+            <path class="ink i7" d="M83 172L83 188" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i7" d="M93 172L93 188" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i8" d="M80 188L86 188" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i8" d="M90 188L96 188" stroke="#e8ddd0" stroke-width=".5"/>
+
+            <!-- 右：办公桌 -->
+            <path class="ink i1" d="M182 160L278 160" stroke="#e8ddd0" stroke-width=".7"/>
+            <path class="ink i1" d="M182 160L182 192" stroke="#e8ddd0" stroke-width=".7"/>
+            <path class="ink i2" d="M278 160L278 192" stroke="#e8ddd0" stroke-width=".7"/>
+            <path class="ink i2" d="M195 160L195 192" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i2" d="M265 160L265 192" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i3" d="M195 172L265 172" stroke="#e8ddd0" stroke-width=".4"/>
+            <path class="ink i3" d="M195 182L265 182" stroke="#e8ddd0" stroke-width=".4"/>
+            <path class="ink i4" d="M230 172L230 182" stroke="#e8ddd0" stroke-width=".4"/>
+            <!-- 电脑 -->
+            <g class="ink i5" stroke="#e8ddd0">
+                <rect x="210" y="134" width="32" height="22" rx="1.5" stroke-width=".6"/>
+                <path d="M226 156L226 160" stroke-width=".5"/>
+                <path d="M220 160L232 160" stroke-width=".5"/>
+            </g>
+            <!-- 咖啡杯 -->
+            <g class="ink i6" stroke="#e8ddd0">
+                <path d="M260 148L260 157Q260 159 262 159L268 159Q270 159 270 157L270 148Z" stroke-width=".5"/>
+                <path d="M270 151Q273 151 273 154Q273 157 270 157" stroke-width=".4"/>
+            </g>
+            <!-- 盆栽 -->
+            <g class="ink i7" stroke="#e8ddd0">
+                <path d="M190 152L190 160L198 160L198 152" stroke-width=".5"/>
+                <path d="M194 152L194 146" stroke-width=".4"/>
+                <path d="M192 148Q194 144 196 148" stroke-width=".4"/>
+            </g>
+            <!-- 椅子 -->
+            <g class="ink i3" stroke="#e8ddd0">
+                <path d="M200 192L200 168" stroke-width=".6"/>
+                <path d="M200 168L200 156" stroke-width=".5"/>
+                <path d="M200 156L208 156" stroke-width=".5"/>
+                <path d="M200 192L208 192" stroke-width=".5"/>
+                <path d="M208 192L208 180" stroke-width=".5"/>
+                <path d="M208 180L200 180" stroke-width=".5"/>
+            </g>
+            <!-- 办公小人 -->
+            <circle class="ink i4" cx="208" cy="125" r="10" stroke="#e8ddd0" stroke-width=".8"/>
+            <path class="ink i4" d="M198 118Q196 112 200 109Q204 106 208 109Q212 106 214 112" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i5" d="M206 135L206 142" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i5" d="M210 135L210 142" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i5" d="M198 142L198 168Q198 172 202 172L214 172Q218 172 218 168L218 142" stroke="#e8ddd0" stroke-width=".6"/>
+            <path class="ink i6" d="M198 158L218 158" stroke="#e8ddd0" stroke-width=".4"/>
+            <path class="ink i6" d="M204 142L208 145L212 142" stroke="#e8ddd0" stroke-width=".4"/>
+            <path class="ink i6" d="M198 148L190 162" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i6" d="M218 148L226 162" stroke="#e8ddd0" stroke-width=".5"/>
+            <circle class="ink i7" cx="189" cy="164" r="1.8" stroke="#e8ddd0"/>
+            <circle class="ink i7" cx="227" cy="164" r="1.8" stroke="#e8ddd0"/>
+            <path class="ink i7" d="M203 172L203 188" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i7" d="M213 172L213 188" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i8" d="M200 188L206 188" stroke="#e8ddd0" stroke-width=".5"/>
+            <path class="ink i8" d="M210 188L216 188" stroke="#e8ddd0" stroke-width=".5"/>
+
+            <!-- 中间虚线 -->
+            <path class="ink i9" d="M110 145Q150 130 190 145" stroke="#e8ddd0" stroke-width=".5" stroke-dasharray="3 4"/>
+            <g class="ink i10" stroke="#e8ddd0">
+                <path d="M146 132L148 136L152 137L149 140L150 144L146 141L142 144L143 140L140 137L144 136Z" stroke-width=".4"/>
+            </g>
+
+            <!-- 星星 -->
+            <g class="ink i8" stroke="#e9c46a">
+                <path d="M40 45L42 50L47 51L43 54L44 59L40 56L36 59L37 54L33 51L38 50Z" stroke-width=".6" fill="#e9c46a" opacity=".6"/>
+            </g>
+            <g class="ink i9" stroke="#e9c46a">
+                <path d="M145 28L147 32L151 33L148 36L149 40L145 37L141 40L142 36L139 33L143 32Z" stroke-width=".5" fill="#e9c46a" opacity=".5"/>
+            </g>
+            <g class="ink i10" stroke="#e9c46a">
+                <path d="M260 40L262 44L266 45L263 48L264 52L260 49L256 52L257 48L254 45L258 44Z" stroke-width=".6" fill="#e9c46a" opacity=".6"/>
+            </g>
+            <g class="ink i11" stroke="#e9c46a">
+                <path d="M200 55L201 58L204 59L202 61L203 64L200 62L197 64L198 61L196 59L199 58Z" stroke-width=".4" fill="#e9c46a" opacity=".4"/>
+            </g>
+            <!-- 月亮 -->
+            <circle class="ink i10" cx="272" cy="80" r="11" stroke="#e9c46a" stroke-width=".6" fill="#e9c46a" opacity=".5"/>
+            <!-- 流星 -->
+            <path class="ink i11" d="M230 30Q250 40 270 55" stroke="#e9c46a" stroke-width=".6" opacity=".5"/>
+            <!-- 带环行星 -->
+            <g>
+                <circle class="ink i11" cx="38" cy="88" r="7" stroke="#e9c46a" stroke-width=".5"/>
+                <ellipse class="ink i11" cx="38" cy="88" rx="11" ry="2.5" stroke="#e9c46a" stroke-width=".4" transform="rotate(-15 38 88)"/>
+            </g>
+        </svg>
+    </div>
+    <div class="card-bottom">
+        <div class="card-tag">STYLE B</div>
+        <div class="card-name">深蓝夜空 · 粉紫星球</div>
+        <div class="card-desc">深蓝背景(#3d5a80)，粉紫色星球地面，白色线条，金黄色星星/月亮/衣服。有流星和带环行星。</div>
+    </div>
+    <div class="caption">The Little One Between Two Worlds</div>
+</div>
+
+<!-- ==================== C: 亮蓝+暖橙版（参考图2） ==================== -->
+<div class="card">
+    <div class="card-top" style="background:#2563eb">
+        <svg viewBox="0 0 300 340" width="300" height="340">
+            <!-- 黄色元素 -->
+            <path d="M78 118Q76 112 80 109Q84 106 88 109Q92 106 94 112" fill="#fde047" opacity=".85"/>
+            <path d="M78 142L78 168Q78 172 82 172L94 172Q98 172 98 168L98 142Z" fill="#fde047" opacity=".85"/>
+            <path d="M84 142L88 145L92 142Z" fill="#fde047" opacity=".85"/>
+            <path d="M198 118Q196 112 200 109Q204 106 208 109Q212 106 214 112" fill="#fde047" opacity=".85"/>
+            <path d="M198 142L198 168Q198 172 202 172L214 172Q218 172 218 168L218 142Z" fill="#fde047" opacity=".85"/>
+            <path d="M204 142L208 145L212 142Z" fill="#fde047" opacity=".85"/>
+
+            <!-- 地面（大暖橙色星球） -->
+            <ellipse cx="150" cy="260" rx="160" ry="120" fill="#f59e0b" opacity=".25"/>
+            <path class="ink" d="M10 210Q80 198 150 204Q220 210 290 200" stroke="#fde68a" stroke-width="1"/>
+            <!-- 星球纹理（粗犷弧线） -->
+            <path class="ink i2" d="M50 240Q90 225 130 238" stroke="#fde68a" stroke-width=".6" opacity=".3"/>
+            <path class="ink i3" d="M140 255Q180 242 220 252" stroke="#fde68a" stroke-width=".6" opacity=".3"/>
+            <path class="ink i4" d="M80 270Q120 258 160 268" stroke="#fde68a" stroke-width=".5" opacity=".25"/>
+            <path class="ink i5" d="M180 275Q210 265 240 272" stroke="#fde68a" stroke-width=".5" opacity=".25"/>
+
+            <!-- 左：书桌 -->
+            <path class="ink i1" d="M22 160L118 160" stroke="#fde68a" stroke-width=".8"/>
+            <path class="ink i1" d="M22 160L22 196" stroke="#fde68a" stroke-width=".8"/>
+            <path class="ink i2" d="M118 160L118 196" stroke="#fde68a" stroke-width=".8"/>
+            <path class="ink i2" d="M35 160L35 196" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i2" d="M105 160L105 196" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i3" d="M35 174L105 174" stroke="#fde68a" stroke-width=".4"/>
+            <path class="ink i3" d="M35 186L105 186" stroke="#fde68a" stroke-width=".4"/>
+            <path class="ink i4" d="M70 174L70 186" stroke="#fde68a" stroke-width=".4"/>
+            <g class="ink i5" stroke="#fde68a">
+                <rect x="28" y="150" width="14" height="10" rx="1" stroke-width=".6"/>
+                <rect x="30" y="144" width="12" height="6" rx="1" stroke-width=".6"/>
+            </g>
+            <g class="ink i6" stroke="#fde68a">
+                <path d="M100 160L100 146" stroke-width=".5"/>
+                <path d="M94 146L106 146" stroke-width=".5"/>
+                <path d="M96 146L96 140Q100 137 104 140L104 146" stroke-width=".5"/>
+            </g>
+            <g class="ink i3" stroke="#fde68a">
+                <path d="M62 196L62 168" stroke-width=".6"/>
+                <path d="M62 168L62 156" stroke-width=".5"/>
+                <path d="M62 156L70 156" stroke-width=".5"/>
+                <path d="M62 196L70 196" stroke-width=".5"/>
+                <path d="M70 196L70 182" stroke-width=".5"/>
+                <path d="M70 182L62 182" stroke-width=".5"/>
+            </g>
+            <circle class="ink i4" cx="88" cy="125" r="10" stroke="#fde68a" stroke-width=".8"/>
+            <path class="ink i4" d="M78 118Q76 112 80 109Q84 106 88 109Q92 106 94 112" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i5" d="M86 135L86 142" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i5" d="M90 135L90 142" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i5" d="M78 142L78 168Q78 172 82 172L94 172Q98 172 98 168L98 142" stroke="#fde68a" stroke-width=".6"/>
+            <path class="ink i6" d="M78 158L98 158" stroke="#fde68a" stroke-width=".4"/>
+            <path class="ink i6" d="M84 142L88 145L92 142" stroke="#fde68a" stroke-width=".4"/>
+            <path class="ink i6" d="M78 148L70 160" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i6" d="M98 148L106 160" stroke="#fde68a" stroke-width=".5"/>
+            <circle class="ink i7" cx="69" cy="162" r="1.8" stroke="#fde68a"/>
+            <circle class="ink i7" cx="107" cy="162" r="1.8" stroke="#fde68a"/>
+            <g class="ink i7" stroke="#fde68a">
+                <path d="M62 164L70 168L86 168L94 164" stroke-width=".5"/>
+                <path d="M62 162L70 166L86 166L94 162" stroke-width=".5"/>
+            </g>
+            <path class="ink i7" d="M83 172L83 192" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i7" d="M93 172L93 192" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i8" d="M80 192L86 192" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i8" d="M90 192L96 192" stroke="#fde68a" stroke-width=".5"/>
+
+            <!-- 右：办公桌 -->
+            <path class="ink i1" d="M182 160L278 160" stroke="#fde68a" stroke-width=".8"/>
+            <path class="ink i1" d="M182 160L182 196" stroke="#fde68a" stroke-width=".8"/>
+            <path class="ink i2" d="M278 160L278 196" stroke="#fde68a" stroke-width=".8"/>
+            <path class="ink i2" d="M195 160L195 196" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i2" d="M265 160L265 196" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i3" d="M195 174L265 174" stroke="#fde68a" stroke-width=".4"/>
+            <path class="ink i3" d="M195 186L265 186" stroke="#fde68a" stroke-width=".4"/>
+            <path class="ink i4" d="M230 174L230 186" stroke="#fde68a" stroke-width=".4"/>
+            <g class="ink i5" stroke="#fde68a">
+                <rect x="210" y="134" width="32" height="22" rx="1.5" stroke-width=".6"/>
+                <path d="M226 156L226 160" stroke-width=".5"/>
+                <path d="M220 160L232 160" stroke-width=".5"/>
+            </g>
+            <g class="ink i6" stroke="#fde68a">
+                <path d="M260 148L260 157Q260 159 262 159L268 159Q270 159 270 157L270 148Z" stroke-width=".5"/>
+                <path d="M270 151Q273 151 273 154Q273 157 270 157" stroke-width=".4"/>
+            </g>
+            <g class="ink i7" stroke="#fde68a">
+                <path d="M190 152L190 160L198 160L198 152" stroke-width=".5"/>
+                <path d="M194 152L194 146" stroke-width=".4"/>
+                <path d="M192 148Q194 144 196 148" stroke-width=".4"/>
+            </g>
+            <g class="ink i3" stroke="#fde68a">
+                <path d="M200 196L200 168" stroke-width=".6"/>
+                <path d="M200 168L200 156" stroke-width=".5"/>
+                <path d="M200 156L208 156" stroke-width=".5"/>
+                <path d="M200 196L208 196" stroke-width=".5"/>
+                <path d="M208 196L208 182" stroke-width=".5"/>
+                <path d="M208 182L200 182" stroke-width=".5"/>
+            </g>
+            <circle class="ink i4" cx="208" cy="125" r="10" stroke="#fde68a" stroke-width=".8"/>
+            <path class="ink i4" d="M198 118Q196 112 200 109Q204 106 208 109Q212 106 214 112" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i5" d="M206 135L206 142" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i5" d="M210 135L210 142" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i5" d="M198 142L198 168Q198 172 202 172L214 172Q218 172 218 168L218 142" stroke="#fde68a" stroke-width=".6"/>
+            <path class="ink i6" d="M198 158L218 158" stroke="#fde68a" stroke-width=".4"/>
+            <path class="ink i6" d="M204 142L208 145L212 142" stroke="#fde68a" stroke-width=".4"/>
+            <path class="ink i6" d="M198 148L190 162" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i6" d="M218 148L226 162" stroke="#fde68a" stroke-width=".5"/>
+            <circle class="ink i7" cx="189" cy="164" r="1.8" stroke="#fde68a"/>
+            <circle class="ink i7" cx="227" cy="164" r="1.8" stroke="#fde68a"/>
+            <path class="ink i7" d="M203 172L203 192" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i7" d="M213 172L213 192" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i8" d="M200 192L206 192" stroke="#fde68a" stroke-width=".5"/>
+            <path class="ink i8" d="M210 192L216 192" stroke="#fde68a" stroke-width=".5"/>
+
+            <!-- 中间虚线 -->
+            <path class="ink i9" d="M110 145Q150 130 190 145" stroke="#fde68a" stroke-width=".5" stroke-dasharray="3 4"/>
+            <g class="ink i10" stroke="#fde68a">
+                <path d="M146 132L148 136L152 137L149 140L150 144L146 141L142 144L143 140L140 137L144 136Z" stroke-width=".4"/>
+            </g>
+
+            <!-- 星星 -->
+            <g class="ink i8" stroke="#fde047">
+                <path d="M40 45L42 50L47 51L43 54L44 59L40 56L36 59L37 54L33 51L38 50Z" stroke-width=".6" fill="#fde047" opacity=".7"/>
+            </g>
+            <g class="ink i9" stroke="#fde047">
+                <path d="M145 28L147 32L151 33L148 36L149 40L145 37L141 40L142 36L139 33L143 32Z" stroke-width=".5" fill="#fde047" opacity=".5"/>
+            </g>
+            <g class="ink i10" stroke="#fde047">
+                <path d="M260 40L262 44L266 45L263 48L264 52L260 49L256 52L257 48L254 45L258 44Z" stroke-width=".6" fill="#fde047" opacity=".7"/>
+            </g>
+            <g class="ink i11" stroke="#fde047">
+                <path d="M200 55L201 58L204 59L202 61L203 64L200 62L197 64L198 61L196 59L199 58Z" stroke-width=".4" fill="#fde047" opacity=".4"/>
+            </g>
+            <!-- 带环行星 -->
+            <g>
+                <circle class="ink i10" cx="272" cy="80" r="10" stroke="#fde047" stroke-width=".6" fill="#fde047" opacity=".5"/>
+                <ellipse class="ink i10" cx="272" cy="80" rx="15" ry="3.5" stroke="#fde047" stroke-width=".5" fill="none" transform="rotate(-20 272 80)"/>
+            </g>
+            <g>
+                <circle class="ink i11" cx="38" cy="88" r="7" stroke="#fde047" stroke-width=".5"/>
+                <ellipse class="ink i11" cx="38" cy="88" rx="11" ry="2.5" stroke="#fde047" stroke-width=".4" transform="rotate(-15 38 88)"/>
+            </g>
+        </svg>
+    </div>
+    <div class="card-bottom">
+        <div class="card-tag">STYLE C</div>
+        <div class="card-name">亮蓝天空 · 暖橙星球</div>
+        <div class="card-desc">亮蓝背景(#2563eb)，暖橙色大星球地面，金黄色线条和填充。带环行星，色彩饱和温暖。</div>
+    </div>
+    <div class="caption">The Little One Between Two Worlds</div>
+</div>
+
+</div>
+</body>
+</html>
